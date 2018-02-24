@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Little by Little">
-<meta property="og:url" content="https://heidyhe.github.io/index.html">
+<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
+<meta property="og:url" content="https://heidyhe.github.io/2018/02/23/Boyer-Moore/index.html">
 <meta property="og:site_name" content="Little by Little">
+<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-02-24T05:42:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Little by Little">
+<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
+<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/"/>
 
 
 
 
 
-  <title>Little by Little</title>
+  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,9 +247,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -276,9 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/23/Boyer-Moore/" itemprop="url">Boyer-Moore Majority Vote Algorithm</a></h1>
+          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
         
 
         <div class="post-meta">
@@ -350,16 +351,16 @@
       
 
       
-        
-          <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/23/Boyer-Moore/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.</p>
+<a id="more"></a>
+<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
+<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
+<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
+<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
+<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
+
       
     </div>
     
@@ -376,158 +377,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/22/LCS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heidy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Little by Little">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/22/LCS/" itemprop="url">Longest Common Subsequence</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-22T21:54:18-08:00">
-                2018-02-22
-              </time>
+              <a href="/2018/02/22/LCS/" rel="next" title="Longest Common Subsequence">
+                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>Longest common subsequence is a classic problem of dynamic programming. It is to find out the longest subsequence that presents in the two given sequences. A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/22/LCS/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -537,303 +408,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/21/Two-Pointers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heidy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Little by Little">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/21/Two-Pointers/" itemprop="url">Two Pointers</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-21T12:20:11-08:00">
-                2018-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Two pointers is a powerful weapon of solving problems for data structures such as array and list. A classic example is to find out whether there is a cycle in a linked list.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/21/Two-Pointers/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/19/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Heidy">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Little by Little">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/19/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-19T21:00:00-08:00">
-                2018-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/misc/" itemprop="url" rel="index">
-                    <span itemprop="name">misc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>This is a blog based on Github Pages and powered by Hexo. The first post created by Hexo is always called “Hello World”, so I keep this title for my first post.</p>
-<p>This is not my first blog. I have tried something else before, like wordpress. The problem is that it is hard to find a trustworthy website hosting service for free. Anyway, after doing some research, I think github might be a good choice. It was an easy setup, and a day would be enough to get everything done.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/19/hello-world/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -841,6 +420,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -861,8 +444,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -942,6 +534,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1082,6 +690,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
