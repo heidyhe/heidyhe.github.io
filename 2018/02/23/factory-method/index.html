@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tech, blog" />
+  <meta name="keywords" content="factory pattern," />
 
 
 
@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta name="description" content="Factory Method Pattern provides a way of encapsulating object creation.The definition by Gang of Four:  Define an interface for creating an object, but let subclasses decide which class to instantiate">
+<meta name="keywords" content="factory pattern">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta property="og:url" content="https://heidyhe.github.io/2018/02/23/Boyer-Moore/index.html">
+<meta property="og:title" content="Factory Method Pattern">
+<meta property="og:url" content="https://heidyhe.github.io/2018/02/23/factory-method/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta property="og:description" content="Factory Method Pattern provides a way of encapsulating object creation.The definition by Gang of Four:  Define an interface for creating an object, but let subclasses decide which class to instantiate">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-24T06:04:28.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod1.png">
+<meta property="og:updated_time" content="2018-02-26T01:30:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta name="twitter:title" content="Factory Method Pattern">
+<meta name="twitter:description" content="Factory Method Pattern provides a way of encapsulating object creation.The definition by Gang of Four:  Define an interface for creating an object, but let subclasses decide which class to instantiate">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/02/23/factory-method/"/>
 
 
 
 
 
-  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
+  <title>Factory Method Pattern | Little by Little</title>
   
 
 
@@ -262,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/23/factory-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -279,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">Factory Method Pattern</h1>
         
 
         <div class="post-meta">
@@ -291,7 +295,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T20:40:09-08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T22:06:46-08:00">
                 2018-02-23
               </time>
             
@@ -314,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
+                  <a href="/categories/design-pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">design pattern</span>
                   </a>
                 </span>
 
@@ -351,15 +355,27 @@
       
 
       
-        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.</p>
+        <p>Factory Method Pattern provides a way of encapsulating object creation.<br>The definition by Gang of Four:</p>
+<blockquote>
+<p>Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory method lets a class defer instantiation it uses to subclasses.</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
-<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
-<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
-<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
+<h2 id="A-simple-example"><a href="#A-simple-example" class="headerlink" title="A simple example"></a>A simple example</h2><p>As shown in the UML below, the interface <em>Factory</em> defines a method for creating an object, but only its subclasses can create an object and can decide which class to instantiate.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod.png" alt=""></p>
+<p>This simple example can only give you a basic idea of factory method pattern. From my point of view, I have no idea why I need such a complex hierarchy, and why I need to defer the object creation to different factories, and how I can control which factory to use. So let’s learn from some real examples.</p>
+<h2 id="More-examples"><a href="#More-examples" class="headerlink" title="More examples"></a>More examples</h2><h3 id="i-Java-API-commons-logging"><a href="#i-Java-API-commons-logging" class="headerlink" title="i. Java API: commons-logging"></a>i. Java API: commons-logging</h3><p>It is a libary that provides a way of logging and allows developers to plug in a specific logging implementation.<br>It has an interface <em>Log</em> which abstracts logging APIs, and an abstract class <em>LogFactory</em> which creates instances of <em>Log</em>. This is how it is used:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Log log = LogFactory.getLog(ThisIsAClass.class);</span><br></pre></td></tr></table></figure></p>
+<p>The implementation of <em>getLog(Class)</em> is as below. <em>LogFactory</em> itself doesn’t create the <em>Log</em> instances because it doesn’t implement the method <em>getInstance()</em>, it defers the object creation to its subclasses, like <em>LogFactoryImpl</em>.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Log <span class="title">getLog</span><span class="params">(Class clazz)</span> <span class="keyword">throws</span> LogConfigurationException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (getFactory().getInstance(clazz));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Here comes the question: why <em>LogFactory</em> defers the object creation to its subclasses?<br>If <em>LogFactory</em> implements the object creation, and if someone who uses this library wants a different implementation of creating objects, he has to modify <em>LogFactory</em> and rebuild the library. This is silly and totally violates the principal of “open to extension but close to modification”. A good practice is to have the subclasses decide how to create objects. Anyone who wants to plug in a new logging implementation can achieve this by extending <em>LogFactory</em> and implementing the method <em>getInstance()</em>.<br>As shown in the following UML, I can define a new class <em>MyLogFactoryImpl</em> which extends <em>LogFactory</em>, and I can decide to create the objects of <em>Log4JLogger</em> or <em>MyLogger</em> in my class.</p>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod1.png" alt=""></p>
+<p>And the next question is: how I can control which factory to use at the runtime? This can be done by passing parameters or using configuration files.</p>
+<h2 id="P-S-Simple-Factory-Pattern"><a href="#P-S-Simple-Factory-Pattern" class="headerlink" title="P.S. Simple Factory Pattern"></a>P.S. Simple Factory Pattern</h2><p>Someone argues that Simple Factory Pattern is not a design pattern, but a simple encapsulation of object creation. By wrapping the code of creating new objects in a new class, it decouples the creation and the use of an object.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Song</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Indie</span> <span class="keyword">implements</span> <span class="title">Song</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rock</span> <span class="keyword">implements</span> <span class="title">Song</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Song <span class="title">createSong</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        Song obj = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>: obj = <span class="keyword">new</span> Indie(); <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>: obj = <span class="keyword">new</span> Rock(); <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Song obj = SimpleFactory.createSong(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Pros:</p>
+<ul>
+<li>Hide the complex logic of creating objects</li>
+<li>Changes to the logic of creating objects won’t require changes to the client code</li>
+<li>Code can be reused if the object creation is required in many places</li>
+</ul>
+<h3 id="Factory-Method-Pattern-vs-Simple-Factory-Pattern"><a href="#Factory-Method-Pattern-vs-Simple-Factory-Pattern" class="headerlink" title="Factory Method Pattern vs. Simple Factory Pattern"></a>Factory Method Pattern vs. Simple Factory Pattern</h3><p>Simple factory is just an encapsulation of a piece of code so that it can be reused. It provides only one way of creating objects, and hence if you want to create objects in other ways, you have to modify the factory itself, but which is the strength of factory method pattern. But of course, it doesn’t mean you must use factory method pattern, it all depends on how you want the factory to be used.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="http://coding-geek.com/design-pattern-factory-patterns/" target="_blank" rel="noopener">Factory Patterns</a></p>
 
       
     </div>
@@ -375,6 +391,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/factory-pattern/" rel="tag"># factory pattern</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/22/LCS/" rel="next" title="Longest Common Subsequence">
-                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              <a href="/2018/02/23/Boyer-Moore/" rel="next" title="Boyer-Moore Majority Vote Algorithm">
+                <i class="fa fa-chevron-left"></i> Boyer-Moore Majority Vote Algorithm
               </a>
             
           </div>
@@ -394,8 +416,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/23/factory-method/" rel="prev" title="Factory Method Pattern">
-                Factory Method Pattern <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/24/binary-tree/" rel="prev" title="Binary Tree">
+                Binary Tree <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-simple-example"><span class="nav-text">A simple example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-examples"><span class="nav-text">More examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Java-API-commons-logging"><span class="nav-text">i. Java API: commons-logging</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P-S-Simple-Factory-Pattern"><span class="nav-text">P.S. Simple Factory Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Factory-Method-Pattern-vs-Simple-Factory-Pattern"><span class="nav-text">Factory Method Pattern vs. Simple Factory Pattern</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
