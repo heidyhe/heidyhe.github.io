@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="math,big number," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Given two positive numbers which are represented in strings, return the sum, difference, product, quotient and remainder of the two numbers. A solution is to have the string converted to an array wher">
+<meta name="keywords" content="math,big number">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Math Problems with Big Numbers">
+<meta property="og:url" content="https://heidyhe.github.io/2018/02/25/big-number/index.html">
+<meta property="og:site_name" content="Little by Little">
+<meta property="og:description" content="Given two positive numbers which are represented in strings, return the sum, difference, product, quotient and remainder of the two numbers. A solution is to have the string converted to an array wher">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-02-26T22:45:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Math Problems with Big Numbers">
+<meta name="twitter:description" content="Given two positive numbers which are represented in strings, return the sum, difference, product, quotient and remainder of the two numbers. A solution is to have the string converted to an array wher">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://heidyhe.github.io/2018/02/25/big-number/"/>
+
+
+
+
+
+  <title>Math Problems with Big Numbers | Little by Little</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Little by Little</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Heidy's tech blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/25/big-number/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heidy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Little by Little">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Math Problems with Big Numbers</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-25T19:47:55-08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Given two positive numbers which are represented in strings, return the sum, difference, product, quotient and remainder of the two numbers.</p>
+<p>A solution is to have the string converted to an array where digits are store in a reversed order and then do the calculation on each digit. </p>
+<a id="more"></a>
+<h2 id="I-a-b"><a href="#I-a-b" class="headerlink" title="I. a + b"></a>I. a + b</h2><p>The implementation is quite straight-forward. Just be care of the carry.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">add</span><span class="params">(List&lt;Integer&gt; num1, List&lt;Integer&gt; num2)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; sum = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; num1.size() || i &lt; num2.size()) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = carry;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; num1.size()) &#123;</span><br><span class="line">            n += num1.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; num2.size()) &#123;</span><br><span class="line">            n += num2.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">        sum.add(n % <span class="number">10</span>);</span><br><span class="line">        carry = n / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        sum.add(carry);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Leetcode: <a href="https://leetcode.com/problems/add-two-numbers/description/" target="_blank" rel="noopener">2. Add Two Numbers</a>.</p>
+<h2 id="II-a-b"><a href="#II-a-b" class="headerlink" title="II. a - b"></a>II. a - b</h2><p>Simplar to <em>a + b</em>, but be aware of the case when a is smaller than b. And don’t forget to remove the leading 0 in the difference.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// num1 must be larger than num2</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">minus</span><span class="params">(List&lt;Integer&gt; num1, List&lt;Integer&gt; num2)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; diff = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num1.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = <span class="number">10</span> + num1.get(i) - carry;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; num2.size()) &#123;</span><br><span class="line">            n = n - num2.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">10</span>) &#123;</span><br><span class="line">            carry = <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            n = n % <span class="number">10</span>;</span><br><span class="line">            carry = <span class="number">0</span>;  <span class="comment">// carry should be set to 0 here</span></span><br><span class="line">        &#125;</span><br><span class="line">        diff.add(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remove leading 0</span></span><br><span class="line">    <span class="keyword">int</span> i = diff.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (diff.get(i) == <span class="number">0</span>) &#123;</span><br><span class="line">            diff.remove(i);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> diff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="III-a-b"><a href="#III-a-b" class="headerlink" title="III. a * b"></a>III. a * b</h2><p>The solution is to mimic the process of doing multiplication, but be aware of the the index.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">multiple</span><span class="params">(List&lt;Integer&gt; num1, List&lt;Integer&gt; num2)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; product = <span class="keyword">new</span> ArrayList&lt;&gt;(num1.size() + num2.size());</span><br><span class="line">    <span class="comment">// go through each digit in num1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num1.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; num2.size(); j++) &#123;</span><br><span class="line">            <span class="comment">// the currect index for the product is i + j</span></span><br><span class="line">            <span class="keyword">int</span> n = num1.get(i) * num2.get(j) + carry;</span><br><span class="line">            <span class="keyword">if</span> (i + j &lt; product.size()) &#123;</span><br><span class="line">                n += product.get(i + j);</span><br><span class="line">            &#125;</span><br><span class="line">            carry = n / <span class="number">10</span>;</span><br><span class="line">            n = n % <span class="number">10</span>;</span><br><span class="line">            <span class="comment">// note: set(index, number) is used for replacement only</span></span><br><span class="line">            <span class="keyword">if</span> (i + j &lt; product.size()) &#123;</span><br><span class="line">                product.set(i + j, n);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                product.add(n);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            product.add(carry);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remove leading 0</span></span><br><span class="line">    <span class="keyword">int</span> i = product.size() - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (product.get(i) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        product.remove(i);</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> product;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>LeetCode: <a href="https://leetcode.com/problems/multiply-strings/description/" target="_blank" rel="noopener">43. Multiply Strings</a></p>
+<h2 id="IV-a-b-and-a-b"><a href="#IV-a-b-and-a-b" class="headerlink" title="IV. a / b and a % b"></a>IV. a / b and a % b</h2><p>The idea is to use subtraction - repeat the process of <em>a</em> minus <em>b</em> until <em>a</em> &lt; <em>b</em>. But this whole process is time consuming. To improve performance, we don’t have to do <em>a - b</em> each time, but we can try something like <em>a - b*10</em>. For example, a = 2981, b = 13, because the difference between the length of a and b is 2, so the dividend can be initailized to be 1300, and when the divisor become less than dividend, a 0 can be removed from the dividend, as shown in the table below. This is actually how we do subtraction.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">divisor</th>
+<th style="text-align:left">dividend</th>
+<th style="text-align:left">quotient</th>
+<th style="text-align:left">remainder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2981</td>
+<td style="text-align:left">1300</td>
+<td style="text-align:left">100</td>
+<td style="text-align:left">1681</td>
+</tr>
+<tr>
+<td style="text-align:left">1681</td>
+<td style="text-align:left">1300</td>
+<td style="text-align:left">200</td>
+<td style="text-align:left">381</td>
+</tr>
+<tr>
+<td style="text-align:left">381</td>
+<td style="text-align:left">130</td>
+<td style="text-align:left">210</td>
+<td style="text-align:left">251</td>
+</tr>
+<tr>
+<td style="text-align:left">251</td>
+<td style="text-align:left">130</td>
+<td style="text-align:left">220</td>
+<td style="text-align:left">121</td>
+</tr>
+<tr>
+<td style="text-align:left">121</td>
+<td style="text-align:left">13</td>
+<td style="text-align:left">…</td>
+<td style="text-align:left">…</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// num2 cannot be a zero</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">divide</span><span class="params">(List&lt;Integer&gt; num1, List&lt;Integer&gt; num2)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; quotient = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    quotient.add(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = num1.size() - num2.size();</span><br><span class="line">    List&lt;Integer&gt; dividend = buildDividend(num2, k);</span><br><span class="line">    List&lt;Integer&gt; counter = buildCounter(k);</span><br><span class="line">    <span class="keyword">while</span> (compare(num1, num2) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (compare(num1, dividend) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            num1 = minus(num1, dividend);</span><br><span class="line">            quotient = add(quotient, counter);</span><br><span class="line">        &#125;</span><br><span class="line">        dividend.remove(<span class="number">0</span>);</span><br><span class="line">        counter.remove(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// num1 is now the remainder</span></span><br><span class="line">    <span class="keyword">return</span> quotient;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">buildCounter</span><span class="params">(<span class="keyword">int</span> zeroCount)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; counter = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (zeroCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        counter.add(<span class="number">0</span>);</span><br><span class="line">        zeroCount--;</span><br><span class="line">    &#125;</span><br><span class="line">    counter.add(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> counter;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">buildDividend</span><span class="params">(List&lt;Integer&gt; num, <span class="keyword">int</span> zeroCount)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; dividend = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (zeroCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        dividend.add(<span class="number">0</span>);</span><br><span class="line">        zeroCount--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.size(); i++) &#123;</span><br><span class="line">        dividend.add(num.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dividend;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/math/" rel="tag"># math</a>
+          
+            <a href="/tags/big-number/" rel="tag"># big number</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/24/binary-tree/" rel="next" title="Binary Tree">
+                <i class="fa fa-chevron-left"></i> Binary Tree
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg"
+                alt="Heidy" />
+            
+              <p class="site-author-name" itemprop="name">Heidy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heidyhe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:heidycat@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-a-b"><span class="nav-text">I. a + b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-a-b"><span class="nav-text">II. a - b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-a-b"><span class="nav-text">III. a * b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-a-b-and-a-b"><span class="nav-text">IV. a / b and a % b</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
