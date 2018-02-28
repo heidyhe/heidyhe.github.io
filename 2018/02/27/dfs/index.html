@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tech, blog" />
+  <meta name="keywords" content="bfs,dfs," />
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta name="description" content="DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it">
+<meta name="keywords" content="bfs,dfs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta property="og:url" content="https://heidyhe.github.io/2018/02/23/Boyer-Moore/index.html">
+<meta property="og:title" content="DFS">
+<meta property="og:url" content="https://heidyhe.github.io/2018/02/27/dfs/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta property="og:description" content="DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-24T06:04:28.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/4-queen.png">
+<meta property="og:updated_time" content="2018-02-28T22:52:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.">
+<meta name="twitter:title" content="DFS">
+<meta name="twitter:description" content="DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/4-queen.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/02/27/dfs/"/>
 
 
 
 
 
-  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
+  <title>DFS | Little by Little</title>
   
 
 
@@ -262,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/27/dfs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -279,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">DFS</h1>
         
 
         <div class="post-meta">
@@ -291,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T20:40:09-08:00">
-                2018-02-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-27T10:16:58-08:00">
+                2018-02-27
               </time>
             
 
@@ -351,16 +354,12 @@
       
 
       
-        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm will not detect it.</p>
+        <p>DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it cannot go any further, and then it backtracks and tries other possible paths.</p>
+<p>DFS is usually implemented using recursion.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Cell is a class that represents a cell in a matrix</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Cell cell)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qualified(cell) || !canGoFuther(cell)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Cell neighbor : getNeighbors(cell)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (canBeProcessed(neighbor)) &#123;</span><br><span class="line">            dfs(neighbor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
-<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
-<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
-<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
-
+<h2 id="Permutation"><a href="#Permutation" class="headerlink" title="Permutation"></a>Permutation</h2><h3 id="N-Queen"><a href="#N-Queen" class="headerlink" title="N-Queen"></a>N-Queen</h3><p><a href="https://leetcode.com/problems/n-queens/description/" target="_blank" rel="noopener">51. N-Queens</a>: place <em>n</em> queens on an *nxn chessboard such that no two queens attack each other.</p>
+<p>The idea is quite straightforward: place a queen on each row and try one row after another, if it does not work, backtrack to the last row and try another column. The key is to mark down which cells cannot be used when a queen is placed on the chessboard and unmark them when it is removed from the chessboard, as shown in the figure below.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/4-queen.png" alt=""><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">queen</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> n, <span class="keyword">int</span>[][] marks)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (row == n) &#123;</span><br><span class="line">        <span class="comment">// this is a solution of N-Queen</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> col = <span class="number">0</span>; col &lt; n; col++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (marks[row][col] == <span class="number">0</span>) &#123;</span><br><span class="line">            mark(row, col, n, marks);</span><br><span class="line">            queen(row + <span class="number">1</span>, n, marks);</span><br><span class="line">            unmark(row, col, n, marks);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mark</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> n, <span class="keyword">int</span>[][] marks)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]--;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]--;</span><br><span class="line">    <span class="comment">// for simplification, there is no need to mark the cells in the upper rows</span></span><br><span class="line">    <span class="keyword">int</span> i = row + <span class="number">1</span>, j = col - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &gt;= <span class="number">0</span>) marks[i++][j--]--;</span><br><span class="line">    i = row + <span class="number">1</span>, j = col + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; n) marks[i++][j++]--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unmark</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> n, <span class="keyword">int</span>[][] marks)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]++;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]++;</span><br><span class="line">    <span class="keyword">int</span> i = row + <span class="number">1</span>, j = col - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &gt;= <span class="number">0</span>) marks[i++][j--]++;</span><br><span class="line">    i = row + <span class="number">1</span>, j = col + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; n) marks[i++][j++]++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Sudoku"><a href="#Sudoku" class="headerlink" title="Sudoku"></a>Sudoku</h3>
       
     </div>
     
@@ -375,6 +374,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/bfs/" rel="tag"># bfs</a>
+          
+            <a href="/tags/dfs/" rel="tag"># dfs</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/22/LCS/" rel="next" title="Longest Common Subsequence">
-                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              <a href="/2018/02/26/bfs/" rel="next" title="BFS">
+                <i class="fa fa-chevron-left"></i> BFS
               </a>
             
           </div>
@@ -393,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/23/factory-method/" rel="prev" title="Factory Method Pattern">
-                Factory Method Pattern <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Permutation"><span class="nav-text">Permutation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#N-Queen"><span class="nav-text">N-Queen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sudoku"><span class="nav-text">Sudoku</span></a></li></ol></li></ol></div>
             
 
           </div>
