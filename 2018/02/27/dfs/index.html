@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="bfs,dfs," />
+  <meta name="keywords" content="dfs,bfs,backtracking," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it">
-<meta name="keywords" content="bfs,dfs">
+<meta name="description" content="DFS, short for Depth First Search, is an algorithm of searching tree or graph data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or">
+<meta name="keywords" content="dfs,bfs,backtracking">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DFS">
 <meta property="og:url" content="https://heidyhe.github.io/2018/02/27/dfs/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it">
+<meta property="og:description" content="DFS, short for Depth First Search, is an algorithm of searching tree or graph data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/4-queen.png">
-<meta property="og:updated_time" content="2018-02-28T22:52:12.000Z">
+<meta property="og:updated_time" content="2018-03-27T04:54:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DFS">
-<meta name="twitter:description" content="DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/4-queen.png">
+<meta name="twitter:description" content="DFS, short for Depth First Search, is an algorithm of searching tree or graph data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or">
 
 
 
@@ -354,12 +352,19 @@
       
 
       
-        <p>DFS, short for Depth First Search, is an algorithm of search graph data structures. It starts at a specific node, and explores as far as possible until it finds a path that meets the requirement or it cannot go any further, and then it backtracks and tries other possible paths.</p>
-<p>DFS is usually implemented using recursion.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Cell is a class that represents a cell in a matrix</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Cell cell)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qualified(cell) || !canGoFuther(cell)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Cell neighbor : getNeighbors(cell)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (canBeProcessed(neighbor)) &#123;</span><br><span class="line">            dfs(neighbor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>DFS, short for Depth First Search, is an algorithm of searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or deep) as possible until it cannot go any further, then it backtracks and tries other paths.</p>
+<p>DFS is always implemented using recursion. Its non-recursive implementation depends on an explicit stack.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Node represents a node in a graph</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qualified(node) || !canGoFuther(node)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Node neighbor : getNeighbors(node)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (canBeProcessed(neighbor)) &#123;</span><br><span class="line">            dfs(neighbor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>I have applied DFS to varieties of search problems in previous posts, e.g. problems relating to <a href="https://heidyhe.github.io/2018/02/24/binary-tree/#more">binary tree</a>, and problems relating to <a href="https://heidyhe.github.io/2018/02/26/bfs/#more">graph</a>. So I won’t cover the same problems in this post, but I’ll write about the topic <em>DFS vs. backtracking</em> which I find both interesting and confusing.</p>
 <a id="more"></a>
-<h2 id="Permutation"><a href="#Permutation" class="headerlink" title="Permutation"></a>Permutation</h2><h3 id="N-Queen"><a href="#N-Queen" class="headerlink" title="N-Queen"></a>N-Queen</h3><p><a href="https://leetcode.com/problems/n-queens/description/" target="_blank" rel="noopener">51. N-Queens</a>: place <em>n</em> queens on an *nxn chessboard such that no two queens attack each other.</p>
-<p>The idea is quite straightforward: place a queen on each row and try one row after another, if it does not work, backtrack to the last row and try another column. The key is to mark down which cells cannot be used when a queen is placed on the chessboard and unmark them when it is removed from the chessboard, as shown in the figure below.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/4-queen.png" alt=""><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">queen</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> n, <span class="keyword">int</span>[][] marks)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (row == n) &#123;</span><br><span class="line">        <span class="comment">// this is a solution of N-Queen</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> col = <span class="number">0</span>; col &lt; n; col++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (marks[row][col] == <span class="number">0</span>) &#123;</span><br><span class="line">            mark(row, col, n, marks);</span><br><span class="line">            queen(row + <span class="number">1</span>, n, marks);</span><br><span class="line">            unmark(row, col, n, marks);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mark</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> n, <span class="keyword">int</span>[][] marks)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]--;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]--;</span><br><span class="line">    <span class="comment">// for simplification, there is no need to mark the cells in the upper rows</span></span><br><span class="line">    <span class="keyword">int</span> i = row + <span class="number">1</span>, j = col - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &gt;= <span class="number">0</span>) marks[i++][j--]--;</span><br><span class="line">    i = row + <span class="number">1</span>, j = col + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; n) marks[i++][j++]--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unmark</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> n, <span class="keyword">int</span>[][] marks)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]++;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) marks[row][i]++;</span><br><span class="line">    <span class="keyword">int</span> i = row + <span class="number">1</span>, j = col - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &gt;= <span class="number">0</span>) marks[i++][j--]++;</span><br><span class="line">    i = row + <span class="number">1</span>, j = col + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; n) marks[i++][j++]++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Sudoku"><a href="#Sudoku" class="headerlink" title="Sudoku"></a>Sudoku</h3>
+<h2 id="DFS-vs-Backtracking"><a href="#DFS-vs-Backtracking" class="headerlink" title="DFS vs. Backtracking"></a>DFS vs. Backtracking</h2><p>I thought <em>DFS</em> and <em>backtracking</em> were the same thing. It was not until I prepared for this post when I realized I was wrong.</p>
+<p>After reading what I can find on the Internet, my opinion is:</p>
+<ul>
+<li>They are both search algorithms</li>
+<li>They both <em>backtrack</em> when they cannot explore any further</li>
+<li><em>DFS</em> is limited to the domain of tree or graph, but <em>backtracking</em> has a broader application domain</li>
+<li><em>DFS</em> backtracks when it encounters the tree leaves or the ending of a path in the graph, but <em>backtracking</em> backtracks when it finds out that the current path down will lead to nothing. In other words, <em>DFS</em> explores all the nodes and checks all the possibilities until it finds the answer, which sounds like brutal-force search; <em>backtracking</em> does not waste time on the possibilities leading to naught (kind of like pruning), so it is more efficient.</li>
+</ul>
+
       
     </div>
     
@@ -376,9 +381,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/dfs/" rel="tag"># dfs</a>
+          
             <a href="/tags/bfs/" rel="tag"># bfs</a>
           
-            <a href="/tags/dfs/" rel="tag"># dfs</a>
+            <a href="/tags/backtracking/" rel="tag"># backtracking</a>
           
         </div>
       
@@ -484,7 +491,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -495,7 +502,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -506,7 +513,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -555,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Permutation"><span class="nav-text">Permutation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#N-Queen"><span class="nav-text">N-Queen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sudoku"><span class="nav-text">Sudoku</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS-vs-Backtracking"><span class="nav-text">DFS vs. Backtracking</span></a></li></ol></div>
             
 
           </div>

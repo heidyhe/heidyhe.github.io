@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="binary tree," />
+  <meta name="keywords" content="dfs,binary tree," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is k, then it has at most 2^k children.A complete binary tree is a binary tree where every level (e">
-<meta name="keywords" content="binary tree">
+<meta name="keywords" content="dfs,binary tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binary Tree">
 <meta property="og:url" content="https://heidyhe.github.io/2018/02/24/binary-tree/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs2.png">
-<meta property="og:updated_time" content="2018-03-01T21:34:38.000Z">
+<meta property="og:updated_time" content="2018-03-26T23:07:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binary Tree">
 <meta name="twitter:description" content="A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is k, then it has at most 2^k children.A complete binary tree is a binary tree where every level (e">
@@ -356,6 +356,7 @@
 
       
         <p>A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is <em>k</em>, then it has at most <em>2^k</em> children.<br>A complete binary tree is a binary tree where every level (except the last) is completely filled, and all nodes at the last level are as far left as possible.<br>A full binary tree is a complete binary tree where every node other than the leaves has two children.</p>
+<p>This post is about some classic problems relating to the binary tree. Most of the problems can be solved using <a href="https://heidyhe.github.io/2018/02/27/dfs/">DFS</a>.</p>
 <a id="more"></a>
 <h2 id="I-Traversal"><a href="#I-Traversal" class="headerlink" title="I. Traversal"></a>I. Traversal</h2><h3 id="i-Pre-order-traversal"><a href="#i-Pre-order-traversal" class="headerlink" title="i. Pre-order traversal"></a>i. Pre-order traversal</h3><p>Leetcode: <a href="https://leetcode.com/problems/binary-tree-preorder-traversal/description/" target="_blank" rel="noopener">144. Binary Tree Preorder Traversal</a>.</p>
 <p>Recursive solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// handle the current node</span></span><br><span class="line">    preorder(node.left);</span><br><span class="line">    preorder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -375,7 +376,7 @@
 <p>The idea is to traverse the left subtree and right subtree in an opposite way. Note that simply using in-order traversal to generate an array and then checking if it is symmetric is not enough. Check a counter example below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   4</span><br><span class="line"> /   /</span><br><span class="line">4   2</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dfs(root.left, root.right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(TreeNode lTree, TreeNode rTree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lTree == <span class="keyword">null</span> &amp;&amp; rTree == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (lTree == <span class="keyword">null</span> &amp;&amp; rTree != <span class="keyword">null</span> || lTree != <span class="keyword">null</span> &amp;&amp; rTree == <span class="keyword">null</span> || lTree.val != rTree.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dfs(lTree.left, rTree.right) &amp;&amp; dfs(lTree.right, rTree.left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="vi-Level-order-traversal"><a href="#vi-Level-order-traversal" class="headerlink" title="vi. Level order traversal"></a>vi. Level order traversal</h3><p>Leetcode: <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/description/" target="_blank" rel="noopener">102. Binary Tree Level Order Traversal</a>.</p>
-<p>The solution is to use BFS to explore tree nodes by level.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">queue.add(root);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">int</span> childCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Node node = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123; queue.add(node.left); childCount++; &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123; queue.add(node.right); childCount++; &#125;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    count = childCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>The solution is to use <a href="https://heidyhe.github.io/2018/02/26/bfs/">BFS</a> to explore tree nodes by level.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">queue.add(root);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">int</span> childCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Node node = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123; queue.add(node.left); childCount++; &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123; queue.add(node.right); childCount++; &#125;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    count = childCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="vii-Morris-traversal"><a href="#vii-Morris-traversal" class="headerlink" title="vii. Morris traversal"></a>vii. Morris traversal</h3><p>It is a different kind of traversal without recursion and without stack. Its space complexity is O(1).</p>
 <h2 id="II-Serialize-amp-Deserialize"><a href="#II-Serialize-amp-Deserialize" class="headerlink" title="II. Serialize &amp; Deserialize"></a>II. Serialize &amp; Deserialize</h2><p>Leetcode: <a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/" target="_blank" rel="noopener">297. Serialize and Deserialize Binary Tree</a>.</p>
 <p>The key is to find a way to serialize a binary tree to a string. One obvious way is to put the result of pre-order (or post-order) traversal and in-order traversal together, but this will take up space twice as the tree’s size.</p>
@@ -410,6 +411,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/dfs/" rel="tag"># dfs</a>
           
             <a href="/tags/binary-tree/" rel="tag"># binary tree</a>
           
@@ -517,7 +520,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -528,7 +531,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -539,7 +542,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

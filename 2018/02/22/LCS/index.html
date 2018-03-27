@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Longest common subsequence is a classic problem of dynamic programming. It is to find out the longest subsequence that presents in the two given sequences. A subsequence is a sequence that appears in">
+<meta name="description" content="Longest common subsequence (LCS) is a classic problem of dynamic programming. The problem is to find out the longest subsequence which presents in the two given sequences. A subsequence is a sequence">
 <meta name="keywords" content="lcs,dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Longest Common Subsequence">
 <meta property="og:url" content="https://heidyhe.github.io/2018/02/22/LCS/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Longest common subsequence is a classic problem of dynamic programming. It is to find out the longest subsequence that presents in the two given sequences. A subsequence is a sequence that appears in">
+<meta property="og:description" content="Longest common subsequence (LCS) is a classic problem of dynamic programming. The problem is to find out the longest subsequence which presents in the two given sequences. A subsequence is a sequence">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-23T23:22:05.000Z">
+<meta property="og:updated_time" content="2018-03-09T23:07:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Longest Common Subsequence">
-<meta name="twitter:description" content="Longest common subsequence is a classic problem of dynamic programming. It is to find out the longest subsequence that presents in the two given sequences. A subsequence is a sequence that appears in">
+<meta name="twitter:description" content="Longest common subsequence (LCS) is a classic problem of dynamic programming. The problem is to find out the longest subsequence which presents in the two given sequences. A subsequence is a sequence">
 
 
 
@@ -352,7 +352,8 @@
       
 
       
-        <p>Longest common subsequence is a classic problem of dynamic programming. It is to find out the longest subsequence that presents in the two given sequences. A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.</p>
+        <p>Longest common subsequence (LCS) is a classic problem of dynamic programming. The problem is to find out the longest subsequence which presents in the two given sequences. A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.</p>
+<p>The solution of LCS is delicate, and the idea can be applied to many other problems. I will walk through these problems in this post.</p>
 <a id="more"></a>
 <h2 id="I-Solution-of-LCS"><a href="#I-Solution-of-LCS" class="headerlink" title="I. Solution of LCS"></a>I. Solution of LCS</h2><p>The key is to break down the problem into a collection of simpler subproblems.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Let mark[i][j] represent the length of the LCS of s1(0..i-1) and s2(0..j-1).</span><br><span class="line"></span><br><span class="line">When i = 0 &amp;&amp; j = 0, mark[i][j] = 0, because the LCS of &quot;&quot; and &quot;&quot; is &quot;&quot;;</span><br><span class="line">When i = 0 &amp;&amp; j &gt; 0, mark[i][j] = 0, because the LCS of &quot;&quot; and s2(0..j-1) is &quot;&quot;;</span><br><span class="line">When i &gt; 0 &amp;&amp; j = 0, mark[i][j] = 0, because the LCS of s1(0..i-1) and &quot;&quot; is &quot;&quot;;</span><br><span class="line">When i &gt; 0 &amp;&amp; j &gt; 0,</span><br><span class="line">  if s1[i-1] = s2[j-1], mark[i][j] = mark[i-1][j-1] + 1;</span><br><span class="line">  otherwise, mark[i][j] = max&#123;mark[i-1][j], mark[i][j-1]&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>If we need to return the subsequence, we can use a matrix to record the path we take in the if/else above and then recover the subsequence according to it.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">When i &gt; 0 &amp;&amp; j &gt; 0,</span><br><span class="line">  if s1[i-1] = s2[j-1], mark[i][j] = mark[i-1][j-1] + 1, trace[i][j] = 0;</span><br><span class="line">  if mark[i-1][j] &gt;= mark[i][j-1], mark[i][j] = mark[i-1][j], trace[i][j] = 1;</span><br><span class="line">  otherwise, mark[i][j] = mark[i][j-1], trace[i][j] = 2;</span><br></pre></td></tr></table></figure></p>
@@ -508,7 +509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -519,7 +520,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -530,7 +531,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

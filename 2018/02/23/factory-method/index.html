@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod2.png">
-<meta property="og:updated_time" content="2018-03-07T06:14:22.000Z">
+<meta property="og:updated_time" content="2018-03-09T23:12:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Factory Method Pattern">
 <meta name="twitter:description" content="Factory Method Pattern provides a way of encapsulating object creation.The definition by Gang of Four:  Define an interface for creating an object, but let subclasses decide which class to instantiate">
@@ -360,6 +360,7 @@
 <blockquote>
 <p>Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory method lets a class defer instantiation it uses to subclasses.</p>
 </blockquote>
+<p>I will first walk through some examples of factory method pattern, and then compare it to the simple factory <em>pattern</em>, hoping that it will give you a better understand of factory method pattern.</p>
 <a id="more"></a>
 <h2 id="A-simple-example"><a href="#A-simple-example" class="headerlink" title="A simple example"></a>A simple example</h2><p>As shown in the UML below, the interface <em>Factory</em> defines a method for creating an object, but only its subclasses can create an object and can decide which class to instantiate.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/factorymethod.png" alt=""></p>
 <p>This simple example can only give you a basic idea of factory method pattern. From my point of view, I have no idea why I need such a complex hierarchy, and why I need to defer the object creation to different factories, and how I can control which factory to use. So let’s learn from some real examples.</p>
@@ -513,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -524,7 +525,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -535,7 +536,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
