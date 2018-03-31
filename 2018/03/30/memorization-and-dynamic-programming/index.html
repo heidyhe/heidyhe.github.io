@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="jvm,garbage collection," />
+  <meta name="keywords" content="dp," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
-<meta name="keywords" content="jvm,garbage collection">
+<meta name="description" content="This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force. Let’s start from a simple problem.">
+<meta name="keywords" content="dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Garbage Collection">
-<meta property="og:url" content="https://heidyhe.github.io/2018/03/13/jvm-garbage-collector/index.html">
+<meta property="og:title" content="Memorization and Dynamic Programming">
+<meta property="og:url" content="https://heidyhe.github.io/2018/03/30/memorization-and-dynamic-programming/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
+<meta property="og:description" content="This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force. Let’s start from a simple problem.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png">
-<meta property="og:updated_time" content="2018-03-31T00:37:06.000Z">
+<meta property="og:updated_time" content="2018-03-31T04:15:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Garbage Collection">
-<meta name="twitter:description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png">
+<meta name="twitter:title" content="Memorization and Dynamic Programming">
+<meta name="twitter:description" content="This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force. Let’s start from a simple problem.">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/2018/03/13/jvm-garbage-collector/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/03/30/memorization-and-dynamic-programming/"/>
 
 
 
 
 
-  <title>Java Garbage Collection | Little by Little</title>
+  <title>Memorization and Dynamic Programming | Little by Little</title>
   
 
 
@@ -265,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/03/13/jvm-garbage-collector/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/03/30/memorization-and-dynamic-programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -282,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java Garbage Collection</h1>
+          <h1 class="post-title" itemprop="name headline">Memorization and Dynamic Programming</h1>
         
 
         <div class="post-meta">
@@ -294,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T22:11:16-07:00">
-                2018-03-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-30T10:49:35-07:00">
+                2018-03-30
               </time>
             
 
@@ -317,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
                   </a>
                 </span>
 
@@ -354,25 +352,19 @@
       
 
       
-        <p>Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it and sometimes find it hard to debug memory issues.<br>What does JVM benefit from garbage collection other than preventing programmers from messing up with the memory? The answer is the efficiency at allocating memory for new objects. This is because garbage collector not only frees memory but also compacts objects in the heap. I wonder if other languages without garbage collector have some similar mechanisms for compaction.</p>
-<p>This post is about the implementation of garbage collection in JVM. JVM adopts a hybrid of various strategies, but <em>generational GC</em> is the cornerstone.</p>
+        <p>This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force.</p>
+<p>Let’s start from a simple problem.</p>
 <a id="more"></a>
-<h2 id="I-Generational-GC"><a href="#I-Generational-GC" class="headerlink" title="I. Generational GC"></a>I. Generational GC</h2><p><em>Generational GC</em> divides objects into several generations and has separate memory regions for different ages of objects, and applies different mechanisms of garbage collection to these generations.</p>
-<p>Take <em>Hotspot</em> JVM for example, the heap is divided into two regions: <em>young generation</em> and <em>old generation</em>.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png" alt=""></p>
-<p>The <strong>Young Generation</strong> is where new objects are allocated and aged. It is further divided into one <em>Eden</em> space and two <em>Survivor</em> spaces. This is how it works (more details can be found <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">here</a>):</p>
-<ol>
-<li>The majority (but not all) of newly created objects are stored in the <em>Eden</em> space.</li>
-<li>When the memory is running low in the <em>Eden</em> space, a <strong>minor GC</strong> occurs. Supposing that <em>Survivor0</em> is empty and <em>Survivor1</em> is occupied by objects.<br> a. The objects that are unreachable are left in the <em>Eden</em> space, and the surviving objects are moved to <em>Survivor0</em>. The <em>Eden</em> space is cleared.<br> b. The reachable objects in <em>Survivor1</em> are moved to <em>Survivor0</em>, and <em>Survivor1</em> is empty as well.<br> c. If an object survives one minor GC, its age will be increased by 1. Now <em>Survivor0</em> is occupied by objects with different ages.<br> d. If an object exceeds the age threshold, it will be promoted from the <strong>Young Generation</strong> to the <strong>Old Generation</strong>.</li>
-</ol>
-<p>The <strong>Old Generation</strong> is used to store long surviving objects. The garbage collection occurs in the <strong>Old Generation</strong> is called a <strong>full GC</strong>. JVM provides different algorithms for full GC: Serial GC, Parallel GC, Parallel Compacting GC, Concurrent Mark &amp; Sweep GC (aka. CMS), and Garge First (G1) GC.</p>
-<p>Note that both <strong>minor GC</strong> and <strong>full GC</strong> are <strong>Stop the World</strong> events, which means the application stop running util gc completes.</p>
-<p>Quick questions:<br>Q1. Why generational GC?<br>There is empirical analysis of applications which shows that most objects are short lived. From there we have a <em>generational hypothesis</em>:</p>
-<blockquote>
-<p>The most recently created objects are also those most likely to become unreachable quickly.</p>
-</blockquote>
-<p>This can be used to improve the performance of garbage collection because different strategies can be applied to different generations. Since most objects in the young generation will soon become unreachable, it is more efficient to move surviving objects from one region to another than removing unreachable objects while compacting the space; but for the old generation, it is pointless to move the majority of objects from one place to another without achieving anything.</p>
-<p>Q2: Why two <em>Survivor</em> spaces?<br>First of all, not all JVMs implement two survivor spaces.<br>If there is only one survivor space, one has to compact the objects first in the survivor space when a minor GC occurs, and then move the surviving objects from the eden space. But as mentioned above, most newly created objects are likely to become unreachable, so it is more simple and effient to move objects round than compacting the survivor space.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Tracing_garbage_collection" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">Java Garbage Collection Basics</a><br>3 <a href="https://www.cubrid.org/blog/understanding-java-garbage-collection" target="_blank" rel="noopener">Understand Java Garbage Collection</a><br>4 <a href="https://stackoverflow.com/questions/10695298/java-gc-why-two-survivor-regions" target="_blank" rel="noopener">Java GC: Why Two Survivor Regions</a></p>
+<h2 id="I-Climbing-stairs"><a href="#I-Climbing-stairs" class="headerlink" title="I. Climbing stairs"></a>I. Climbing stairs</h2><p><a href="https://leetcode.com/problems/climbing-stairs/description/" target="_blank" rel="noopener">70. Climbing Stairs</a>: count ways to reach the top of a stair case with <em>n</em> steps, supposing you can take 1 or 2 steps at a time.</p>
+<p>Let f(n) be the number of ways to reach the top. If you take 1 step for the last climb, there will be <em>f(n-1)</em> ways; if you take 2 steps for the last climb, there will be <em>f(n-2)</em> ways. So the problem can be broken down sub-problems like this: <em>f(n) = f(n-1) + f(n-2)</em>.</p>
+<p>This is easy to implemented using recursion.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> takeStairs(n - <span class="number">1</span>) + takeStairs(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>However, the time complexity of this implementation is O(2^n). It is exponential, and it will cause stack overflow eventually.</p>
+<p>If you execute the recursive function on the paper, you will find that there are many redundanct calculation. Take n = 6 for example, we have to calculate <em>f(4)</em> twice and <em>f(3)</em> three times.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        f(6)</span><br><span class="line">      /     \</span><br><span class="line">    f(5)    f(4)</span><br><span class="line">   /  \    /   \</span><br><span class="line">f(4) f(3) f(3) f(2)</span><br><span class="line"> /</span><br><span class="line">f(3) ...</span><br></pre></td></tr></table></figure></p>
+<p>We can introduce memorization here to reduce redundancy.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span>[] mark)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mark[n] &gt; <span class="number">0</span>) <span class="keyword">return</span> mark[n];</span><br><span class="line">    mark[n] = takeStairs(n - <span class="number">1</span>) + takeStairs(n - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> mark[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>A little improvement, but it still depends on function stack, which might lead to stack overflow.<br>So we should get rid of recursion, but how?<br>As shown in the diagram above, the function is executed from top to bottom and then traced back from bottom to top. Thus, the solution is to have <em>f(n) = f(n-1) + f(n-2)</em> implemented from bottom to top.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    count[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    count[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        count[i] = count[i - <span class="number">1</span>] + count[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The space complexity of the above implementation is O(n), but this can be reduced to O(1) by maintaining the values of <em>count[i-1]</em> and <em>count[i-2]</em> only.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt2 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cnt = cnt1 + cnt2;</span><br><span class="line">        cnt2 = cnt1;</span><br><span class="line">        cnt1 = cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>The solution not using recursion is called <strong>Dynamic Programming</strong>. Here is the formula for dp:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Let f(n) be the number of ways to reach the top.</span><br><span class="line">f(n) = f(n-1) + f(n-2), if n&gt;2</span><br><span class="line">f(n) = 1, if n=1 or n=2</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -390,9 +382,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jvm/" rel="tag"># jvm</a>
-          
-            <a href="/tags/garbage-collection/" rel="tag"># garbage collection</a>
+            <a href="/tags/dp/" rel="tag"># dp</a>
           
         </div>
       
@@ -405,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/07/find-a-number-in-a-sorted-array/" rel="next" title="Find a Number in a Sorted Array">
-                <i class="fa fa-chevron-left"></i> Find a Number in a Sorted Array
+              <a href="/2018/03/26/backtracking/" rel="next" title="Backtracking">
+                <i class="fa fa-chevron-left"></i> Backtracking
               </a>
             
           </div>
@@ -414,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/26/backtracking/" rel="prev" title="Backtracking">
-                Backtracking <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -569,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Generational-GC"><span class="nav-text">I. Generational GC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Climbing-stairs"><span class="nav-text">I. Climbing stairs</span></a></li></ol></div>
             
 
           </div>

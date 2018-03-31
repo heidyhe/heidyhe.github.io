@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix2.png">
-<meta property="og:updated_time" content="2018-03-26T18:48:55.000Z">
+<meta property="og:updated_time" content="2018-03-27T05:03:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Find a Number in a Sorted Array">
 <meta name="twitter:description" content="Given an array of numbers sorted in ascending (or descending) order, a common solution to find a target number is binary search. Binary search starts at the middle position of the array, and narrows d">
@@ -384,7 +384,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = row * col - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> num = matrix[mid / col][mid % col];</span><br><span class="line">    <span class="keyword">if</span> (target == num) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (target &lt; num) &#123;</span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
 <p>Follow-up: <a href="https://leetcode.com/problems/search-a-2d-matrix-ii/description/" target="_blank" rel="noopener">240. Search a 2D Matrix II</a>.</p>
 <p>For this problem, the matrix cannot be treated as sorted array, but we still can apply the binary search to each row.</p>
-<p>There is another solution which applies the idea of narrowing down searching range. Let’s start the search at the right top postion (or the left bottom position), if the target is larger than the number on the position, the numbers on the same row can be ruled out because they are all smaller than the target; if the target is smaller, the numbers on the same column can be ruled out. In this way, we can narrow down the searching range as much as possible, and the time complexity is O(row + col).</p>
+<p>But here is a better solution. Let’s start the search at the right top postion (or the left bottom position), if the target is larger than the number on the position, the numbers on the same row can be ruled out because they are all smaller than the target; if the target is smaller, the numbers on the same column can be ruled out. In this way, we can narrow down the searching range as much as possible, and the time complexity is O(row + col).</p>
 <p><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix1.png" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = col - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; row &amp;&amp; j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (target == matrix[i][j]) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (target &gt; matrix[i][j]) &#123;</span><br><span class="line">        j++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
 <h3 id="More"><a href="#More" class="headerlink" title="More"></a>More</h3><p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/" target="_blank" rel="noopener">378. Kth Smallest Element in a Sorted Matrix</a>: find the kth smallest element in the matrix, given that each of the rows and columns are sorted in ascending order.</p>
@@ -443,8 +443,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/13/jvm-garbage-collector/" rel="prev" title="Garbage Collection in JVM">
-                Garbage Collection in JVM <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/13/jvm-garbage-collector/" rel="prev" title="Java Garbage Collection">
+                Java Garbage Collection <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -526,7 +526,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
