@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Little by Little">
 <meta property="og:description" content="DFS, short for Depth First Search, is an algorithm of searching tree or graph data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-27T04:54:07.000Z">
+<meta property="og:updated_time" content="2018-03-31T04:18:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DFS">
 <meta name="twitter:description" content="DFS, short for Depth First Search, is an algorithm of searching tree or graph data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or">
@@ -356,7 +356,7 @@
 <p>DFS is always implemented using recursion. Its non-recursive implementation depends on an explicit stack.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Node represents a node in a graph</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qualified(node) || !canGoFuther(node)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Node neighbor : getNeighbors(node)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (canBeProcessed(neighbor)) &#123;</span><br><span class="line">            dfs(neighbor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>I have applied DFS to varieties of search problems in previous posts, e.g. problems relating to <a href="https://heidyhe.github.io/2018/02/24/binary-tree/#more">binary tree</a>, and problems relating to <a href="https://heidyhe.github.io/2018/02/26/bfs/#more">graph</a>. So I won’t cover the same problems in this post, but I’ll write about the topic <em>DFS vs. backtracking</em> which I find both interesting and confusing.</p>
 <a id="more"></a>
-<h2 id="DFS-vs-Backtracking"><a href="#DFS-vs-Backtracking" class="headerlink" title="DFS vs. Backtracking"></a>DFS vs. Backtracking</h2><p>I thought <em>DFS</em> and <em>backtracking</em> were the same thing. It was not until I prepared for this post when I realized I was wrong.</p>
+<h2 id="DFS-vs-Backtracking"><a href="#DFS-vs-Backtracking" class="headerlink" title="DFS vs. Backtracking"></a>DFS vs. Backtracking</h2><p>I thought <em>DFS</em> and <em>backtracking</em> were the same thing. It was not until I prepared for this post that I realized I was wrong.</p>
 <p>After reading what I can find on the Internet, my opinion is:</p>
 <ul>
 <li>They are both search algorithms</li>
