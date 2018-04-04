@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="jvm,garbage collection," />
+  <meta name="keywords" content="adapter pattern,composition vs. inheritance," />
 
 
 
@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
-<meta name="keywords" content="jvm,garbage collection">
+<meta name="description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
+<meta name="keywords" content="adapter pattern,composition vs. inheritance">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Garbage Collection">
-<meta property="og:url" content="https://heidyhe.github.io/2018/03/13/jvm-garbage-collector/index.html">
+<meta property="og:title" content="Adapter Pattern">
+<meta property="og:url" content="https://heidyhe.github.io/2018/04/01/adapter-pattern/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
+<meta property="og:description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png">
-<meta property="og:updated_time" content="2018-03-31T00:37:06.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter2.png">
+<meta property="og:updated_time" content="2018-04-04T03:31:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Garbage Collection">
-<meta name="twitter:description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png">
+<meta name="twitter:title" content="Adapter Pattern">
+<meta name="twitter:description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/2018/03/13/jvm-garbage-collector/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/04/01/adapter-pattern/"/>
 
 
 
 
 
-  <title>Java Garbage Collection | Little by Little</title>
+  <title>Adapter Pattern | Little by Little</title>
   
 
 
@@ -265,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/03/13/jvm-garbage-collector/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/04/01/adapter-pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -282,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java Garbage Collection</h1>
+          <h1 class="post-title" itemprop="name headline">Adapter Pattern</h1>
         
 
         <div class="post-meta">
@@ -294,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T22:11:16-07:00">
-                2018-03-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T21:26:54-07:00">
+                2018-04-01
               </time>
             
 
@@ -317,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/design-pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">design pattern</span>
                   </a>
                 </span>
 
@@ -354,25 +355,26 @@
       
 
       
-        <p>Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it and sometimes find it hard to debug memory issues.<br>What does JVM benefit from garbage collection other than preventing programmers from messing up with the memory? The answer is the efficiency at allocating memory for new objects. This is because garbage collector not only frees memory but also compacts objects in the heap. I wonder if other languages without garbage collector have some similar mechanisms for compaction.</p>
-<p>This post is about the implementation of garbage collection in JVM. JVM adopts a hybrid of various strategies, but <em>generational GC</em> is the cornerstone.</p>
-<a id="more"></a>
-<h2 id="I-Generational-GC"><a href="#I-Generational-GC" class="headerlink" title="I. Generational GC"></a>I. Generational GC</h2><p><em>Generational GC</em> divides objects into several generations and has separate memory regions for different ages of objects, and applies different mechanisms of garbage collection to these generations.</p>
-<p>Take <em>Hotspot</em> JVM for example, the heap is divided into two regions: <em>young generation</em> and <em>old generation</em>.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png" alt=""></p>
-<p>The <strong>Young Generation</strong> is where new objects are allocated and aged. It is further divided into one <em>Eden</em> space and two <em>Survivor</em> spaces. This is how it works (more details can be found <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">here</a>):</p>
-<ol>
-<li>The majority (but not all) of newly created objects are stored in the <em>Eden</em> space.</li>
-<li>When the memory is running low in the <em>Eden</em> space, a <strong>minor GC</strong> occurs. Supposing that <em>Survivor0</em> is empty and <em>Survivor1</em> is occupied by objects.<br> a. The objects that are unreachable are left in the <em>Eden</em> space, and the surviving objects are moved to <em>Survivor0</em>. The <em>Eden</em> space is cleared.<br> b. The reachable objects in <em>Survivor1</em> are moved to <em>Survivor0</em>, and <em>Survivor1</em> is empty as well.<br> c. If an object survives one minor GC, its age will be increased by 1. Now <em>Survivor0</em> is occupied by objects with different ages.<br> d. If an object exceeds the age threshold, it will be promoted from the <strong>Young Generation</strong> to the <strong>Old Generation</strong>.</li>
-</ol>
-<p>The <strong>Old Generation</strong> is used to store long surviving objects. The garbage collection occurs in the <strong>Old Generation</strong> is called a <strong>full GC</strong>. JVM provides different algorithms for full GC: Serial GC, Parallel GC, Parallel Compacting GC, Concurrent Mark &amp; Sweep GC (aka. CMS), and Garge First (G1) GC.</p>
-<p>Note that both <strong>minor GC</strong> and <strong>full GC</strong> are <strong>Stop the World</strong> events, which means the application stop running util gc completes.</p>
-<p>Quick questions:<br>Q1. Why generational GC?<br>There is empirical analysis of applications which shows that most objects are short lived. From there we have a <em>generational hypothesis</em>:</p>
+        <p><em>Adapter pattern</em> is a structural pattern. Here is the definition:</p>
 <blockquote>
-<p>The most recently created objects are also those most likely to become unreachable quickly.</p>
+<p>Convert the interface of a class into another interface clients expect.<br>Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.</p>
 </blockquote>
-<p>This can be used to improve the performance of garbage collection because different strategies can be applied to different generations. Since most objects in the young generation will soon become unreachable, it is more efficient to move surviving objects from one region to another than removing unreachable objects while compacting the space; but for the old generation, it is pointless to move the majority of objects from one place to another without achieving anything.</p>
-<p>Q2: Why two <em>Survivor</em> spaces?<br>First of all, not all JVMs implement two survivor spaces.<br>If there is only one survivor space, one has to compact the objects first in the survivor space when a minor GC occurs, and then move the surviving objects from the eden space. But as mentioned above, most newly created objects are likely to become unreachable, so it is more simple and effient to move objects round than compacting the survivor space.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Tracing_garbage_collection" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">Java Garbage Collection Basics</a><br>3 <a href="https://www.cubrid.org/blog/understanding-java-garbage-collection" target="_blank" rel="noopener">Understand Java Garbage Collection</a><br>4 <a href="https://stackoverflow.com/questions/10695298/java-gc-why-two-survivor-regions" target="_blank" rel="noopener">Java GC: Why Two Survivor Regions</a></p>
+<p>In other words, clients expect A, but all we’ve got is B, and yet we want to reuse B, so we introduce an adapter for B, allowing clients to use B in the way they use A without making changes to their code. Note that the adapter does not change the underline behavior implemented by B.</p>
+<a id="more"></a>
+<h2 id="UML-diagram-and-implementation"><a href="#UML-diagram-and-implementation" class="headerlink" title="UML diagram and implementation"></a>UML diagram and implementation</h2><p>This is one way of implementing adapter pattern using composition. It is called <strong>Object Adapter</strong>.</p>
+<h3 id="Object-adapter"><a href="#Object-adapter" class="headerlink" title="Object adapter"></a>Object adapter</h3><p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png" alt=""></p>
+<p>Note that <em>Adaptee</em> can be a class or interface.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operateA</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operateB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee;</span><br><span class="line"></span><br><span class="line">    Adapter(Adaptee obj) &#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee = obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operateA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        adaptee.operateB();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Target obj = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Adaptee());</span><br><span class="line">obj.operateA();</span><br></pre></td></tr></table></figure>
+<p>And there is another way called <strong>Class Adapter</strong>. It uses inheritance instead of composition.</p>
+<h3 id="Class-adapter"><a href="#Class-adapter" class="headerlink" title="Class adapter"></a>Class adapter</h3><p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter2.png" alt=""></p>
+<p>Since Java (before JDK 8), I’m not quite sure how this is implemented in Java yet.</p>
+<h3 id="Object-adapter-vs-Class-adapter"><a href="#Object-adapter-vs-Class-adapter" class="headerlink" title="Object adapter vs. Class adapter"></a>Object adapter vs. Class adapter</h3><p>Another argument about “composition over inheritance”. Check <a href="https://stackoverflow.com/questions/9978477/difference-between-object-adapter-pattern-and-class-adapter-pattern" target="_blank" rel="noopener">this</a> if you’re insterested.</p>
+<h2 id="Real-Examples"><a href="#Real-Examples" class="headerlink" title="Real Examples"></a>Real Examples</h2><h3 id="i-Java-API-java-io-InputStreamReader"><a href="#i-Java-API-java-io-InputStreamReader" class="headerlink" title="i. Java API: java.io.InputStreamReader"></a>i. Java API: java.io.InputStreamReader</h3><p>As we know, <em>BufferedReader</em> expects a character stream, and <em>InputeStream</em> provides byte stream only, how can we make <em>BufferedReader</em> read data from <em>InputStream</em> without changing their implementation? The answer is to introduce an adapter as a wrapper for <em>InputStream</em>. As shown below, <em>InputStreamReader</em> serves as an adapter which converts byte stream into character stream, so the data from <em>InputStream</em> can be handled by <em>BufferedReader</em>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">URLConnection conn = <span class="keyword">new</span> URL(<span class="string">"http://google.comd"</span>).openConnection();</span><br><span class="line">InputStream is = conn.getInputStream();</span><br><span class="line">BufferedReader bfReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is, <span class="string">"UTF-8"</span>));</span><br><span class="line">bfRead.readLine();</span><br></pre></td></tr></table></figure>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Adapter_pattern" target="_blank" rel="noopener">wikiepedia</a></p>
 
       
     </div>
@@ -390,9 +392,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jvm/" rel="tag"># jvm</a>
+            <a href="/tags/adapter-pattern/" rel="tag"># adapter pattern</a>
           
-            <a href="/tags/garbage-collection/" rel="tag"># garbage collection</a>
+            <a href="/tags/composition-vs-inheritance/" rel="tag"># composition vs. inheritance</a>
           
         </div>
       
@@ -405,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/07/find-a-number-in-a-sorted-array/" rel="next" title="Find a Number in a Sorted Array">
-                <i class="fa fa-chevron-left"></i> Find a Number in a Sorted Array
+              <a href="/2018/03/30/memorization-and-dynamic-programming/" rel="next" title="Memorization and Dynamic Programming">
+                <i class="fa fa-chevron-left"></i> Memorization and Dynamic Programming
               </a>
             
           </div>
@@ -414,10 +416,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/26/backtracking/" rel="prev" title="Backtracking">
-                Backtracking <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -569,7 +567,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Generational-GC"><span class="nav-text">I. Generational GC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-diagram-and-implementation"><span class="nav-text">UML diagram and implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter"><span class="nav-text">Object adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-adapter"><span class="nav-text">Class adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter-vs-Class-adapter"><span class="nav-text">Object adapter vs. Class adapter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Real-Examples"><span class="nav-text">Real Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Java-API-java-io-InputStreamReader"><span class="nav-text">i. Java API: java.io.InputStreamReader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
