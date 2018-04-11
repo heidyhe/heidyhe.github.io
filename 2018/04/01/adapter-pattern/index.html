@@ -89,7 +89,9 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter2.png">
-<meta property="og:updated_time" content="2018-04-04T03:31:37.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter4.png">
+<meta property="og:updated_time" content="2018-04-08T19:06:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adapter Pattern">
 <meta name="twitter:description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
@@ -372,9 +374,13 @@
 <h3 id="Class-adapter"><a href="#Class-adapter" class="headerlink" title="Class adapter"></a>Class adapter</h3><p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter2.png" alt=""></p>
 <p>Since Java (before JDK 8), I’m not quite sure how this is implemented in Java yet.</p>
 <h3 id="Object-adapter-vs-Class-adapter"><a href="#Object-adapter-vs-Class-adapter" class="headerlink" title="Object adapter vs. Class adapter"></a>Object adapter vs. Class adapter</h3><p>Another argument about “composition over inheritance”. Check <a href="https://stackoverflow.com/questions/9978477/difference-between-object-adapter-pattern-and-class-adapter-pattern" target="_blank" rel="noopener">this</a> if you’re insterested.</p>
-<h2 id="Real-Examples"><a href="#Real-Examples" class="headerlink" title="Real Examples"></a>Real Examples</h2><h3 id="i-Java-API-java-io-InputStreamReader"><a href="#i-Java-API-java-io-InputStreamReader" class="headerlink" title="i. Java API: java.io.InputStreamReader"></a>i. Java API: java.io.InputStreamReader</h3><p>As we know, <em>BufferedReader</em> expects a character stream, and <em>InputeStream</em> provides byte stream only, how can we make <em>BufferedReader</em> read data from <em>InputStream</em> without changing their implementation? The answer is to introduce an adapter as a wrapper for <em>InputStream</em>. As shown below, <em>InputStreamReader</em> serves as an adapter which converts byte stream into character stream, so the data from <em>InputStream</em> can be handled by <em>BufferedReader</em>.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">URLConnection conn = <span class="keyword">new</span> URL(<span class="string">"http://google.comd"</span>).openConnection();</span><br><span class="line">InputStream is = conn.getInputStream();</span><br><span class="line">BufferedReader bfReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is, <span class="string">"UTF-8"</span>));</span><br><span class="line">bfRead.readLine();</span><br></pre></td></tr></table></figure>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Adapter_pattern" target="_blank" rel="noopener">wikiepedia</a></p>
+<h2 id="Real-Examples"><a href="#Real-Examples" class="headerlink" title="Real Examples"></a>Real Examples</h2><p>In the examples below, what the adapter does is to convert the input from one format to another so that the client can deal with the output format rather than the input format.</p>
+<h3 id="i-Java-API-java-io-InputStreamReader"><a href="#i-Java-API-java-io-InputStreamReader" class="headerlink" title="i. Java API: java.io.InputStreamReader"></a>i. Java API: java.io.InputStreamReader</h3><p>As we know, <em>BufferedReader</em> expects a character stream, and <em>InputeStream</em> provides byte stream only, how can we make <em>BufferedReader</em> read data from <em>InputStream</em> without changing their implementation? The answer is to introduce an adapter as a wrapper for <em>InputStream</em>. As shown below, <em>InputStreamReader</em> serves as an adapter which converts byte stream into character stream, so the data from <em>InputStream</em> can be handled by <em>BufferedReader</em>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">URLConnection conn = <span class="keyword">new</span> URL(<span class="string">"http://google.com"</span>).openConnection();</span><br><span class="line">InputStream is = conn.getInputStream();</span><br><span class="line">BufferedReader bfReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is, <span class="string">"UTF-8"</span>));</span><br><span class="line">bfRead.readLine();</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter3.png" alt=""></p>
+<h3 id="ii-JAXB-javax-xml-bind-annotation-adapters-XmlAdapter"><a href="#ii-JAXB-javax-xml-bind-annotation-adapters-XmlAdapter" class="headerlink" title="ii. JAXB: javax.xml.bind.annotation.adapters.XmlAdapter"></a>ii. JAXB: javax.xml.bind.annotation.adapters.XmlAdapter</h3><p><em>XmlAdapter</em> ensures that every type can be handled by JAXB, that is, if JAXB cannot map an object to an XML representation, the object will be converted from one type to another which JAXB can map to an XML representation. This is done by creating an adapter class which extends <em>XmlAdapter</em> and having the method <em>marshal()</em> and <em>unmarshal()</em> implemented, and this adapter class will be called when the mapping is needed. More details can be found in this post about <a href="http://blog.bdoughan.com/2010/07/xmladapter-jaxbs-secret-weapon.html" target="_blank" rel="noopener">how to use XmlAdapter</a>.</p>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter4.png" alt=""></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Adapter_pattern" target="_blank" rel="noopener">Wikiepedia: Adapter Pattern</a></p>
 
       
     </div>
@@ -416,6 +422,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/authentication/" rel="prev" title="How to authenticate an HTTP request">
+                How to authenticate an HTTP request <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -496,7 +506,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -507,7 +517,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -518,7 +528,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -567,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-diagram-and-implementation"><span class="nav-text">UML diagram and implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter"><span class="nav-text">Object adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-adapter"><span class="nav-text">Class adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter-vs-Class-adapter"><span class="nav-text">Object adapter vs. Class adapter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Real-Examples"><span class="nav-text">Real Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Java-API-java-io-InputStreamReader"><span class="nav-text">i. Java API: java.io.InputStreamReader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-diagram-and-implementation"><span class="nav-text">UML diagram and implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter"><span class="nav-text">Object adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-adapter"><span class="nav-text">Class adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter-vs-Class-adapter"><span class="nav-text">Object adapter vs. Class adapter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Real-Examples"><span class="nav-text">Real Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Java-API-java-io-InputStreamReader"><span class="nav-text">i. Java API: java.io.InputStreamReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-JAXB-javax-xml-bind-annotation-adapters-XmlAdapter"><span class="nav-text">ii. JAXB: javax.xml.bind.annotation.adapters.XmlAdapter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>

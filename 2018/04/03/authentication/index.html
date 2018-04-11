@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tech, blog" />
+  <meta name="keywords" content="authentication,session,single sign-on," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="description" content="Have you ever wondered what happens after you log in to a website? You may think it is like opening a drawer of your own using your key and then having access to everything inside. But this is not a p">
+<meta name="keywords" content="authentication,session,single sign-on">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta property="og:url" content="https://heidyhe.github.io/2018/02/23/Boyer-Moore/index.html">
+<meta property="og:title" content="How to authenticate an HTTP request">
+<meta property="og:url" content="https://heidyhe.github.io/2018/04/03/authentication/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta property="og:description" content="Have you ever wondered what happens after you log in to a website? You may think it is like opening a drawer of your own using your key and then having access to everything inside. But this is not a p">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-09T23:12:32.000Z">
+<meta property="og:updated_time" content="2018-04-11T18:40:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="twitter:title" content="How to authenticate an HTTP request">
+<meta name="twitter:description" content="Have you ever wondered what happens after you log in to a website? You may think it is like opening a drawer of your own using your key and then having access to everything inside. But this is not a p">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/04/03/authentication/"/>
 
 
 
 
 
-  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
+  <title>How to authenticate an HTTP request | Little by Little</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/04/03/authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">How to authenticate an HTTP request</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T20:40:09-08:00">
-                2018-02-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T21:12:27-07:00">
+                2018-04-03
               </time>
             
 
@@ -314,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
+                  <a href="/categories/system-design/" itemprop="url" rel="index">
+                    <span itemprop="name">system design</span>
                   </a>
                 </span>
 
@@ -351,15 +352,67 @@
       
 
       
-        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.</p>
+        <p>Have you ever wondered what happens after you log in to a website? You may think it is like opening a drawer of your own using your key and then having access to everything inside. But this is not a proper metaphor. Whenever you request a resource from the website, you actually sends a HTTP request to the server through your browser. HTTP is a stateless protocol, meaning that</p>
+<ul>
+<li>each request/response happens in isolation</li>
+<li>each request is not aware of the state of the communication</li>
+</ul>
+<p>Thus, a server cannot tell if an HTTP request comes from an authenticated user unless you provide your user name and password in each request, or the server and/or the client keeps track of the state of the communication. Of course, it is silly to ask the user for password every time when a request requires authentication, so it leaves us with the second option.</p>
+<p>This post is about how to keep track of the state of the communication between the client and server, and it covers two solutions.</p>
 <a id="more"></a>
-<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
-<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
-<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
-<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
+<h2 id="Solution-I-session-management"><a href="#Solution-I-session-management" class="headerlink" title="Solution I: session management"></a>Solution I: session management</h2><blockquote>
+<p>A web session is a sequence of HTTP request and response transactions associated to the same user.</p>
+</blockquote>
+<p>Session management is a solution that the state of communication is maintained on the server side.<br>When a client starts a communication with a server, the server will create a key/value pair - generating a session ID as the key and using information relating to the current session (such as user name and user state) as the value, and maintain it on the server side. The server then sends back the session ID. Next time the client sends requests to the server, the requests will bring the session ID with them (if the session hasn’t been expired), so the server can identify where the requests come from. If the user logs in to a website, the server will update the user state as authenticated.<br>The session expires due to timeout or user’s logout. When it expires, the session ID becomes invalid and the session data is deleted, and hence the server cannot identify the following requests.</p>
+<p>Cookie-based and URL rewriting are two mostly adopted implementation of session management.</p>
+<p><strong>Cookie-based session management</strong><br>The session ID is stored in the cookie by the server using the HTTP header <em>Set-cookie</em>. When the client sends a request to the server, the browser will send the cookie along with the request - but this is not always true, of course, due to the security attributes on cookies, but let’s put it aside for now.</p>
+<p><strong>URL rewriting</strong><br>The browser stores the session ID in its local memory and attaches it to the request URL like this <em><a href="https://xxxxxx;sessionid=xxx" target="_blank" rel="noopener">https://xxxxxx;sessionid=xxx</a></em>.</p>
+<p>Cookie-based vs. URL rewriting:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Cookie-based</th>
+<th style="text-align:left">URL rewriting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Cannot be used if cookie has been disabled by the browser</td>
+<td style="text-align:left">No limitations</td>
+</tr>
+<tr>
+<td style="text-align:left">No extra implementation required for the client</td>
+<td style="text-align:left">The client must implement URL rewriting for each request</td>
+</tr>
+</tbody>
+</table>
+<p>Apart from above, cookie-based is a preferable choice from the security perspective. For one reason, we can use the security attributes to limit the usage of cookie for session ID. For another reason,it is much easier to modify the URL than to modify the cookie for accessing your resources, suppose your active session ID is stolen.</p>
+<p>Until now, what I have discussed is based on the assumption that a client deals with only one server, so the session data can be stored in the local memory; in other words, the session data is not shared among the servers.</p>
+<p>Quick question: how can the HTTP requests of one client go to the same server?<br>This can be achived by putting an HTTP load balancer in front of servers and configuring ip-hash load balancing (or having other session persistence configuration enabled).</p>
+<p>It is a simple solution, but it does not take into consideration the weights assigned to the servers. The servers which most of the traffic goes to might become the bottleneck. This solution cannot be applied in the case where a single node might be overloaded.</p>
+<p>If ip-hash load balancing cannot be used, then we have to make the servers share the session data. We can introduce a storage system for storing the data and the data can be accessed by all the servers. Here is an open-source solution: <a href="https://github.com/magro/memcached-session-manager" target="_blank" rel="noopener">memcached-session-manager</a>.</p>
+<h2 id="Solution-II-token-maintained-on-the-client-side"><a href="#Solution-II-token-maintained-on-the-client-side" class="headerlink" title="Solution II: token maintained on the client side"></a>Solution II: token maintained on the client side</h2><p>This solution requires the token to be stored in local storage on the client side, and the server side needn’t maintain the user state.</p>
+<p>It works in this way:</p>
+<ol>
+<li>For authentication, the client provides user name and password to a server.</li>
+<li>If the user is authenticated, the server generates a token and sends it back to the client.</li>
+<li>The client stores the token in the local storage or cookie.</li>
+<li>The client sends HTTP requests along with the token to any server.</li>
+<li>The server which receives the request will verify the validation of the token (including whether the token has expired or not); if it is valid, it will respond with the data that the client asks for.</li>
+</ol>
+<p>The cons of this solution are obvious: the server has to valid the token for each request. But it has its pros:</p>
+<ul>
+<li>No need to manage session on the server side, meaning no worry about load balancing and high traffic volumn</li>
+<li>No limitation on crossing different domains</li>
+<li>Naturally suitable for <em>Single Sign-On</em> (I’ll talk about this later)</li>
+</ul>
+<p>The challenge of this solution is how to decign the token. I would recommend <a href="https://jwt.io/introduction/" target="_blank" rel="noopener">JSON Web Tokens</a> instead of building your own wheel.</p>
+<h2 id="More-single-sign-on"><a href="#More-single-sign-on" class="headerlink" title="More: single sign-on"></a>More: single sign-on</h2><blockquote>
+<p>Single sign-on (SSO) is a property of access control of multiple related, yet independent, software systems. With this property, a user logs in with single ID and password to gain access to a connected system or systems without using different usernames or passwords, or in some configurations seamlessly sign on at each system.</p>
+</blockquote>
+<p>One way to implement SSO is to use token which can be interpreted by different application systems.</p>
+<p>An alternative way is to introduce a central management system. All the application systems must communicate with the central management system for authentication. An example is <a href="https://en.wikipedia.org/wiki/Central_Authentication_Service" target="_blank" rel="noopener">CAS</a>.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 Http: The Definitive Guide<br>2 <a href="https://en.wikipedia.org/wiki/Stateless_protocol" target="_blank" rel="noopener">Wikipedia: Stateless Protocol</a><br>3 <a href="https://en.wikipedia.org/wiki/Single_sign-on" target="_blank" rel="noopener">Wikipedia: Single sign-on</a></p>
 
       
     </div>
@@ -375,6 +428,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/authentication/" rel="tag"># authentication</a>
+          
+            <a href="/tags/session/" rel="tag"># session</a>
+          
+            <a href="/tags/single-sign-on/" rel="tag"># single sign-on</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/22/LCS/" rel="next" title="Longest Common Subsequence">
-                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              <a href="/2018/04/01/adapter-pattern/" rel="next" title="Adapter Pattern">
+                <i class="fa fa-chevron-left"></i> Adapter Pattern
               </a>
             
           </div>
@@ -393,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/23/factory-method/" rel="prev" title="Factory Method Pattern">
-                Factory Method Pattern <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution-I-session-management"><span class="nav-text">Solution I: session management</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution-II-token-maintained-on-the-client-side"><span class="nav-text">Solution II: token maintained on the client side</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-single-sign-on"><span class="nav-text">More: single sign-on</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>

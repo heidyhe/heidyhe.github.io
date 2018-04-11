@@ -88,7 +88,7 @@
 <meta property="og:description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/jvm-heap.png">
-<meta property="og:updated_time" content="2018-03-31T00:37:06.000Z">
+<meta property="og:updated_time" content="2018-04-08T19:07:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Garbage Collection">
 <meta name="twitter:description" content="Java garbage collector frees the heap memory occupied by the objects that are no longer reachable. It takes the job from programmers who often forget to release the memory when they no longer need it">
@@ -372,7 +372,7 @@
 </blockquote>
 <p>This can be used to improve the performance of garbage collection because different strategies can be applied to different generations. Since most objects in the young generation will soon become unreachable, it is more efficient to move surviving objects from one region to another than removing unreachable objects while compacting the space; but for the old generation, it is pointless to move the majority of objects from one place to another without achieving anything.</p>
 <p>Q2: Why two <em>Survivor</em> spaces?<br>First of all, not all JVMs implement two survivor spaces.<br>If there is only one survivor space, one has to compact the objects first in the survivor space when a minor GC occurs, and then move the surviving objects from the eden space. But as mentioned above, most newly created objects are likely to become unreachable, so it is more simple and effient to move objects round than compacting the survivor space.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Tracing_garbage_collection" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">Java Garbage Collection Basics</a><br>3 <a href="https://www.cubrid.org/blog/understanding-java-garbage-collection" target="_blank" rel="noopener">Understand Java Garbage Collection</a><br>4 <a href="https://stackoverflow.com/questions/10695298/java-gc-why-two-survivor-regions" target="_blank" rel="noopener">Java GC: Why Two Survivor Regions</a></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Tracing_garbage_collection" target="_blank" rel="noopener">Wikipedia: Tracing Garbage Collection</a><br>2 <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">Java Garbage Collection Basics</a><br>3 <a href="https://www.cubrid.org/blog/understanding-java-garbage-collection" target="_blank" rel="noopener">Understand Java Garbage Collection</a><br>4 <a href="https://stackoverflow.com/questions/10695298/java-gc-why-two-survivor-regions" target="_blank" rel="noopener">Java GC: Why Two Survivor Regions</a></p>
 
       
     </div>
@@ -498,7 +498,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -509,7 +509,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -520,7 +520,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
