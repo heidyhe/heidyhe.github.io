@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tech, blog" />
+  <meta name="keywords" content="data structure,queue,stack,heap," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="description" content="Queue is a linear data structure where insertion of items takes place at the rear and deletion takes place at the head - Following the FIFO principal: First In First Out. Queue and stack have many fea">
+<meta name="keywords" content="data structure,queue,stack,heap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta property="og:url" content="https://heidyhe.github.io/2018/02/23/Boyer-Moore/index.html">
+<meta property="og:title" content="Queue">
+<meta property="og:url" content="https://heidyhe.github.io/2018/04/14/queue/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta property="og:description" content="Queue is a linear data structure where insertion of items takes place at the rear and deletion takes place at the head - Following the FIFO principal: First In First Out. Queue and stack have many fea">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-09T23:12:32.000Z">
+<meta property="og:updated_time" content="2018-04-17T18:49:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="twitter:title" content="Queue">
+<meta name="twitter:description" content="Queue is a linear data structure where insertion of items takes place at the rear and deletion takes place at the head - Following the FIFO principal: First In First Out. Queue and stack have many fea">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/2018/04/14/queue/"/>
 
 
 
 
 
-  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
+  <title>Queue | Little by Little</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/02/23/Boyer-Moore/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/2018/04/14/queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">Queue</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T20:40:09-08:00">
-                2018-02-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-14T22:52:49-07:00">
+                2018-04-14
               </time>
             
 
@@ -351,15 +352,34 @@
       
 
       
-        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.</p>
+        <p>Queue is a linear data structure where insertion of items takes place at the rear and deletion takes place at the head - Following the FIFO principal: First In First Out.</p>
+<p>Queue and <a href="https://heidyhe.github.io/2018/04/11/stack/">stack</a> have many features in common. They are linear data structures, so they both can be implemented based on an array or a list. The insertion and deletion of items are not allowed to take place at the middle of the data structure. There is only one difference: for stack, the insertion and deletion takes place at one end; for queue, the two operations takes place at different ends - and this has made all the differences on how these two data structures are used.</p>
+<p>Applications of queue include:</p>
+<ul>
+<li><a href="https://heidyhe.github.io/2018/02/26/bfs/">BFS</a></li>
+<li>Producer-Consumer problem, e.g. message queue</li>
+</ul>
 <a id="more"></a>
-<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
-<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
-<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
-<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
+<h2 id="Implementation-of-Queue"><a href="#Implementation-of-Queue" class="headerlink" title="Implementation of Queue"></a>Implementation of Queue</h2><p>There are three basic operations:</p>
+<ul>
+<li>enqueue: insert a new item at the rear</li>
+<li>dequeue: delete the item at the head</li>
+<li>peek: access to the item at the head</li>
+</ul>
+<p>As mentioned above, queue can be implemented based on an array or a list. Actually, in Java, the class <em>LinkedList</em> implements the interface <em>Queue</em> and can be directly used as a queue.</p>
+<p>Unlike stack, where the <em>push</em> operations reuse the space left by the <em>pop</em> operations, queue does not make good use of the space. If you use an array of fixed size to implement a queue, you will soon run out of space, but there is a solution to this problem - <em>circular queue</em>.</p>
+<h2 id="Circular-queue"><a href="#Circular-queue" class="headerlink" title="Circular queue"></a>Circular queue</h2><p>A circular queue is a queue built on a fixed-size array where the first position is connected to the last position to make a circle. In this way, the space left by the <em>dequeue</em> operations can be reused.</p>
+<p>The trick to implement a circular queue is to manipulate the head pointer and rear pointer in a circular way.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircularQueue</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; array;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> len;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> head;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> rear;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CircularQueue</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.len = len;</span><br><span class="line">        <span class="keyword">this</span>.array = <span class="keyword">new</span> ArrayList&lt;&gt;(len);</span><br><span class="line">        head = <span class="number">0</span>;</span><br><span class="line">        rear = <span class="number">0</span>;</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(T obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count == len) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">        rear = (rear + <span class="number">1</span>) % len;</span><br><span class="line">        array.set(rear, obj);</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">dequeue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">        T obj = array.get(head);</span><br><span class="line">        head = (head + <span class="number">1</span>) % len;</span><br><span class="line">        count--;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> array.get(head);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Double-ended-queue"><a href="#Double-ended-queue" class="headerlink" title="Double ended queue"></a>Double ended queue</h2><p>Double ended queue, aka. deque, supports the insertion and deletion of items at both ends. Thus, it can be used as either a queue or a stack.</p>
+<p>A deque can be implemented using a double-linked list or a circular array.</p>
+<p>Applications of deque:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Double-ended_queue#Applications" target="_blank" rel="noopener">A-Steal job scheduling algorithm</a></li>
+<li>undo operations: note that stack can be used for the undo operations, but when the stack gets too full, it’s unlikely to remove the oldest operations from it, so deque is used instead of stack to make it more workable</li>
+<li>palindrome checker</li>
+</ul>
+<h2 id="Priority-queue"><a href="#Priority-queue" class="headerlink" title="Priority queue"></a>Priority queue</h2><p>A priority queue is a regular queue except that an element with high priority is always served before an element with low priority. Thus, when an item is inserted into a priority queue at the rear, the items in the queue will be sorted, and the item with the highest priority will be moved to the head.</p>
+<p>This sounds like a heap, right? A priority queue can be implemented with a heap, but apart from a heap, it can use a self-balancing binary search tree or other data structure. In Java, there is no collection class implementing heap, but we can use <em>PriorityQueue</em> for substitution.</p>
 
       
     </div>
@@ -375,6 +395,18 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/data-structure/" rel="tag"># data structure</a>
+          
+            <a href="/tags/queue/" rel="tag"># queue</a>
+          
+            <a href="/tags/stack/" rel="tag"># stack</a>
+          
+            <a href="/tags/heap/" rel="tag"># heap</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/22/LCS/" rel="next" title="Longest Common Subsequence">
-                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              <a href="/2018/04/11/stack/" rel="next" title="Stack">
+                <i class="fa fa-chevron-left"></i> Stack
               </a>
             
           </div>
@@ -393,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/23/factory-method/" rel="prev" title="Factory Method Pattern">
-                Factory Method Pattern <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-of-Queue"><span class="nav-text">Implementation of Queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Circular-queue"><span class="nav-text">Circular queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Double-ended-queue"><span class="nav-text">Double ended queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Priority-queue"><span class="nav-text">Priority queue</span></a></li></ol></div>
             
 
           </div>

@@ -88,7 +88,7 @@
 <meta property="og:description" content="BFS, short for Breadth First Search, is an algorithm of searching tree or graph data structures. It starts at some specific nodes and explores the neighbor nodes first before moving to the next level,">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/bfs-dfs.png">
-<meta property="og:updated_time" content="2018-04-02T04:22:46.000Z">
+<meta property="og:updated_time" content="2018-04-16T04:45:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BFS">
 <meta name="twitter:description" content="BFS, short for Breadth First Search, is an algorithm of searching tree or graph data structures. It starts at some specific nodes and explores the neighbor nodes first before moving to the next level,">
@@ -428,6 +428,24 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] parent = <span class="keyword">new</span> <span class="keyword">int</span>[row * col];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; col; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix[i][j] == <span class="string">'0'</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> root = find(i, j); <span class="comment">// find</span></span><br><span class="line">        <span class="keyword">for</span> (Node neighbor : getNeighbors(i, j)) &#123;</span><br><span class="line">            <span class="keyword">int</span> nI = neighbor.row;</span><br><span class="line">            <span class="keyword">int</span> nJ = neighbor.col;</span><br><span class="line">            <span class="keyword">if</span> (matrix[nI][nJ] == <span class="string">'0'</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">int</span> nRoot = find(nI, nJ); <span class="comment">// find</span></span><br><span class="line">            <span class="keyword">if</span> (root != nRoot) &#123;</span><br><span class="line">                parent[root] = nRoot; <span class="comment">// union</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Follow-up: <a href="https://www.programcreek.com/2015/01/leetcode-number-of-islands-ii-java/" target="_blank" rel="noopener">Numbers of Islands II</a>.</p>
 <p>The Union Find algorithm is more suitable for solving this problem. For each operation, we only need to check the four adjacent cells of the new position and then count the number of subset. But if we use BFS or DFS, the time complexity will become unacceptable for it depends on the number of operations.</p>
+<h3 id="vi-Other"><a href="#vi-Other" class="headerlink" title="vi. Other"></a>vi. Other</h3><p><a href="https://leetcode.com/problems/word-ladder/description/" target="_blank" rel="noopener">127. Word Ladder</a>: given two words <em>beginWord</em> and <em>endWord</em>, and a dictionary’s word list, find the length of shortest transformation from <em>beginWord</em> to <em>endWord</em>.</p>
+<p>This is similar to <em>Problem ii</em>, so BFS is a better choice for this problem.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">queue.add(endWord);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> round = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">int</span> tmpCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        String word = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (word.equals(endWord)) &#123;</span><br><span class="line">            <span class="keyword">return</span> round;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; transformedWords = getTransformedWords(word);</span><br><span class="line">        queue.addAll(transformedWords);</span><br><span class="line">        tmpCount += transformedWords.size();</span><br><span class="line">    &#125;</span><br><span class="line">    count = tmpCount;</span><br><span class="line">    round++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Suppose there are <em>n</em> words on the list, the time complexity is O(k * n), where <em>k</em> depends on the performance of <em>getTransformedWords()</em>.</p>
+<p>The function <em>getTransformedWords()</em> can be implemented by precomputation - computing all the transformed words for each word on the list. The time complexity for this implementation is O(n * n), so the overall time complexity is O(n * n);</p>
+<p>There is another implementation - stored all the words in a set, so it is easy to verify if a word is valid; get a word’s transformed words by changing one letter at a time and verify their validation using the set. The time complexity is O(k * word’s length), where <em>k</em> depends on the range of the letters.</p>
+<p>Follow-up: <a href="https://leetcode.com/problems/word-ladder-ii/description/" target="_blank" rel="noopener">126. Word Ladder II</a>, find all the shortest transformation sequence(s).</p>
+<p>I cannot think of a solution using BFS only. BFS can be used to get the length of the shortest tranformation, but I have no idea how to get all the possibilities through BFS. However, if I know the minimum length, I can use DFS to get all the possibilities which have the minimum length.</p>
+<p>Here is the solution combining BFS and DFS:</p>
+<ol>
+<li>Get the length of the shortest tranformation using BFS</li>
+<li>Get all the possibilities using DFS, dropping the ones which are longer than the minimum length</li>
+</ol>
+<p>After I wrote the code, I realized that the second part wasted a lot of time on useless calculation. For example, “hit -&gt; hot -&gt; got -&gt; …” proves to be invalid, but when backtracking, the program goes through “hit -&gt; hot -&gt; lot -&gt; got -&gt; …” for nothing.</p>
+<p>Here is the improved solution:</p>
+<ol>
+<li>Get the length of the shortest tranformation from beginWord and all the words on the list to <em>endWord</em> using BFS</li>
+<li>Get all the possibilities using DFS, dropping the ones which are longer than the minimum length as soon as possibile</li>
+</ol>
 
       
     </div>
@@ -555,7 +573,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -577,7 +595,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -626,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS-vs-DFS"><span class="nav-text">BFS vs. DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS-vs-Union-Find"><span class="nav-text">BFS vs. Union Find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-and-solutions"><span class="nav-text">Problems and solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Binary-tree"><span class="nav-text">i. Binary tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-Graph"><span class="nav-text">ii. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iii-Graph"><span class="nav-text">iii. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iv-Graph"><span class="nav-text">iv. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-Graph"><span class="nav-text">v. Graph</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS-vs-DFS"><span class="nav-text">BFS vs. DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS-vs-Union-Find"><span class="nav-text">BFS vs. Union Find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-and-solutions"><span class="nav-text">Problems and solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Binary-tree"><span class="nav-text">i. Binary tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-Graph"><span class="nav-text">ii. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iii-Graph"><span class="nav-text">iii. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iv-Graph"><span class="nav-text">iv. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-Graph"><span class="nav-text">v. Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi-Other"><span class="nav-text">vi. Other</span></a></li></ol></li></ol></div>
             
 
           </div>
