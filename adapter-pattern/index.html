@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="adapter pattern,composition vs. inheritance," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
+<meta name="keywords" content="adapter pattern,composition vs. inheritance">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Adapter Pattern">
+<meta property="og:url" content="https://heidyhe.github.io/adapter-pattern/index.html">
+<meta property="og:site_name" content="Little by Little">
+<meta property="og:description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter4.png">
+<meta property="og:updated_time" content="2018-04-08T19:06:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Adapter Pattern">
+<meta name="twitter:description" content="Adapter pattern is a structural pattern. Here is the definition:  Convert the interface of a class into another interface clients expect.Adapter lets classes work together that couldn’t otherwise beca">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://heidyhe.github.io/adapter-pattern/"/>
+
+
+
+
+
+  <title>Adapter Pattern | Little by Little</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Little by Little</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Aha~, stay curious and have fun</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/adapter-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heidy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Little by Little">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Adapter Pattern</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T21:26:54-07:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/design-pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">design pattern</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>Adapter pattern</em> is a structural pattern. Here is the definition:</p>
+<blockquote>
+<p>Convert the interface of a class into another interface clients expect.<br>Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.</p>
+</blockquote>
+<p>In other words, clients expect A, but all we’ve got is B, and yet we want to reuse B, so we introduce an adapter for B, allowing clients to use B in the way they use A without making changes to their code. Note that the adapter does not change the underline behavior implemented by B.</p>
+<a id="more"></a>
+<h2 id="UML-diagram-and-implementation"><a href="#UML-diagram-and-implementation" class="headerlink" title="UML diagram and implementation"></a>UML diagram and implementation</h2><p>This is one way of implementing adapter pattern using composition. It is called <strong>Object Adapter</strong>.</p>
+<h3 id="Object-adapter"><a href="#Object-adapter" class="headerlink" title="Object adapter"></a>Object adapter</h3><p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter1.png" alt=""></p>
+<p>Note that <em>Adaptee</em> can be a class or interface.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operateA</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operateB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee;</span><br><span class="line"></span><br><span class="line">    Adapter(Adaptee obj) &#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee = obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operateA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        adaptee.operateB();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Target obj = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Adaptee());</span><br><span class="line">obj.operateA();</span><br></pre></td></tr></table></figure>
+<p>And there is another way called <strong>Class Adapter</strong>. It uses inheritance instead of composition.</p>
+<h3 id="Class-adapter"><a href="#Class-adapter" class="headerlink" title="Class adapter"></a>Class adapter</h3><p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter2.png" alt=""></p>
+<p>Since Java (before JDK 8), I’m not quite sure how this is implemented in Java yet.</p>
+<h3 id="Object-adapter-vs-Class-adapter"><a href="#Object-adapter-vs-Class-adapter" class="headerlink" title="Object adapter vs. Class adapter"></a>Object adapter vs. Class adapter</h3><p>Another argument about “composition over inheritance”. Check <a href="https://stackoverflow.com/questions/9978477/difference-between-object-adapter-pattern-and-class-adapter-pattern" target="_blank" rel="noopener">this</a> if you’re insterested.</p>
+<h2 id="Real-Examples"><a href="#Real-Examples" class="headerlink" title="Real Examples"></a>Real Examples</h2><p>In the examples below, what the adapter does is to convert the input from one format to another so that the client can deal with the output format rather than the input format.</p>
+<h3 id="i-Java-API-java-io-InputStreamReader"><a href="#i-Java-API-java-io-InputStreamReader" class="headerlink" title="i. Java API: java.io.InputStreamReader"></a>i. Java API: java.io.InputStreamReader</h3><p>As we know, <em>BufferedReader</em> expects a character stream, and <em>InputeStream</em> provides byte stream only, how can we make <em>BufferedReader</em> read data from <em>InputStream</em> without changing their implementation? The answer is to introduce an adapter as a wrapper for <em>InputStream</em>. As shown below, <em>InputStreamReader</em> serves as an adapter which converts byte stream into character stream, so the data from <em>InputStream</em> can be handled by <em>BufferedReader</em>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">URLConnection conn = <span class="keyword">new</span> URL(<span class="string">"http://google.com"</span>).openConnection();</span><br><span class="line">InputStream is = conn.getInputStream();</span><br><span class="line">BufferedReader bfReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is, <span class="string">"UTF-8"</span>));</span><br><span class="line">bfRead.readLine();</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter3.png" alt=""></p>
+<h3 id="ii-JAXB-javax-xml-bind-annotation-adapters-XmlAdapter"><a href="#ii-JAXB-javax-xml-bind-annotation-adapters-XmlAdapter" class="headerlink" title="ii. JAXB: javax.xml.bind.annotation.adapters.XmlAdapter"></a>ii. JAXB: javax.xml.bind.annotation.adapters.XmlAdapter</h3><p><em>XmlAdapter</em> ensures that every type can be handled by JAXB, that is, if JAXB cannot map an object to an XML representation, the object will be converted from one type to another which JAXB can map to an XML representation. This is done by creating an adapter class which extends <em>XmlAdapter</em> and having the method <em>marshal()</em> and <em>unmarshal()</em> implemented, and this adapter class will be called when the mapping is needed. More details can be found in this post about <a href="http://blog.bdoughan.com/2010/07/xmladapter-jaxbs-secret-weapon.html" target="_blank" rel="noopener">how to use XmlAdapter</a>.</p>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/design/adapter4.png" alt=""></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Adapter_pattern" target="_blank" rel="noopener">Wikiepedia: Adapter Pattern</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/adapter-pattern/" rel="tag"># adapter pattern</a>
+          
+            <a href="/tags/composition-vs-inheritance/" rel="tag"># composition vs. inheritance</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/memorization-and-dynamic-programming/" rel="next" title="Memorization and Dynamic Programming">
+                <i class="fa fa-chevron-left"></i> Memorization and Dynamic Programming
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/authentication/" rel="prev" title="How to authenticate an HTTP request">
+                How to authenticate an HTTP request <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg"
+                alt="Heidy" />
+            
+              <p class="site-author-name" itemprop="name">Heidy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heidyhe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:heidycat@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-diagram-and-implementation"><span class="nav-text">UML diagram and implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter"><span class="nav-text">Object adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-adapter"><span class="nav-text">Class adapter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-adapter-vs-Class-adapter"><span class="nav-text">Object adapter vs. Class adapter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Real-Examples"><span class="nav-text">Real Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Java-API-java-io-InputStreamReader"><span class="nav-text">i. Java API: java.io.InputStreamReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-JAXB-javax-xml-bind-annotation-adapters-XmlAdapter"><span class="nav-text">ii. JAXB: javax.xml.bind.annotation.adapters.XmlAdapter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

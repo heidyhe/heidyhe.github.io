@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="array,binary search," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Given an array of numbers sorted in ascending (or descending) order, a common solution to find a target number is binary search. Binary search starts at the middle position of the array, and narrows d">
+<meta name="keywords" content="array,binary search">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find a Number in a Sorted Array">
+<meta property="og:url" content="https://heidyhe.github.io/find-a-number-in-a-sorted-array/index.html">
+<meta property="og:site_name" content="Little by Little">
+<meta property="og:description" content="Given an array of numbers sorted in ascending (or descending) order, a common solution to find a target number is binary search. Binary search starts at the middle position of the array, and narrows d">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix2.png">
+<meta property="og:updated_time" content="2018-03-27T05:03:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Find a Number in a Sorted Array">
+<meta name="twitter:description" content="Given an array of numbers sorted in ascending (or descending) order, a common solution to find a target number is binary search. Binary search starts at the middle position of the array, and narrows d">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://heidyhe.github.io/find-a-number-in-a-sorted-array/"/>
+
+
+
+
+
+  <title>Find a Number in a Sorted Array | Little by Little</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Little by Little</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Aha~, stay curious and have fun</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/find-a-number-in-a-sorted-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heidy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Little by Little">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Find a Number in a Sorted Array</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T21:56:17-08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Given an array of numbers sorted in ascending (or descending) order, a common solution to find a target number is binary search. Binary search starts at the middle position of the array, and narrows down the searching range to half of the array by comparing the target number to the number on the middle position; and then repeats this process until the target number is found or the searching range is left to be 0.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// suppose the array of nubmers are sorted in ascending order</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> j = array.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (target == array[mid]) <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">if</span> (target &lt; array[mid]) &#123;</span><br><span class="line">            j = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Time complexity: O(log(n)).</p>
+<p>There are a variety of interesting problems which are derived from this simple searching problem. In Part I, I’ll go through such searching problems confined to an array. In Part II, the problems are focused on the matrix.</p>
+<a id="more"></a>
+<h2 id="I-Find-a-number-in-an-array"><a href="#I-Find-a-number-in-an-array" class="headerlink" title="I. Find a number in an array"></a>I. Find a number in an array</h2><h3 id="i-Search-for-a-range"><a href="#i-Search-for-a-range" class="headerlink" title="i. Search for a range"></a>i. Search for a range</h3><p><a href="https://leetcode.com/problems/search-for-a-range/#/description" target="_blank" rel="noopener">34. Search for a Range</a>: given an array of integers sorted in ascending order, find the starting and ending position of a target number (the array may contain duplicates).</p>
+<p>Solution 1: find the target number in the array using binary search, and then go through its neighbors on the left until finding the starting position, and go through its neighbors on the right for the ending position. Time complexity is O(log(n) + k), k is the number of the target element.</p>
+<p>Solution 2: find the starting position of the target using binary search, and then find the ending position using binary search as well. Time complexity is O(log(n)).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// find the starting position</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = array.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (target == array[mid]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (mid == <span class="number">0</span> || array[mid] != array[mid - <span class="number">1</span>]) <span class="keyword">return</span> mid;</span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &lt; array[mid]) &#123;</span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ii-The-sorted-array-is-rotated"><a href="#ii-The-sorted-array-is-rotated" class="headerlink" title="ii. The sorted array is rotated"></a>ii. The sorted array is rotated</h3><p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/description/" target="_blank" rel="noopener">33. Search in Rotated Sorted Array</a>: find the target number in an array which is sorted in ascending order but rotated at some pivot (no duplicate exist in the array).</p>
+<p>The solution is binary search with a little change on narrowing down the searching range. It cannot decide the target is on the left side or the right side by simply comparing the target number to the number on the middle position.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = nums.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (target == nums[mid]) <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] &lt; nums[j]) &#123; <span class="comment">// if numbers in array[i..j] are in ascending order</span></span><br><span class="line">        <span class="keyword">if</span> (target &lt; nums[mid]) &#123;</span><br><span class="line">            j = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// if numbers in array[i..j] are rotated</span></span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt; nums[j]) &#123; <span class="comment">// if numbers in array[i..mid] are in ascending order</span></span><br><span class="line">            <span class="keyword">if</span> (target &gt;= nums[i] &amp;&amp; target &lt; nums[mid]) &#123;</span><br><span class="line">                j = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// if numbers in array[mid..j] are in ascending order</span></span><br><span class="line">            <span class="keyword">if</span> (target &gt; nums[mid] &amp;&amp; target &lt;= nums[j]) &#123;</span><br><span class="line">                i = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<p>Follow-up: what if the array contains duplicates?<br><a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/" target="_blank" rel="noopener">81. Search in Rotated Sorted Array II</a>: find out if a given number exists in the array.</p>
+<p>For the case when nums[i] == nums[mid] &amp;&amp; nums[mid] == nums[j], it cannot tell if the numbers in nums[i..mid] are the same or the ones in nums[mid..j] are the same (e.g. {1, 1, 3, 1} vs. {1, 3, 1, 1, 1}), and hence it cannot narrow down the searching range by half. The time complexity should be a little more than O(log(n)).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = nums.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (target == nums[mid]) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] &lt; nums[j]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target &lt; nums[mid]) &#123;</span><br><span class="line">            j = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; nums[j]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (target &gt; nums[mid] &amp;&amp; target &lt;= nums[j]) &#123;</span><br><span class="line">                i = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[j]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (target &lt; nums[mid] &amp;&amp; target &gt;= nums[i]) &#123;</span><br><span class="line">                j = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">            <span class="keyword">if</span> (nums[mid] != nums[i]) &#123;</span><br><span class="line">                j = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// if nums[mid]==nums[j] &amp;&amp; nums[mid]==nums[i]</span></span><br><span class="line">                i++;</span><br><span class="line">                j--; <span class="comment">// cannot tell if it is &#123;1, 1, 3, 1&#125; or &#123;1, 3, 1, 1, 1&#125;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+<p><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/" target="_blank" rel="noopener">153. Find Minimum in Rotated Sorted Array</a>: find the minimum number in an array which is sorted in ascending order but rotated at some pivot (no duplicate exist in the array).</p>
+<p>Instead of finding a target number in an array, this problem is finding the number which is smaller than its left neighbor or the first number if the whole array is in ascending order. We can narrow down the searching range by ruling out the half part which is in ascending order unless the whole array is in ascending order.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = nums.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] &lt; nums[j]) <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">if</span> (mid &gt; <span class="number">0</span> &amp;&amp; nums[mid] &lt; nums[mid - <span class="number">1</span>]) <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; nums.length - <span class="number">1</span> &amp;&amp; nums[mid] &gt; nums[mid + <span class="number">1</span>]) <span class="keyword">return</span> mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums[mid] &gt; nums[i]) &#123; <span class="comment">// if array[i..mid] is in ascending order</span></span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// if array[mid..j] is in ascending order</span></span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Be aware of these test cases (when mid equals to i):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;1, 2&#125;</span><br><span class="line">&#123;2, 1&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Follow-up: what if the array contains duplicates?<br><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/" target="_blank" rel="noopener">154. Find Minimum in Rotated Sorted Array II</a>: find the minimum number.</p>
+<p>Be aware of the situation when nums[mid] equals to nums[j] and nums[mid] equals to nums[j], e.g. {1, 1, 3, 1}, {1, 3, 1, 1, 1}.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = nums.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (nums[i] &lt; nums[j]) &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (mid &gt; <span class="number">0</span> &amp;&amp; nums[mid] &lt; nums[mid - <span class="number">1</span>]) &#123; i = mid; <span class="keyword">break</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; nums.length - <span class="number">1</span> &amp;&amp; nums[mid] &gt; nums[mid + <span class="number">1</span>]) &#123; i = mid + <span class="number">1</span>; <span class="keyword">break</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (nums[mid] &gt; nums[i]) &#123; <span class="comment">// if array[i..mid] is in ascending order</span></span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt;= nums[j]) <span class="keyword">break</span>;</span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; nums[i]) &#123; <span class="comment">// if array[mid..j] is in ascending order</span></span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == nums[j]) &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> i;</span><br></pre></td></tr></table></figure>
+<h3 id="iii-Search-for-duplicate-number"><a href="#iii-Search-for-duplicate-number" class="headerlink" title="iii. Search for duplicate number"></a>iii. Search for duplicate number</h3><p><a href="https://leetcode.com/problems/find-the-duplicate-number/description/" target="_blank" rel="noopener">287. Find the Duplicate Number</a>: find the only one duplicate number in an array containing n + 1 integers where each integer is between 1 and n(inclusive).</p>
+<p>Since it is required to use O(1) extra space only, we cannot keep a counter for each number in the array. A straightforward way is using brutal force to find the duplicate number, and the time complexity is O(n^2).<br>You may wonder how to apply binary search to this problem. The array is not sorted, so a little twist is needed here. Instead of directly use binary search on the array, we can use binary search on the number <em>n</em>. If there are more than <em>k</em> elements between <em>i</em> and <em>i+k-1</em> (inclusive) in the array, the duplicate number must be in this range, so we can narrow down the searching range from <em>1 ~ n</em> to <em>i ~ i+k-1</em>. The time complexity is O(n*log(n)).<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> j = n;</span><br><span class="line"><span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> k = countNumberNoMoreThanMid(nums, mid);</span><br><span class="line">    <span class="keyword">if</span> (k &lt;= mid) &#123; <span class="comment">// note that for this case &#123;2, 2, 2, 2&#125;, when mid=1, k will be 0</span></span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        j = mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> i;</span><br></pre></td></tr></table></figure></p>
+<p>Here is another solution using <a href="https://heidyhe.github.io/2018/02/21/Two-Pointers/#more">two pointers</a>.</p>
+<h2 id="II-Find-a-number-in-a-matrix"><a href="#II-Find-a-number-in-a-matrix" class="headerlink" title="II. Find a number in a matrix"></a>II. Find a number in a matrix</h2><p>Things become more complex when searching a matrix.</p>
+<p><a href="https://leetcode.com/problems/search-a-2d-matrix/description/" target="_blank" rel="noopener">74. Search a 2D Matrix</a>: search a target number in a sorted matrix.</p>
+<p>If we put the first number in a row after the last number in the previous row, the matrix can be treated as a sorted array, so we can directly apply binary search to this problem.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = row * col - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (i + j) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> num = matrix[mid / col][mid % col];</span><br><span class="line">    <span class="keyword">if</span> (target == num) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (target &lt; num) &#123;</span><br><span class="line">        j = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        i = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+<p>Follow-up: <a href="https://leetcode.com/problems/search-a-2d-matrix-ii/description/" target="_blank" rel="noopener">240. Search a 2D Matrix II</a>.</p>
+<p>For this problem, the matrix cannot be treated as sorted array, but we still can apply the binary search to each row.</p>
+<p>But here is a better solution. Let’s start the search at the right top postion (or the left bottom position), if the target is larger than the number on the position, the numbers on the same row can be ruled out because they are all smaller than the target; if the target is smaller, the numbers on the same column can be ruled out. In this way, we can narrow down the searching range as much as possible, and the time complexity is O(row + col).</p>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix1.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> j = col - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; row &amp;&amp; j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (target == matrix[i][j]) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (target &gt; matrix[i][j]) &#123;</span><br><span class="line">        j++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="More"><a href="#More" class="headerlink" title="More"></a>More</h3><p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/" target="_blank" rel="noopener">378. Kth Smallest Element in a Sorted Matrix</a>: find the kth smallest element in the matrix, given that each of the rows and columns are sorted in ascending order.</p>
+<p>One solution is to use a <em>k</em> maximum heap to keep track of the small elements while traversing the matrix.</p>
+<p>The other solution is to use binary search. The searching space is the range between the left top number in the matrix to the bottom right number. The key is how to narrow down the searching range. Here is the implementation.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> vLeft = matrix[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> vRight = matrix[n - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (vLeft &lt; vRight) &#123;</span><br><span class="line">        <span class="keyword">int</span> vMid = (vLeft + vRight) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> count = countLessOrEqual(vMid, matrix);</span><br><span class="line">        <span class="keyword">if</span> (count &lt; k) &#123;</span><br><span class="line">            vLeft = vMid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            vRight = vMid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> vLeft;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Quick questions:</p>
+<ol>
+<li>Why the condition of termination is <em>vLeft == vRight</em>?</li>
+<li>Why vLeft is an element in the matrix?</li>
+<li>Why vLeft is the kth smallest element in the matrix?</li>
+</ol>
+<p>Here is the answer to the questions. When <em>count</em> is equal to <em>k</em>, it does not return <em>vMid</em> as the result because <em>vMid</em> may be some number larger than the kth smallest element, and it just narrows down the searching range until <em>vMid</em> is the kth smallest element (<em>vMid</em> is always less than or equal to <em>vRight</em>, so the searching ranged will continue to be narrowed down if <em>vMid</em> is not the kth smallest element). When <em>vMid</em> is the kth smallest element, <em>vRight</em> will be become the kth smallest elment for the following loops. Until now, <em>vLeft</em> may be equal to or not equal to <em>vRight</em>. If <em>vLeft</em> is not equal to <em>vRight</em>, <em>vMid</em> will be less than the kth smallest element and hence the <em>count</em> will be less than <em>k</em>, so eventually <em>vLeft</em> will be equal to <em>vRight</em>.</p>
+<p>Follow-up: <a href="https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/" target="_blank" rel="noopener">719. Find K-th Smallest Pair Distance</a>, given an integer array, return the k-th smallest distance among all the pairs.</p>
+<p>A straightforward solution is to calculate all the distances and use a maximum heap to find out the k-th smallest one.</p>
+<p>Here is another solution which uses binary search.</p>
+<p>Given an array {4, 11, 40, 23, 7, 27}, if we sort it in ascending order, we can get a sorted matrix of distance as the diagram below, and we can apply the above solution to this problem.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/matrix2.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/array/" rel="tag"># array</a>
+          
+            <a href="/tags/binary-search/" rel="tag"># binary search</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/strategy-pattern/" rel="next" title="Strategy Pattern">
+                <i class="fa fa-chevron-left"></i> Strategy Pattern
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/jvm-garbage-collector/" rel="prev" title="Java Garbage Collection">
+                Java Garbage Collection <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg"
+                alt="Heidy" />
+            
+              <p class="site-author-name" itemprop="name">Heidy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heidyhe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:heidycat@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Find-a-number-in-an-array"><span class="nav-text">I. Find a number in an array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Search-for-a-range"><span class="nav-text">i. Search for a range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-The-sorted-array-is-rotated"><span class="nav-text">ii. The sorted array is rotated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iii-Search-for-duplicate-number"><span class="nav-text">iii. Search for duplicate number</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-Find-a-number-in-a-matrix"><span class="nav-text">II. Find a number in a matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

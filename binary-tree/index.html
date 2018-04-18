@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="dfs,data structure,binary tree," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is k, then it has at most 2^k children.A complete binary tree is a binary tree where every level (e">
+<meta name="keywords" content="dfs,data structure,binary tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binary Tree">
+<meta property="og:url" content="https://heidyhe.github.io/binary-tree/index.html">
+<meta property="og:site_name" content="Little by Little">
+<meta property="og:description" content="A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is k, then it has at most 2^k children.A complete binary tree is a binary tree where every level (e">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs2.png">
+<meta property="og:updated_time" content="2018-04-04T03:34:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Binary Tree">
+<meta name="twitter:description" content="A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is k, then it has at most 2^k children.A complete binary tree is a binary tree where every level (e">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://heidyhe.github.io/binary-tree/"/>
+
+
+
+
+
+  <title>Binary Tree | Little by Little</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Little by Little</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Aha~, stay curious and have fun</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/binary-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heidy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Little by Little">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Binary Tree</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-24T14:16:30-08:00">
+                2018-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is <em>k</em>, then it has at most <em>2^k</em> children.<br>A complete binary tree is a binary tree where every level (except the last) is completely filled, and all nodes at the last level are as far left as possible.<br>A full binary tree is a complete binary tree where every node other than the leaves has two children.</p>
+<p>This post is about some classic problems relating to the binary tree. Most of the problems can be solved using <a href="https://heidyhe.github.io/2018/02/27/dfs/">DFS</a>.</p>
+<a id="more"></a>
+<h2 id="I-Traversal"><a href="#I-Traversal" class="headerlink" title="I. Traversal"></a>I. Traversal</h2><h3 id="i-Pre-order-traversal"><a href="#i-Pre-order-traversal" class="headerlink" title="i. Pre-order traversal"></a>i. Pre-order traversal</h3><p>Leetcode: <a href="https://leetcode.com/problems/binary-tree-preorder-traversal/description/" target="_blank" rel="noopener">144. Binary Tree Preorder Traversal</a>.</p>
+<p>Recursive solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// handle the current node</span></span><br><span class="line">    preorder(node.left);</span><br><span class="line">    preorder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Itervative solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> Deque&lt;&gt;();</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode node = stack.pop();</span><br><span class="line">        <span class="comment">// handle the current node;</span></span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(node.right);</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(node.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="ii-In-order-traversal"><a href="#ii-In-order-traversal" class="headerlink" title="ii. In-order traversal"></a>ii. In-order traversal</h3><p>Leetcode: <a href="https://leetcode.com/problems/binary-tree-inorder-traversal/description/" target="_blank" rel="noopener">94. Binary Tree Inorder Traversal</a>.</p>
+<p>Recursive solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    inorder(node.left);</span><br><span class="line">    <span class="comment">// handle the current node</span></span><br><span class="line">    inorder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Itervative solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackNode</span> </span>&#123;</span><br><span class="line">    TreeNode node;</span><br><span class="line">    <span class="keyword">boolean</span> hasProcessed;</span><br><span class="line">    StackNode(TreeNode node) &#123;</span><br><span class="line">        <span class="keyword">this</span>.node = node;</span><br><span class="line">        <span class="keyword">this</span>.hasProcessed = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Deque&lt;StackNode&gt; stack = <span class="keyword">new</span> Deque&lt;&gt;();</span><br><span class="line">    stack.push(<span class="keyword">new</span> StackNode(root));</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        StackNode node = stack.pop();</span><br><span class="line">        <span class="keyword">if</span> (node.hasProcessed) &#123;</span><br><span class="line">            <span class="comment">// handle the current node</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(<span class="keyword">new</span> StackNode(node.right));</span><br><span class="line">            stack.push(node);</span><br><span class="line">            <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(<span class="keyword">new</span> StackNode(node.left));</span><br><span class="line">            node.hasProcessed = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or use a set to record the nodes which have been processed (as shown in iii).</p>
+<h3 id="iii-Post-order-traversal"><a href="#iii-Post-order-traversal" class="headerlink" title="iii. Post-order traversal"></a>iii. Post-order traversal</h3><p>Leetcode: <a href="https://leetcode.com/problems/binary-tree-postorder-traversal/description/" target="_blank" rel="noopener">145. Binary Tree Postorder Traversal</a>.</p>
+<p>Recursive solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postorder</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    postorder(node.left);</span><br><span class="line">    postorder(node.right);</span><br><span class="line">    <span class="comment">// handle the current node</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Itervative solution:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postorder</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> Deque&lt;&gt;();</span><br><span class="line">    stack.push(<span class="keyword">new</span> StackNode(root));</span><br><span class="line">    Set&lt;TreeNode&gt; mark = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode node = stack.pop();</span><br><span class="line">        <span class="keyword">if</span> (mark.contains(node)) &#123;</span><br><span class="line">            <span class="comment">// handle the current node</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            stack.push(node);</span><br><span class="line">            <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) stack.push(<span class="keyword">new</span> StackNode(node.right));</span><br><span class="line">            <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) stack.push(<span class="keyword">new</span> StackNode(node.left));</span><br><span class="line">            mark.add(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="iv-Construct-a-binary-tree-using-pre-order-and-in-order-or-post-order-and-in-order"><a href="#iv-Construct-a-binary-tree-using-pre-order-and-in-order-or-post-order-and-in-order" class="headerlink" title="iv. Construct a binary tree using pre-order and in-order (or post-order and in-order)"></a>iv. Construct a binary tree using pre-order and in-order (or post-order and in-order)</h3><p>For pre-order traversal, the first element is the root of the tree (similar for post-order traversal), and follows the nodes of the left subtree, and then the nodes of the right subtree. How do we know which nodes belong the left subtree? The answer is in the in-order traversal, the nodes on the left side of the root belong to the left subtree, and the nodes on the right side belong to the right subtree. The next thing is to construct the left subtree and the right one, <strong>divide and conquer</strong>, and this is how to construct a binary tree.<br>In a word, we use the pre-order/post-order traversal to local the root of subtree, and use in-order traversal to find the nodes in the left subtree and in the right subtree.</p>
+<p>Leetcode: <a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/" target="_blank" rel="noopener">105. Construct Binary Tree from Preorder and Inorder Traversal</a> and <a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/" target="_blank" rel="noopener">106. Construct Binary Tree from Inorder and Postorder Traversal
+</a>.</p>
+<h3 id="v-Symmetric-Tree"><a href="#v-Symmetric-Tree" class="headerlink" title="v. Symmetric Tree"></a>v. Symmetric Tree</h3><p><a href="https://leetcode.com/problems/symmetric-tree/description/" target="_blank" rel="noopener">101. Symmetric Tree</a>: check if a binary tree is a mirror of itself.</p>
+<p>The idea is to traverse the left subtree and right subtree in an opposite way. Note that simply using in-order traversal to generate an array and then checking if it is symmetric is not enough. Check a counter example below.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   4</span><br><span class="line"> /   /</span><br><span class="line">4   2</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSymmetric</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dfs(root.left, root.right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(TreeNode lTree, TreeNode rTree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lTree == <span class="keyword">null</span> &amp;&amp; rTree == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (lTree == <span class="keyword">null</span> &amp;&amp; rTree != <span class="keyword">null</span> || lTree != <span class="keyword">null</span> &amp;&amp; rTree == <span class="keyword">null</span> || lTree.val != rTree.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dfs(lTree.left, rTree.right) &amp;&amp; dfs(lTree.right, rTree.left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="vi-Level-order-traversal"><a href="#vi-Level-order-traversal" class="headerlink" title="vi. Level order traversal"></a>vi. Level order traversal</h3><p>Leetcode: <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/description/" target="_blank" rel="noopener">102. Binary Tree Level Order Traversal</a>.</p>
+<p>The solution is to use <a href="https://heidyhe.github.io/2018/02/26/bfs/">BFS</a> to explore tree nodes by level.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">queue.add(root);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">int</span> childCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Node node = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123; queue.add(node.left); childCount++; &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123; queue.add(node.right); childCount++; &#125;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    count = childCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="vii-Morris-traversal"><a href="#vii-Morris-traversal" class="headerlink" title="vii. Morris traversal"></a>vii. Morris traversal</h3><p>It is a different kind of traversal without recursion and without stack. Its space complexity is O(1).</p>
+<h2 id="II-Serialize-amp-Deserialize"><a href="#II-Serialize-amp-Deserialize" class="headerlink" title="II. Serialize &amp; Deserialize"></a>II. Serialize &amp; Deserialize</h2><p>Leetcode: <a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/" target="_blank" rel="noopener">297. Serialize and Deserialize Binary Tree</a>.</p>
+<p>The key is to find a way to serialize a binary tree to a string. One obvious way is to put the result of pre-order (or post-order) traversal and in-order traversal together, but this will take up space twice as the tree’s size.</p>
+<p>One solution is provided by <a href="https://leetcode.com/faq/#binary-tree" target="_blank" rel="noopener">LeetCode OJ</a>. It traverses the tree in level order and prints each node including the children which are null (so that each node can find their parents when deserialized), but the last <em>nulls</em> can be removed. The implementation is easy.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">serialize</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        TreeNode node = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123; sb.append(<span class="string">"null,"</span>); <span class="keyword">continue</span>; &#125;</span><br><span class="line">        sb.append(node.val).append(<span class="string">","</span>);</span><br><span class="line">        queue.add(node.left);</span><br><span class="line">        queue.add(node.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remove extra null and ,</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode <span class="title">deserialize</span><span class="params">(String sequence)</span> </span>&#123;</span><br><span class="line">    TreeNode root = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">""</span>.equals(sequence)) <span class="keyword">return</span> root;</span><br><span class="line"></span><br><span class="line">    String[] array = sequence.split(<span class="string">","</span>);</span><br><span class="line">    root = <span class="keyword">new</span> TreeNode(Integer.valueOf(array[<span class="number">0</span>]));</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    queue.add(root);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty() &amp;&amp; i &lt; array.length) &#123;</span><br><span class="line">        TreeNode node = queue.poll();</span><br><span class="line">        <span class="keyword">if</span> (!<span class="string">"null"</span>.equals(array[i])) &#123;</span><br><span class="line">            node.left = <span class="keyword">new</span> TreeNode(Integer.valueOf(array[i]));</span><br><span class="line">            queue.add(node.left); </span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="string">"null"</span>.equals(array[i])) &#123;</span><br><span class="line">            node.right = <span class="keyword">new</span> TreeNode(Integer.valueOf(array[i]));</span><br><span class="line">            queue.add(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>The other solution is to use in-order traversal, but to introduce extra marks to indicate the level of each node, e.g. <strong>(((5)2)1(3(4)))</strong> represents the tree as follows: there are 3 pairs of parentheses around node 5, so it is at level 3, and for the same reason, the level of node 2 is 2, and because node 5 is on the left side of node 2, node 5 is the left child of node 2.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   3</span><br><span class="line"> /     \</span><br><span class="line">5       4</span><br></pre></td></tr></table></figure></p>
+<p>The part of serialization is super easy, but the part of deserialization is much more difficult.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">serialize</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"("</span> + serialize(node.left) + node.val + serialize(node.right) + <span class="string">")"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TreeNode <span class="title">deserialize</span><span class="params">(String sequence)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">""</span>.equals(sequence)) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pCounter = <span class="number">0</span>; <span class="comment">// counter for parentheses</span></span><br><span class="line">    Deque&lt;StackNode&gt; stack = <span class="keyword">new</span> Deque&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, num = <span class="number">0</span>, sign = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">boolean</span> handleNum = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; sequence.length()) &#123;</span><br><span class="line">        <span class="keyword">char</span> ch = sequence.charAt(i);</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">'-'</span>) &#123;</span><br><span class="line">            sign = -<span class="number">1</span>;</span><br><span class="line">            i++;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>) &#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (ch - <span class="string">'0'</span>);</span><br><span class="line">            i++;</span><br><span class="line">            handleNum = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (handleNum) &#123;</span><br><span class="line">            processNewNode(<span class="keyword">new</span> TreeNode(num * sign), pCounter, stack);</span><br><span class="line">            num = <span class="number">0</span>;</span><br><span class="line">            sign = -<span class="number">1</span>;</span><br><span class="line">            handleNum = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">'('</span>) &#123;</span><br><span class="line">            pCounter++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">')'</span>) &#123;</span><br><span class="line">            pCounter--;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (handleNum) &#123;</span><br><span class="line">        processNewNode(<span class="keyword">new</span> TreeNode(num), stack);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stack.get(<span class="number">0</span>).node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processNewNode</span><span class="params">(TreeNode tNode, <span class="keyword">int</span> level, Deque&lt;StackNode&gt; stack)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// alway pop out the nodes of the left subtree from the stack</span></span><br><span class="line">    <span class="comment">// the stack is left with the most right path</span></span><br><span class="line">    <span class="keyword">if</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        StackNode topNode = stack.pop();</span><br><span class="line">        <span class="comment">// topNode is in the left subtree of tNode</span></span><br><span class="line">        <span class="keyword">if</span> (topNode.level &gt; level) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; topNode.level - <span class="number">1</span> &gt; level) &#123;</span><br><span class="line">                topNode = stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            tNode.left = topNode;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span> (!stack.isEmpty()) &#123;&#125;</span><br><span class="line">            topNode = stack.peek();</span><br><span class="line">            <span class="comment">// tNode is the right child of topNode</span></span><br><span class="line">            <span class="keyword">if</span> (topNode.level + <span class="number">1</span> == level) &#123;</span><br><span class="line">                topNode.node.right = topNode;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stack.push(<span class="keyword">new</span> StackNode(tNode, level));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackNode</span> </span>&#123;</span><br><span class="line">    TreeNode node;</span><br><span class="line">    <span class="keyword">int</span> level;</span><br><span class="line">    StackNode(Tree node, <span class="keyword">int</span> level) &#123;</span><br><span class="line">        <span class="keyword">this</span>.node = node;</span><br><span class="line">        <span class="keyword">this</span>.level = level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="III-Lowest-Common-Ancestor"><a href="#III-Lowest-Common-Ancestor" class="headerlink" title="III. Lowest Common Ancestor"></a>III. Lowest Common Ancestor</h2><p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/" target="_blank" rel="noopener">236. Lowest Common Ancestor of a Binary Tree</a>: find the lowest common ancestor (LCA) of two given nodes <em>p</em> and <em>q</em> in a binary tree.</p>
+<p><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs.png" alt=""></p>
+<p>If the binary tree has links connecting each node to its parent, we can apply <a href="https://heidyhe.github.io/2018/02/21/Two-Pointers/#more">the solution of two pointers</a> to this problem. But here we need to figure out something else.</p>
+<p>The idea is to let the ancestors of <em>p</em> or <em>q</em> be aware that <em>p</em> or <em>q</em> is in the subtree. We can use the return value to pass what we need upwards. As the image below shows, move <em>p</em> or <em>q</em> upwards until the lcs is found, and then move the lcs upwards.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/lcs2.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode <span class="title">lcs</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// The amazing thing about this implementation is that</span></span><br><span class="line">    <span class="comment">// the function returns null when the node is null,</span></span><br><span class="line">    <span class="comment">// so for each node that is not the ancestor of p or q, the function will return null.</span></span><br><span class="line">    <span class="comment">// This simplifies the implementation, </span></span><br><span class="line">    <span class="comment">// otherwise it will take some efforts to distinguish the lcs from other nodes.</span></span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span> || node == q || node == p) &#123;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode left = lcs(node.left);</span><br><span class="line">    TreeNode right = lcs(node.right);</span><br><span class="line">    <span class="keyword">if</span> (left != <span class="keyword">null</span> &amp;&amp; right != <span class="keyword">null</span>) <span class="keyword">return</span> node;</span><br><span class="line">    <span class="keyword">if</span> (left != <span class="keyword">null</span>) <span class="keyword">return</span> left;</span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="IV-More"><a href="#IV-More" class="headerlink" title="IV. More"></a>IV. More</h2><h3 id="i-Flattern-a-binary-tree"><a href="#i-Flattern-a-binary-tree" class="headerlink" title="i. Flattern a binary tree"></a>i. Flattern a binary tree</h3><p><a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/" target="_blank" rel="noopener">114. Flatten Binary Tree to Linked List</a>: flattern a binary tree to a linked list in-place.</p>
+<p>The solution is <strong>divide and conquer</strong>. For each subtree, flattern its left subtree, link its right child to the last node of the left subtree, and make its left child as its right child; and then flattern its right subtree, and return its last node.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TreeNode <span class="title">flattern</span><span class="params">(TreeNode node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span> || node.left == <span class="keyword">null</span> &amp;&amp; node.right == <span class="keyword">null</span>) <span class="keyword">return</span> node;</span><br><span class="line">    TreeNode right = node.right;</span><br><span class="line">    TreeNode lLast = flattern(node.left);</span><br><span class="line">    <span class="keyword">if</span> (lLast != <span class="keyword">null</span>) &#123;</span><br><span class="line">        lLast.right = right;</span><br><span class="line">        node.right = node.left;</span><br><span class="line">        node.left = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode rLast = flattern(right);</span><br><span class="line">    <span class="keyword">return</span> rLast != <span class="keyword">null</span> ? rLast : lLast;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ii-Sum"><a href="#ii-Sum" class="headerlink" title="ii. Sum"></a>ii. Sum</h3><p><a href="https://leetcode.com/problems/sum-root-to-leaf-numbers/description/" target="_blank" rel="noopener">129. Sum Root to Leaf Numbers</a>: given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number; find the total sum of all root-to-leaf numbers.</p>
+<p>The solution is pre-order traversal: generate a number when encounter a leaf node.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(TreeNode node, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> tmp = num * <span class="number">10</span> + node.val;</span><br><span class="line">    <span class="keyword">if</span> (node.left == <span class="keyword">null</span> &amp;&amp; node.right == <span class="keyword">null</span>) <span class="keyword">return</span> tmp;</span><br><span class="line">    <span class="keyword">return</span> sum(node.left, tmp) + sum(node.right, tmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="http://www.learn4master.com/algorithms/morris-traversal-inorder-tree-traversal-without-recursion-and-without-stack" target="_blank" rel="noopener">Morris Traversal</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dfs/" rel="tag"># dfs</a>
+          
+            <a href="/tags/data-structure/" rel="tag"># data structure</a>
+          
+            <a href="/tags/binary-tree/" rel="tag"># binary tree</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/factory-method/" rel="next" title="Factory Method Pattern">
+                <i class="fa fa-chevron-left"></i> Factory Method Pattern
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/big-number/" rel="prev" title="Math Problems with Big Numbers">
+                Math Problems with Big Numbers <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg"
+                alt="Heidy" />
+            
+              <p class="site-author-name" itemprop="name">Heidy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heidyhe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:heidycat@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Traversal"><span class="nav-text">I. Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Pre-order-traversal"><span class="nav-text">i. Pre-order traversal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-In-order-traversal"><span class="nav-text">ii. In-order traversal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iii-Post-order-traversal"><span class="nav-text">iii. Post-order traversal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iv-Construct-a-binary-tree-using-pre-order-and-in-order-or-post-order-and-in-order"><span class="nav-text">iv. Construct a binary tree using pre-order and in-order (or post-order and in-order)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-Symmetric-Tree"><span class="nav-text">v. Symmetric Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi-Level-order-traversal"><span class="nav-text">vi. Level order traversal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vii-Morris-traversal"><span class="nav-text">vii. Morris traversal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-Serialize-amp-Deserialize"><span class="nav-text">II. Serialize &amp; Deserialize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-Lowest-Common-Ancestor"><span class="nav-text">III. Lowest Common Ancestor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-More"><span class="nav-text">IV. More</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i-Flattern-a-binary-tree"><span class="nav-text">i. Flattern a binary tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ii-Sum"><span class="nav-text">ii. Sum</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="dp,backtracking," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force.">
+<meta name="keywords" content="dp,backtracking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memorization and Dynamic Programming">
+<meta property="og:url" content="https://heidyhe.github.io/memorization-and-dynamic-programming/index.html">
+<meta property="og:site_name" content="Little by Little">
+<meta property="og:description" content="This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-04-16T17:15:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Memorization and Dynamic Programming">
+<meta name="twitter:description" content="This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://heidyhe.github.io/memorization-and-dynamic-programming/"/>
+
+
+
+
+
+  <title>Memorization and Dynamic Programming | Little by Little</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Little by Little</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Aha~, stay curious and have fun</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/memorization-and-dynamic-programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Heidy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Little by Little">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Memorization and Dynamic Programming</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-30T10:49:35-07:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This post is about how to come up with solutions applying dynamic programming when all I can think about is brutal force.</p>
+<a id="more"></a>
+<p>Let’s start from a simple problem.</p>
+<h2 id="I-Climbing-stairs"><a href="#I-Climbing-stairs" class="headerlink" title="I. Climbing stairs"></a>I. Climbing stairs</h2><p><a href="https://leetcode.com/problems/climbing-stairs/description/" target="_blank" rel="noopener">70. Climbing Stairs</a>: count ways to reach the top of a stair case with <em>n</em> steps, supposing you can take 1 or 2 steps at a time.</p>
+<p>Let f(n) be the number of ways to reach the top. If you take 1 step for the last climb, there will be <em>f(n-1)</em> ways; if you take 2 steps for the last climb, there will be <em>f(n-2)</em> ways. So the problem can be broken down sub-problems like this: <em>f(n) = f(n-1) + f(n-2)</em>.</p>
+<p>This is easy to implemented using recursion.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> takeStairs(n - <span class="number">1</span>) + takeStairs(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>However, the time complexity of this implementation is O(2^n). It is exponential, and it will cause stack overflow eventually.</p>
+<p>If you execute the recursive function on the paper, you will find that there are many redundanct calculation. Take n = 6 for example, we have to calculate <em>f(4)</em> twice and <em>f(3)</em> three times.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        f(6)</span><br><span class="line">      /     \</span><br><span class="line">    f(5)    f(4)</span><br><span class="line">   /  \    /   \</span><br><span class="line">f(4) f(3) f(3) f(2)</span><br><span class="line"> /</span><br><span class="line">f(3) ...</span><br></pre></td></tr></table></figure></p>
+<p>We can introduce memorization here to reduce redundancy.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span>[] mark)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mark[n] &gt; <span class="number">0</span>) <span class="keyword">return</span> mark[n];</span><br><span class="line">    mark[n] = takeStairs(n - <span class="number">1</span>) + takeStairs(n - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> mark[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>A little improvement, but it still depends on function stack, which might lead to stack overflow.<br>So we should get rid of recursion, but how?<br>As shown in the diagram above, the function is executed from top to bottom and then traced back from bottom to top. Thus, the solution is to have <em>f(n) = f(n-1) + f(n-2)</em> implemented from bottom to top.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] count = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    count[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    count[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        count[i] = count[i - <span class="number">1</span>] + count[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This bottom-top implementation applies the algorithm called <strong>Dynamic Programming</strong>. Here is the formulation for dp:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Let f(n) be the number of ways to reach the top.</span><br><span class="line">f(n) = f(n-1) + f(n-2), if n&gt;2</span><br><span class="line">f(n) = 1, if n=1 or n=2</span><br></pre></td></tr></table></figure></p>
+<p>The space complexity of the above implementation is O(n), but this can be reduced to O(1) by maintaining the values of <em>count[i-1]</em> and <em>count[i-2]</em> only.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">takeStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt2 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cnt = cnt1 + cnt2;</span><br><span class="line">        cnt2 = cnt1;</span><br><span class="line">        cnt1 = cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="II-Decode-ways"><a href="#II-Decode-ways" class="headerlink" title="II. Decode ways"></a>II. Decode ways</h2><p><a href="https://leetcode.com/problems/decode-ways/description/" target="_blank" rel="noopener">91. Decode Ways</a>: determine the total number of ways to decode an encoded message which contains digits only; a message is encoded by converting letters to numbers using this mapping ‘A’ -&gt; 1, …, ‘Z’ -&gt; 26.</p>
+<p>It is easy to apply the backtracking algorithm to this problem. For a digit in the message, it can be decoded to a letter; or it can combine the digit next to it and then be decoded to a new letter. Thus, we have two choices when we handle message[i]. We can try the first choice and then try the second one when it backtracks.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countWays</span><span class="params">(<span class="keyword">int</span> i, String message, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i == len) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> ch = message.charAt(i);</span><br><span class="line">    <span class="keyword">if</span> (ch &gt; <span class="string">'0'</span>) </span><br><span class="line">        count += countWays(i + <span class="number">1</span>, message, len);</span><br><span class="line">    <span class="keyword">if</span> (i &lt;= len - <span class="number">2</span> &amp;&amp; (ch == <span class="string">'1'</span> || ch == <span class="string">'2'</span> &amp;&amp; message.charAt(i + <span class="number">1</span>) &lt;= <span class="string">'6'</span>))</span><br><span class="line">        count += countWays(i + <span class="number">2</span>, message, len);</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>It is a solution of brutal force with pruning. The time complexity is O(2^n), supposing the length of the message is <em>n</em>. How can we optimize this solution by applying dynamic programming?</p>
+<p>First, introduce memorization: let count[i] be the number of decode ways for <em>message.substring(i)</em>. It is because in the backtracking implementation <em>countWays(i, message, len)</em> is called for more than once for the same <em>i</em>, which can be avoided by memorization.<br>Second, have it implemented from bottom to top: calculate count[i] in the order that <em>i</em> descends from len-1 to 0.</p>
+<p>Thus, we have the formulation for dp:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Let count[i] be the number of decode ways for message.substring(i).</span><br><span class="line">count[i] = count[i+1] if message[i] &gt; &apos;0&apos;</span><br><span class="line">         + count[i+2] if message[i] == &apos;1&apos; or message[i] == &apos;2&apos; and message[i+1] &lt;= &apos;6&apos;</span><br><span class="line">count[i] = 1 if i == len</span><br></pre></td></tr></table></figure></p>
+<p>Note that this formulation looks a lot like the implementation in the <em>countWays</em> function. Actually, the thinking process is similar, so it shouldn’t hard to come up with a dp solution from brutal force.</p>
+<p>Because count[i] depends on count[i+1] and count[i+2] only, we don’t need to maintain an array for storing all the intermediate results.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> count1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> count2 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">char</span> ch = message.charAt(i);</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (ch &gt; <span class="string">'0'</span>) &#123;</span><br><span class="line">        count += count1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i &lt;= len - <span class="number">2</span> &amp;&amp; (ch == <span class="string">'1'</span> || ch == <span class="string">'2'</span> &amp;&amp; message.charAt(i + <span class="number">1</span>) &lt;= <span class="string">'6'</span>) &#123;</span><br><span class="line">        count += count2;</span><br><span class="line">    &#125;</span><br><span class="line">    count2 = count1;</span><br><span class="line">    count1 = count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> count;</span><br></pre></td></tr></table></figure></p>
+<h2 id="III-Paint-house"><a href="#III-Paint-house" class="headerlink" title="III. Paint house"></a>III. Paint house</h2><blockquote>
+<p>There are a row of n houses, each house can be painted with one of the k colors.<br>The cost of painting each house with a certain color is different.<br>You have to paint all the houses such that no two adjacent houses have the same color.<br>The cost of painting each house with a certain color is represented by a n*k cost costs.<br>For example, costs[0][0] is the cost of painting house 0 with color 0; costs[1][2]is the cost of painting house 1 with color 2, and so on…<br>Find the minimum cost to paint all houses.</p>
+</blockquote>
+<p>Here is an implementation of brutal force that applies backtracking. It is quite straightforward, so it is easy to come up with.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// i represents the ith house, and j represents the jth color</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> cost, <span class="keyword">int</span>[] mark, <span class="keyword">int</span>[][] costs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i == n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cost &lt; maxCost) maxCost = cost;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; mark[i - <span class="number">1</span>] == i) <span class="keyword">continue</span>;</span><br><span class="line">        mark[i] = j;</span><br><span class="line">        paint(i + <span class="number">1</span>, cost + costs[i][j], mark, costs);</span><br><span class="line">        mark[i] = -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>How can we optimize this solution? Let’s first locate where the double counting is in the above implmentation.<br>Suppose there are 5 houses and 4 colors. If we paint house 0 with color 1, we are going to paint house 1 using colors except color 1, we will call the <em>paint</em> function like this:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paint(<span class="number">2</span>, cost + costs[<span class="number">1</span>][<span class="number">0</span>], mark, costs); <span class="comment">// mark[1] = 0</span></span><br><span class="line">paint(<span class="number">2</span>, cost + costs[<span class="number">1</span>][<span class="number">2</span>], mark, costs); <span class="comment">// mark[1] = 2</span></span><br><span class="line">paint(<span class="number">2</span>, cost + costs[<span class="number">1</span>][<span class="number">3</span>], mark, costs); <span class="comment">// mark[1] = 3</span></span><br></pre></td></tr></table></figure></p>
+<p>If we paint hourse 0 with color 3, we are going to paint house 1 using colors except color 3, we will call the <em>paint</em> function like this (and most of them are duplicates):<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paint(<span class="number">2</span>, cost + costs[<span class="number">1</span>][<span class="number">0</span>], mark, costs); <span class="comment">// mark[1] = 0</span></span><br><span class="line">paint(<span class="number">2</span>, cost + costs[<span class="number">1</span>][<span class="number">1</span>], mark, costs); <span class="comment">// mark[1] = 1</span></span><br><span class="line">paint(<span class="number">2</span>, cost + costs[<span class="number">1</span>][<span class="number">2</span>], mark, costs); <span class="comment">// mark[1] = 2</span></span><br></pre></td></tr></table></figure></p>
+<p>Thus, we need to memorize the mediate results to avoid double counting. We can adopt the bottom-up idea - the minimum cost of house <em>i</em> using color <em>j</em> depends on the minimum cost of house <em>i+1</em> using colors except color <em>j</em>, so we have the formulation as follows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Let cost[i][j] be the minimum cost of for house i, i+1, ... n-1, on the premise that house i is painted with color j.</span><br><span class="line">cost[i][j] = min&#123;cost[i+1][k]&#125; + costs[i][j], s.t. k != j</span><br><span class="line">cost[i][j] = costs[i][j], if i == n-1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] cost = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>][k];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; j++) &#123;</span><br><span class="line">        <span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; k; t++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (t != j &amp;&amp; (min == <span class="number">0</span> || min &gt; costs[i + <span class="number">1</span>][t]))</span><br><span class="line">                min = costs[i + <span class="number">1</span>][t];</span><br><span class="line">        &#125;</span><br><span class="line">        cost[i][j] = min + costs[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The time complexity for this implementation is O(n * k * k).</p>
+<p>Follow-up: can we solve it in O(n * k)?<br>The answer is yes. It is unnecessary to search the <em>k</em> cost value for house <em>i+1</em> to get the minimum cost. Since all we need is the minimum result from a previous loop for <em>i+1</em>, why not just keep the minimum result? The minimum result is not valid if house <em>i+1</em> use color <em>j</em> to get the minimum result and we want to try the same color for house <em>i</em>. But we can keep the most two smallest costs instead of one, and use the second smallest cost as the minimum result if house <em>i</em> and house <em>i+1</em> use the same color.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> preMin1 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> preMin2 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> preColor1 = -<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; j++) &#123;</span><br><span class="line">        <span class="keyword">int</span> cost = costs[i][j];</span><br><span class="line">        <span class="keyword">if</span> (j == preColor1) &#123;</span><br><span class="line">            cost += preMin2;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cost += preMin1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> min1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> color1 = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (min1 == <span class="number">0</span> || min1 &gt; cost) &#123;</span><br><span class="line">            min2 = min1;</span><br><span class="line">            min1 = cost;</span><br><span class="line">            color1 = j;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (min2 == <span class="number">0</span> || min2 &gt; cost) &#123;</span><br><span class="line">            min2 = cost;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        preMin1 = min1;</span><br><span class="line">        preMin2 = min2;</span><br><span class="line">        preColor1 = color1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>It’s ok that we can only come up with a brutal-force solution at first. Write it down, and look for double counting. Then we can introduce memorization for intermediate results to avoid repetition works. Last but not the least, memorization requires the intermediate results are calculated from bottom to top.<br>If you compare the implementations of both solutions, they are essentially the same, but dynamic programming introduces memorization and bottom-up implementation for optimization.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dp/" rel="tag"># dp</a>
+          
+            <a href="/tags/backtracking/" rel="tag"># backtracking</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/backtracking/" rel="next" title="Backtracking">
+                <i class="fa fa-chevron-left"></i> Backtracking
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/adapter-pattern/" rel="prev" title="Adapter Pattern">
+                Adapter Pattern <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/heidyhe/img/master/avatar.jpg"
+                alt="Heidy" />
+            
+              <p class="site-author-name" itemprop="name">Heidy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heidyhe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:heidycat@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-Climbing-stairs"><span class="nav-text">I. Climbing stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-Decode-ways"><span class="nav-text">II. Decode ways</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-Paint-house"><span class="nav-text">III. Paint house</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-text">Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Heidy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
