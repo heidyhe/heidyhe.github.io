@@ -352,10 +352,10 @@
       
         
           <p>Queue is a linear data structure where insertion of items takes place at the rear and deletion takes place at the head - Following the FIFO principal: First In First Out.</p>
-<p>Queue and <a href="https://heidyhe.github.io/2018/04/11/stack/">stack</a> have many features in common. They are linear data structures, so they both can be implemented based on an array or a list. The insertion and deletion of items are not allowed to take place at the middle of the data structure. There is only one difference: for stack, the insertion and deletion takes place at one end; for queue, the two operations takes place at different ends - and this has made all the differences on how these two data structures are used.</p>
+<p>Queue and <a href="https://heidyhe.github.io/stack/">stack</a> have many features in common. They are linear data structures, so they both can be implemented based on an array or a list. The insertion and deletion of items are not allowed to take place at the middle of the data structure. There is only one difference: for stack, the insertion and deletion takes place at one end; for queue, the two operations takes place at different ends - and this has made all the differences on how these two data structures are used.</p>
 <p>Applications of queue include:</p>
 <ul>
-<li><a href="https://heidyhe.github.io/2018/02/26/bfs/">BFS</a></li>
+<li><a href="https://heidyhe.github.io/bfs/">BFS</a></li>
 <li>Producer-Consumer problem, e.g. message queue</li>
 </ul>
           <!--noindex-->
@@ -1119,7 +1119,7 @@
 <blockquote>
 <p>Backtracking is general algorithm for finding all (or some) solutions to some computational problems, notably constraint satisfaction problems, that incrementally builds candidates to the solutions, and abandons a candidate (backtracks) as soon as it determines that the candidate cannot possibly be completed to a valid solution.</p>
 </blockquote>
-<p>I have compared <em>backtracking</em> to <em>DFS</em> in a previous <a href="https://heidyhe.github.io/2018/02/27/dfs/">post</a>, so here I’ll just focus on the classic problems solved by backtracking.</p>
+<p>I have compared <em>backtracking</em> to <em>DFS</em> in a previous <a href="https://heidyhe.github.io/dfs/">post</a>, so here I’ll just focus on the classic problems solved by backtracking.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/backtracking/#more" rel="contents">
@@ -1719,7 +1719,7 @@
         
           <p>DFS, short for Depth First Search, is an algorithm of searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts at the root (or selecting some node as the root in the case of graph), and explores as far (or deep) as possible until it cannot go any further, then it backtracks and tries other paths.</p>
 <p>DFS is always implemented using recursion. Its non-recursive implementation depends on an explicit stack.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Node represents a node in a graph</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qualified(node) || !canGoFuther(node)) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (Node neighbor : getNeighbors(node)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (canBeProcessed(neighbor)) &#123;</span><br><span class="line">            dfs(neighbor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>I have applied DFS to varieties of search problems in previous posts, e.g. problems relating to <a href="https://heidyhe.github.io/2018/02/24/binary-tree/#more">binary tree</a>, and problems relating to <a href="https://heidyhe.github.io/2018/02/26/bfs/#more">graph</a>. So I won’t cover the same problems in this post, but I’ll write about the topic <em>DFS vs. backtracking</em> which I find both interesting and confusing.</p>
+<p>I have applied DFS to varieties of search problems in previous posts, e.g. problems relating to <a href="https://heidyhe.github.io/binary-tree/">binary tree</a>, and problems relating to <a href="https://heidyhe.github.io/bfs/">graph</a>. So I won’t cover the same problems in this post, but I’ll write about the topic <em>DFS vs. backtracking</em> which I find both interesting and confusing.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/dfs/#more" rel="contents">
@@ -1899,7 +1899,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -1907,7 +1907,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Gemini</a> v5.1.4</div>
 
 
 

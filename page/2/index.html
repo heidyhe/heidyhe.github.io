@@ -353,7 +353,7 @@
         
           <p>BFS, short for Breadth First Search, is an algorithm of searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts at some specific nodes and explores the neighbor nodes first before moving to the next level, until it searches through the whole graph.</p>
 <p>BFS usually works with a queue.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// initialize</span></span><br><span class="line">queue.add(node);</span><br><span class="line"><span class="comment">// search</span></span><br><span class="line"><span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">    <span class="comment">// Node represents a node in a graph</span></span><br><span class="line">    Node node = queue.poll();</span><br><span class="line">    <span class="comment">// explore the neighbor nodes</span></span><br><span class="line">    <span class="keyword">for</span> (Node neighbor : neighbors) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isQualified(neighbor)) queue.add(neighbor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>BFS and <a href="https://heidyhe.github.io/2018/02/27/dfs/">DFS</a> are two typical algorithms of searching graphs, and some searching problems can be solved by Union Find as well, so first I want to discuss the scenarios where we should use BFS, DFS or Union Find. And then I will walk through some problems, if they can be solved using DFS or Union Find, I’ll provide the corresponding solutions; otherwise, I’ll list the reasons why DFS or Union Find cannot be applied to the problems.</p>
+<p>BFS and <a href="https://heidyhe.github.io/dfs/">DFS</a> are two typical algorithms of searching graphs, and some searching problems can be solved by Union Find as well, so first I want to discuss the scenarios where we should use BFS, DFS or Union Find. And then I will walk through some problems, if they can be solved using DFS or Union Find, I’ll provide the corresponding solutions; otherwise, I’ll list the reasons why DFS or Union Find cannot be applied to the problems.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/bfs/#more" rel="contents">
@@ -647,7 +647,7 @@
       
         
           <p>A binary tree is a tree where each node has at most two children. Suppose the depth of a binary tree is <em>k</em>, then it has at most <em>2^k</em> children.<br>A complete binary tree is a binary tree where every level (except the last) is completely filled, and all nodes at the last level are as far left as possible.<br>A full binary tree is a complete binary tree where every node other than the leaves has two children.</p>
-<p>This post is about some classic problems relating to the binary tree. Most of the problems can be solved using <a href="https://heidyhe.github.io/2018/02/27/dfs/">DFS</a>.</p>
+<p>This post is about some classic problems relating to the binary tree. Most of the problems can be solved using <a href="https://heidyhe.github.io/dfs/">DFS</a>.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/binary-tree/#more" rel="contents">
@@ -1565,7 +1565,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -1573,7 +1573,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Gemini</a> v5.1.4</div>
 
 
 

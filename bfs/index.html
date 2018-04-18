@@ -88,7 +88,7 @@
 <meta property="og:description" content="BFS, short for Breadth First Search, is an algorithm of searching tree or graph data structures. It starts at some specific nodes and explores the neighbor nodes first before moving to the next level,">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/bfs-dfs.png">
-<meta property="og:updated_time" content="2018-04-16T04:45:33.000Z">
+<meta property="og:updated_time" content="2018-04-18T03:05:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BFS">
 <meta name="twitter:description" content="BFS, short for Breadth First Search, is an algorithm of searching tree or graph data structures. It starts at some specific nodes and explores the neighbor nodes first before moving to the next level,">
@@ -356,12 +356,12 @@
       
         <p>BFS, short for Breadth First Search, is an algorithm of searching <strong>tree</strong> or <strong>graph</strong> data structures. It starts at some specific nodes and explores the neighbor nodes first before moving to the next level, until it searches through the whole graph.</p>
 <p>BFS usually works with a queue.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// initialize</span></span><br><span class="line">queue.add(node);</span><br><span class="line"><span class="comment">// search</span></span><br><span class="line"><span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">    <span class="comment">// Node represents a node in a graph</span></span><br><span class="line">    Node node = queue.poll();</span><br><span class="line">    <span class="comment">// explore the neighbor nodes</span></span><br><span class="line">    <span class="keyword">for</span> (Node neighbor : neighbors) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isQualified(neighbor)) queue.add(neighbor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>BFS and <a href="https://heidyhe.github.io/2018/02/27/dfs/">DFS</a> are two typical algorithms of searching graphs, and some searching problems can be solved by Union Find as well, so first I want to discuss the scenarios where we should use BFS, DFS or Union Find. And then I will walk through some problems, if they can be solved using DFS or Union Find, I’ll provide the corresponding solutions; otherwise, I’ll list the reasons why DFS or Union Find cannot be applied to the problems.</p>
+<p>BFS and <a href="https://heidyhe.github.io/dfs/">DFS</a> are two typical algorithms of searching graphs, and some searching problems can be solved by Union Find as well, so first I want to discuss the scenarios where we should use BFS, DFS or Union Find. And then I will walk through some problems, if they can be solved using DFS or Union Find, I’ll provide the corresponding solutions; otherwise, I’ll list the reasons why DFS or Union Find cannot be applied to the problems.</p>
 <a id="more"></a>
 <h2 id="BFS-vs-DFS"><a href="#BFS-vs-DFS" class="headerlink" title="BFS vs. DFS"></a>BFS vs. DFS</h2><p>The example below compares the way of how BFS traverses and the way of how DFS traverses, assuming that the moving directions can be right and down only.<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/bfs-dfs.png" alt="BFS vs. DFS"></p>
 <p>Sometimes BFS and DFS can be used to solved the same problems. Whether BFS or DFS is a better choice, it depends. </p>
 <h2 id="BFS-vs-Union-Find"><a href="#BFS-vs-Union-Find" class="headerlink" title="BFS vs. Union Find"></a>BFS vs. Union Find</h2><p>Union Find is not a searching algorithm. It partitions a set of elements into a number of non-overlapping subsets. Each element is intialized as a subset of its own, and then subsets are merged if they are of the same kind until the subsets are not overlapping. Although it is quite different than BFS, sometimes they can be used to solve the same problems.</p>
-<h2 id="Problems-and-solutions"><a href="#Problems-and-solutions" class="headerlink" title="Problems and solutions"></a>Problems and solutions</h2><h3 id="i-Binary-tree"><a href="#i-Binary-tree" class="headerlink" title="i. Binary tree"></a>i. Binary tree</h3><p>Level order traversal of binary trees is an example of BFS. See more in this post about <a href="https://heidyhe.github.io/2018/02/24/binary-tree/#more">binary tree</a>.</p>
+<h2 id="Problems-and-solutions"><a href="#Problems-and-solutions" class="headerlink" title="Problems and solutions"></a>Problems and solutions</h2><h3 id="i-Binary-tree"><a href="#i-Binary-tree" class="headerlink" title="i. Binary tree"></a>i. Binary tree</h3><p>Level order traversal of binary trees is an example of BFS. See more in this post about <a href="https://heidyhe.github.io/binary-tree/">binary tree</a>.</p>
 <h3 id="ii-Graph"><a href="#ii-Graph" class="headerlink" title="ii. Graph"></a>ii. Graph</h3><p><a href="https://leetcode.com/problems/01-matrix/description/" target="_blank" rel="noopener">542. 01 Matrix</a>：given a matrix which consists of 0 and 1, find the distance of the nearst 0 for each cell.</p>
 <p><strong>BFS solution</strong></p>
 <blockquote>
@@ -674,7 +674,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -682,7 +682,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Gemini</a> v5.1.4</div>
 
 
 

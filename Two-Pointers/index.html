@@ -88,7 +88,7 @@
 <meta property="og:description" content="Two pointers is a powerful weapon of solving problems for data structures such as array and list. A classic example is to find out whether there is a cycle in a linked list. I will collect some typica">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/algorithm/linkedlist0221.png">
-<meta property="og:updated_time" content="2018-04-16T17:36:53.000Z">
+<meta property="og:updated_time" content="2018-04-18T03:07:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Two Pointers">
 <meta name="twitter:description" content="Two pointers is a powerful weapon of solving problems for data structures such as array and list. A classic example is to find out whether there is a cycle in a linked list. I will collect some typica">
@@ -428,7 +428,7 @@
 </tbody>
 </table>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> slow = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> fast = nums[nums[<span class="number">0</span>]];</span><br><span class="line">    <span class="keyword">while</span> (slow != fast) &#123;</span><br><span class="line">        slow = nums[slow];</span><br><span class="line">        fast = nums[nums[fast]];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> head = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (head != slow) &#123;</span><br><span class="line">        head = nums[head];</span><br><span class="line">        slow = nums[slow];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Another solution is using <a href="https://heidyhe.github.io/2018/03/07/find-a-number-in-a-sorted-array/#more">binary search</a>.</p>
+<p>Another solution is using <a href="https://heidyhe.github.io/find-a-number-in-a-sorted-array/">binary search</a>.</p>
 <h3 id="iv-The-Nth-node"><a href="#iv-The-Nth-node" class="headerlink" title="iv. The Nth node"></a>iv. The Nth node</h3><p><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/" target="_blank" rel="noopener">19. Remove Nth node</a>: remove the Nth node from the end of a linked list.</p>
 <p>The solution is to have the fast pointer take <em>n</em> steps ahead of the slow pointer, so when the fast pointer reaches the end of the linst, the slow pointer will be one step before the node being removed.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ListNode fast = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ListNode slow = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (slow == <span class="keyword">null</span>) &#123;</span><br><span class="line">            slow = head;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (slow == <span class="keyword">null</span>) &#123;</span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        slow.next = slow.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -693,7 +693,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -701,7 +701,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Gemini</a> v5.1.4</div>
 
 
 

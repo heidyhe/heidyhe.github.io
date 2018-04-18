@@ -2,9 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidyhe.github.io/dfs/</loc>
+    
+    <lastmod>2018-04-18T03:07:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/find-a-number-in-a-sorted-array/</loc>
+    
+    <lastmod>2018-04-18T03:07:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/binary-tree/</loc>
+    
+    <lastmod>2018-04-18T03:07:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidyhe.github.io/queue/</loc>
     
-    <lastmod>2018-04-17T18:49:12.000Z</lastmod>
+    <lastmod>2018-04-18T03:07:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/Two-Pointers/</loc>
+    
+    <lastmod>2018-04-18T03:07:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/bfs/</loc>
+    
+    <lastmod>2018-04-18T03:05:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/backtracking/</loc>
+    
+    <lastmod>2018-04-18T03:04:49.000Z</lastmod>
     
   </url>
   
@@ -16,23 +58,9 @@
   </url>
   
   <url>
-    <loc>https://heidyhe.github.io/Two-Pointers/</loc>
-    
-    <lastmod>2018-04-16T17:36:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidyhe.github.io/memorization-and-dynamic-programming/</loc>
     
     <lastmod>2018-04-16T17:15:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/bfs/</loc>
-    
-    <lastmod>2018-04-16T04:45:33.000Z</lastmod>
     
   </url>
   
@@ -72,37 +100,9 @@
   </url>
   
   <url>
-    <loc>https://heidyhe.github.io/binary-tree/</loc>
-    
-    <lastmod>2018-04-04T03:34:57.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidyhe.github.io/LCS/</loc>
     
     <lastmod>2018-04-02T04:23:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/dfs/</loc>
-    
-    <lastmod>2018-03-31T04:18:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/backtracking/</loc>
-    
-    <lastmod>2018-03-31T02:13:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/find-a-number-in-a-sorted-array/</loc>
-    
-    <lastmod>2018-03-27T05:03:26.000Z</lastmod>
     
   </url>
   
