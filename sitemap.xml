@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidyhe.github.io/heap/</loc>
+    
+    <lastmod>2018-04-24T03:58:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/array-list/</loc>
+    
+    <lastmod>2018-04-21T22:43:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/Two-Pointers/</loc>
+    
+    <lastmod>2018-04-20T22:17:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/binary-tree/</loc>
+    
+    <lastmod>2018-04-18T03:16:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/bfs/</loc>
+    
+    <lastmod>2018-04-18T03:12:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidyhe.github.io/dfs/</loc>
     
     <lastmod>2018-04-18T03:07:48.000Z</lastmod>
@@ -16,30 +51,9 @@
   </url>
   
   <url>
-    <loc>https://heidyhe.github.io/binary-tree/</loc>
-    
-    <lastmod>2018-04-18T03:07:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidyhe.github.io/queue/</loc>
     
     <lastmod>2018-04-18T03:07:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/Two-Pointers/</loc>
-    
-    <lastmod>2018-04-18T03:07:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/bfs/</loc>
-    
-    <lastmod>2018-04-18T03:05:39.000Z</lastmod>
     
   </url>
   

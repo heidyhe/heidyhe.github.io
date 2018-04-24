@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tech, blog" />
+  <meta name="keywords" content="array,list" />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="description" content="An array is a data structure of fixed size. It contains a collection of elements of the same type. They are ordered and each element is identified by an array index. It is easy to access or modify any">
+<meta name="keywords" content="array,list">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta property="og:url" content="https://heidyhe.github.io/Boyer-Moore/index.html">
+<meta property="og:title" content="Array vs. List">
+<meta property="og:url" content="https://heidyhe.github.io/array-list/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta property="og:description" content="An array is a data structure of fixed size. It contains a collection of elements of the same type. They are ordered and each element is identified by an array index. It is easy to access or modify any">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-09T23:12:32.000Z">
+<meta property="og:updated_time" content="2018-04-21T22:43:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="twitter:title" content="Array vs. List">
+<meta name="twitter:description" content="An array is a data structure of fixed size. It contains a collection of elements of the same type. They are ordered and each element is identified by an array index. It is easy to access or modify any">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/Boyer-Moore/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/array-list/"/>
 
 
 
 
 
-  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
+  <title>Array vs. List | Little by Little</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/Boyer-Moore/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/array-list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">Array vs. List</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T20:40:09-08:00">
-                2018-02-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-18T15:42:33-07:00">
+                2018-04-18
               </time>
             
 
@@ -351,15 +352,15 @@
       
 
       
-        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.</p>
+        <p>An array is a data structure of fixed size. It contains a collection of elements of the same type. They are ordered and each element is identified by an array index. It is easy to access or modify any element in the array through the array index, and the time complexity is O(1).<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a one-dimensional array</span></span><br><span class="line">String[] array = <span class="keyword">new</span> String[<span class="number">16</span>];</span><br><span class="line">array[<span class="number">14</span>] = <span class="string">"hello"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// a two-dimensional array, aka. matrix</span></span><br><span class="line"><span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">200</span>][<span class="number">200</span>];</span><br><span class="line">matrix[<span class="number">10</span>][<span class="number">0</span>] = <span class="number">123</span>;</span><br></pre></td></tr></table></figure></p>
+<p>But it is a little more complex when an element is removed from the array or a new one is inserted in the array. To maintain the order of elements in the array, the right part of the array needs to be shifted to the left or to the right, and the time complexity is O(n).<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> len, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = index; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        array[i] = array[i + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    len--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>A list is a abstract data structure which consists of ordered elements of the same type. It is resizable. One of the concrete implementations of list is linked list, where elements are connected through pointers or references.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleLinkedListNode</span> &lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T obj;</span><br><span class="line">    <span class="keyword">private</span> SingleLinkedListNode next;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SingleLinkedListNode</span><span class="params">(T obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.obj = obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleLinkedList</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> SingleLinkedListNode head;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SingleLinkedList</span><span class="params">(T[] array)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (array == <span class="keyword">null</span> || array.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">        head = <span class="keyword">new</span> SingleLinkedListNode(array[<span class="number">0</span>]);</span><br><span class="line">        SingleLinkedListNode pre = head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            SingleLinkedListNode node = <span class="keyword">new</span> SingleLinkedListNode(array[i]);</span><br><span class="line">            pre.next = node;</span><br><span class="line">            pre = node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>It takes O(n) to find the target element in a linked list, but it takes only O(1) to insert or remove an element in a linked list. Compared to array, linked list is more suitable for the senarios where the insertion and deletion operations are more needed than random access.</p>
 <a id="more"></a>
-<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
-<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
-<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
-<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
+<h2 id="Implementation-in-Java"><a href="#Implementation-in-Java" class="headerlink" title="Implementation in Java"></a>Implementation in Java</h2><p>In Java, there is a utility class <em>Arrays</em> which provides various methods for manipulating arrays.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] numbers = &#123;<span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, -<span class="number">5</span>, -<span class="number">10</span>, <span class="number">9</span>, <span class="number">0</span>&#125;;</span><br><span class="line">Arrays.sort(numbers);</span><br><span class="line"><span class="keyword">int</span> index = Arrays.binarySearch(numbers, <span class="number">7</span>);</span><br></pre></td></tr></table></figure></p>
+<p>There are two mostly used implementations of <em>List</em>: <em>ArrayList</em> and <em>LinkedList</em>.<br><em>ArrayList</em> is implemented by wrapping an fixed-size array, but it is resizable, its capacity grows automatically as elements are added to an <em>ArrayList</em>.<br><em>LinkedList</em> is a doubly-linked list. Note that it provides the method <em>get(int index)</em>, but the time complexity of the implementation is O(n) because it doesn’t maintain an index for each element.</p>
+<p>Be aware that the utility class <em>Arrays</em> provides a method <em>asList()</em> for converting an array to an <em>ArrayList</em>, but this <em>ArrayList</em> is not the same as the one mentioned above. This <em>ArrayList</em> implements the <em>List</em> interface, but it is an inner class and its size is fixed.</p>
 
       
     </div>
@@ -375,6 +376,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/array/" rel="tag"># array</a>
+          
+            <a href="/tags/list/" rel="tag"># list</a>
+          
+            <a href="/tags/data-structure/" rel="tag"># data structure</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/LCS/" rel="next" title="Longest Common Subsequence">
-                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              <a href="/heap/" rel="next" title="Heap">
+                <i class="fa fa-chevron-left"></i> Heap
               </a>
             
           </div>
@@ -393,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/factory-method/" rel="prev" title="Factory Method Pattern">
-                Factory Method Pattern <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-in-Java"><span class="nav-text">Implementation in Java</span></a></li></ol></div>
             
 
           </div>

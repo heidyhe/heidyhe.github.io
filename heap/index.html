@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="tech, blog" />
+  <meta name="keywords" content="heap" />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="description" content="Heap is a tree-based data structure which satisfies the heap ordering property:  If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum valu">
+<meta name="keywords" content="heap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta property="og:url" content="https://heidyhe.github.io/Boyer-Moore/index.html">
+<meta property="og:title" content="Heap">
+<meta property="og:url" content="https://heidyhe.github.io/heap/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta property="og:description" content="Heap is a tree-based data structure which satisfies the heap ordering property:  If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum valu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-09T23:12:32.000Z">
+<meta property="og:updated_time" content="2018-04-24T03:58:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boyer-Moore Majority Vote Algorithm">
-<meta name="twitter:description" content="Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.">
+<meta name="twitter:title" content="Heap">
+<meta name="twitter:description" content="Heap is a tree-based data structure which satisfies the heap ordering property:  If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum valu">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/Boyer-Moore/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/heap/"/>
 
 
 
 
 
-  <title>Boyer-Moore Majority Vote Algorithm | Little by Little</title>
+  <title>Heap | Little by Little</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/Boyer-Moore/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/heap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Boyer-Moore Majority Vote Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">Heap</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T20:40:09-08:00">
-                2018-02-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-17T20:14:57-07:00">
+                2018-04-17
               </time>
             
 
@@ -351,15 +352,22 @@
       
 
       
-        <p>Boyer-Moore Majority Vote Algorithm finds the majority of a sequence of elements if there is one. Note that if there is no majority, the algorithm cannot detect it.</p>
+        <p>Heap is a tree-based data structure which satisfies the heap ordering property:</p>
+<ul>
+<li>If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum value at the root</li>
+<li>If it is a min-heap, the value of any node is less than or equal to the value of its children, with the minimum value at the root</li>
+</ul>
+<p>The <em>binary heap</em> is the most common implementation of a heap. It is a <em>complete binary tree</em> where every level (except possibly the last one) is completely filled, and all nodes are as far let as possible. Thus, a binary heap can be implemented based on an array instead of a binary tree. Suppose the index of a node is <em>i</em>, then<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> leftChild = i * <span class="number">2</span> + <span class="number">1</span>;  <span class="comment">// index of its left child</span></span><br><span class="line"><span class="keyword">int</span> rightChild = i * <span class="number">2</span> + <span class="number">2</span>; <span class="comment">// index of its right child</span></span><br><span class="line"><span class="keyword">int</span> parent = (i - <span class="number">1</span>) / <span class="number">2</span>;   <span class="comment">// index of its parent</span></span><br></pre></td></tr></table></figure></p>
+<p>When an element is inserted or removed, the heap needs to be adjusted to maintain the ordering property, and the time complexity depends on the height of the heap, i.e. O(log(n)). Unlike a sorted array which takes O(n*log(n)) to sort and O(1) to fetch the next element, it takes O(n*log(n)) to build a heap and O(log(n)) to adjust the heap for fetching the next element, so it does not make sense to use heap to sort a fixed size collection (aka. heapsort), but if we need to sort out the top <em>k</em> elements from a stream or a file which cannot be fit into memory, a heap is exactly what we need.</p>
 <a id="more"></a>
-<h2 id="The-algorithm"><a href="#The-algorithm" class="headerlink" title="The algorithm"></a>The algorithm</h2><p>How does the algorithm work? The idea is to keep a counter for the majority.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> number;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (counter == <span class="number">0</span>) &#123;</span><br><span class="line">        number = sequence[<span class="number">0</span>];</span><br><span class="line">        counter++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (sequence[i] == number) counter++;</span><br><span class="line">        <span class="keyword">else</span> counter--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> number;</span><br></pre></td></tr></table></figure></p>
-<p>This can be found on leetcode: <a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">169. Majority Element</a></p>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><p>The problem is now to find all elements that appear more than <em>n/3</em>: <a href="https://leetcode.com/problems/majority-element-ii/description/" target="_blank" rel="noopener">229. Majority Element II</a>.</p>
-<p>Because the element must appear more than n/3, there should be one or two of such elements. We can keep two counters. Both counters deduce 1 when the current number is not the majority.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int counter1 = 0, counter2 = 0;</span><br><span class="line">int number1, number2;</span><br><span class="line">for (int i = 0; i &lt; sequence.length; i++) &#123;</span><br><span class="line">    if (counter1 &gt; 0 &amp;&amp; number1 == sequence[i]) &#123;</span><br><span class="line">        counter1++;</span><br><span class="line">    &#125; else if (counter2 &gt; 0 &amp;&amp; number2 == sequence[i]) &#123;</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else if (counter1 == 0) &#123;</span><br><span class="line">        number1 = sequence[i];</span><br><span class="line">        counter1++；</span><br><span class="line">    &#125; else if (counter2 == 0) &#123;</span><br><span class="line">        number2 = sequence[i];</span><br><span class="line">        counter2++;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        counter1--;</span><br><span class="line">        counter2--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>But this is not enough, either number1 or number2 might not be the majority, so we should make a second pass through the sequence to verify if number1 or number 2 is the majority.</p>
-<p>Note that this algorithm can be applied to the cases where the majority appears more than <em>n/k</em>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" target="_blank" rel="noopener">wikipedia</a><br>2 <a href="https://www.quora.com/What-is-the-proof-of-correctness-of-Moores-voting-algorithm" target="_blank" rel="noopener">Proof of correctness of the algorithm</a>: the first answer looks correct</p>
+<h2 id="Implementation-of-heap"><a href="#Implementation-of-heap" class="headerlink" title="Implementation of heap"></a>Implementation of heap</h2><p>There are two operations on a heap:</p>
+<ul>
+<li>Insertion: insert the new element at the rear of the array and then adjust the heap using bottom-up approach</li>
+<li>Removal: remove the top element and then adjust the heap using top-down approach</li>
+</ul>
+<h3 id="Insert-a-new-element"><a href="#Insert-a-new-element" class="headerlink" title="Insert a new element"></a>Insert a new element</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span>[] maxHeap, <span class="keyword">int</span> len, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    maxHeap[len++] = num;</span><br><span class="line">    <span class="comment">// bottom-up adjust</span></span><br><span class="line">    <span class="keyword">int</span> i = len - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> parent = (i - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (maxHeap[parent] &gt;= maxHeap[i]) <span class="keyword">break</span>;</span><br><span class="line">        swap(maxHeap, parent, i);</span><br><span class="line">        i = parent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Remove-the-top-element"><a href="#Remove-the-top-element" class="headerlink" title="Remove the top element"></a>Remove the top element</h3><p>Implementation 1: replace the element at the top with the one at the rear and then adjust the heap<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span>[] maxHeap, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    maxHeap[<span class="number">0</span>] = maxHeap[--len];</span><br><span class="line">    <span class="comment">// top-down adjust</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = i * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= len) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> j = left;</span><br><span class="line">        <span class="keyword">if</span> (right &lt; len &amp;&amp; maxHeap[right] &gt; maxHeap[left]) &#123;</span><br><span class="line">            j = right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (maxHeap[i] &gt;= maxHeap[j]) <span class="keyword">break</span>;</span><br><span class="line">        swap(maxHeap, i, j);</span><br><span class="line">        i = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Implementation 2: remove the element at the top and then replace the blank with its child<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span>[] maxHeap, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = i * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= len) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> j = left;</span><br><span class="line">        <span class="keyword">if</span> (right &lt; len &amp;&amp; maxHeap[right] &gt; maxHeap[left]) &#123;</span><br><span class="line">            j = right;</span><br><span class="line">        &#125;</span><br><span class="line">        maxHeap[i] = maxHeap[j];</span><br><span class="line">        i = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &lt; len) &#123;</span><br><span class="line">        maxHeap[i] = maxHeap[--len];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -375,6 +383,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/data-structure/" rel="tag"># data structure</a>
+          
+            <a href="/tags/heap/" rel="tag"># heap</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +400,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/LCS/" rel="next" title="Longest Common Subsequence">
-                <i class="fa fa-chevron-left"></i> Longest Common Subsequence
+              <a href="/queue/" rel="next" title="Queue">
+                <i class="fa fa-chevron-left"></i> Queue
               </a>
             
           </div>
@@ -394,8 +410,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/factory-method/" rel="prev" title="Factory Method Pattern">
-                Factory Method Pattern <i class="fa fa-chevron-right"></i>
+              <a href="/array-list/" rel="prev" title="Array vs. List">
+                Array vs. List <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-algorithm"><span class="nav-text">The algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More"><span class="nav-text">More</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-of-heap"><span class="nav-text">Implementation of heap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-a-new-element"><span class="nav-text">Insert a new element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-the-top-element"><span class="nav-text">Remove the top element</span></a></li></ol></li></ol></div>
             
 
           </div>
