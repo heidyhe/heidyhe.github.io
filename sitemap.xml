@@ -2,6 +2,76 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://heidyhe.github.io/semaphore/</loc>
+    
+    <lastmod>2018-05-10T04:27:43.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/queue/</loc>
+    
+    <lastmod>2018-04-30T16:58:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/LCS/</loc>
+    
+    <lastmod>2018-04-30T16:58:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/bfs/</loc>
+    
+    <lastmod>2018-04-30T16:57:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/dfs/</loc>
+    
+    <lastmod>2018-04-30T16:57:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/memorization-and-dynamic-programming/</loc>
+    
+    <lastmod>2018-04-30T16:56:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/strategy-pattern/</loc>
+    
+    <lastmod>2018-04-30T16:55:59.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/jvm-garbage-collector/</loc>
+    
+    <lastmod>2018-04-30T16:55:43.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/factory-method/</loc>
+    
+    <lastmod>2018-04-30T16:55:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://heidyhe.github.io/adapter-pattern/</loc>
+    
+    <lastmod>2018-04-30T16:54:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://heidyhe.github.io/heap/</loc>
     
     <lastmod>2018-04-24T03:58:47.000Z</lastmod>
@@ -30,30 +100,9 @@
   </url>
   
   <url>
-    <loc>https://heidyhe.github.io/bfs/</loc>
-    
-    <lastmod>2018-04-18T03:12:25.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/dfs/</loc>
-    
-    <lastmod>2018-04-18T03:07:48.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidyhe.github.io/find-a-number-in-a-sorted-array/</loc>
     
     <lastmod>2018-04-18T03:07:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/queue/</loc>
-    
-    <lastmod>2018-04-18T03:07:35.000Z</lastmod>
     
   </url>
   
@@ -72,51 +121,9 @@
   </url>
   
   <url>
-    <loc>https://heidyhe.github.io/memorization-and-dynamic-programming/</loc>
-    
-    <lastmod>2018-04-16T17:15:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://heidyhe.github.io/authentication/</loc>
     
     <lastmod>2018-04-11T18:40:30.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/strategy-pattern/</loc>
-    
-    <lastmod>2018-04-08T19:07:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/jvm-garbage-collector/</loc>
-    
-    <lastmod>2018-04-08T19:07:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/factory-method/</loc>
-    
-    <lastmod>2018-04-08T19:06:56.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/adapter-pattern/</loc>
-    
-    <lastmod>2018-04-08T19:06:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://heidyhe.github.io/LCS/</loc>
-    
-    <lastmod>2018-04-02T04:23:35.000Z</lastmod>
     
   </url>
   
