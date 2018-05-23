@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="heap" />
+  <meta name="keywords" content="security,symmetric cryptography,asymmetric cryptography,man-in-the-middle attack,public key certificate" />
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="Heap is a tree-based data structure which satisfies the heap ordering property:  If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum valu">
-<meta name="keywords" content="heap">
+<meta name="description" content="Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using">
+<meta name="keywords" content="security,symmetric cryptography,asymmetric cryptography,man-in-the-middle attack,public key certificate">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Heap">
-<meta property="og:url" content="https://heidyhe.github.io/heap/index.html">
+<meta property="og:title" content="Introduction to Asymmetric Cryptography">
+<meta property="og:url" content="https://heidyhe.github.io/asymmetric-cryptography/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Heap is a tree-based data structure which satisfies the heap ordering property:  If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum valu">
+<meta property="og:description" content="Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-24T03:58:47.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/wikipedia-certificate.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/735869-9fff88cd487604d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/692">
+<meta property="og:updated_time" content="2018-05-23T00:19:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Heap">
-<meta name="twitter:description" content="Heap is a tree-based data structure which satisfies the heap ordering property:  If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum valu">
+<meta name="twitter:title" content="Introduction to Asymmetric Cryptography">
+<meta name="twitter:description" content="Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/wikipedia-certificate.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/heap/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/asymmetric-cryptography/"/>
 
 
 
 
 
-  <title>Heap | Little by Little</title>
+  <title>Introduction to Asymmetric Cryptography | Little by Little</title>
   
 
 
@@ -263,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/heap/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/asymmetric-cryptography/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -280,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Heap</h1>
+          <h1 class="post-title" itemprop="name headline">Introduction to Asymmetric Cryptography</h1>
         
 
         <div class="post-meta">
@@ -292,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-17T20:14:57-07:00">
-                2018-04-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T21:34:20-07:00">
+                2018-05-09
               </time>
             
 
@@ -315,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
+                  <a href="/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -352,22 +355,64 @@
       
 
       
-        <p>Heap is a tree-based data structure which satisfies the heap ordering property:</p>
-<ul>
-<li>If it is a max-heap, the value of any node is greater than or equal to the value of its children, with the maximum value at the root</li>
-<li>If it is a min-heap, the value of any node is less than or equal to the value of its children, with the minimum value at the root</li>
-</ul>
-<p>The <em>binary heap</em> is the most common implementation of a heap. It is a <em>complete binary tree</em> where every level (except possibly the last one) is completely filled, and all nodes are as far let as possible. Thus, a binary heap can be implemented based on an array instead of a binary tree. Suppose the index of a node is <em>i</em>, then<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> leftChild = i * <span class="number">2</span> + <span class="number">1</span>;  <span class="comment">// index of its left child</span></span><br><span class="line"><span class="keyword">int</span> rightChild = i * <span class="number">2</span> + <span class="number">2</span>; <span class="comment">// index of its right child</span></span><br><span class="line"><span class="keyword">int</span> parent = (i - <span class="number">1</span>) / <span class="number">2</span>;   <span class="comment">// index of its parent</span></span><br></pre></td></tr></table></figure></p>
-<p>When an element is inserted or removed, the heap needs to be adjusted to maintain the ordering property, and the time complexity depends on the height of the heap, i.e. O(log(n)). Unlike a sorted array which takes O(n*log(n)) to sort and O(1) to fetch the next element, it takes O(n*log(n)) to build a heap and O(log(n)) to adjust the heap for fetching the next element, so it does not make sense to use heap to sort a fixed size collection (aka. heapsort), but if we need to sort out the top <em>k</em> elements from a stream or a file which cannot be fit into memory, a heap is exactly what we need.</p>
+        <p>Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using the same key. This is known as symmetric cryptography. </p>
+<p>In contrast, asymmetric cryptography doesn’t require A and B to share the same private key; instead, A and B hold two different keys - one public key and one private key (it is impossible to compute the private key based on the public key). If A wants to send a secret message to B, A can first get a public key from B and use it to encode the message, and then B can decode the ciphertext using the private key.</p>
+<p>In summary, symmetric cryptography</p>
+<blockquote>
+<p>uses the same cryptographic keys for both encryption of plaintext and decryption of ciphertext.</p>
+</blockquote>
+<p>Asymmetric cryptography</p>
+<blockquote>
+<p>uses public and private keys to encrypt and decrypt data; either of the keys can be used to encrypt a message, and the other key can be used for decryption.</p>
+</blockquote>
+<p>Both cryptography can be used for data confidential, as shown in the example above. Besides, asymmetric cryptography can be applied in other scenarios, like representing the authentication of digital messages (aka. digital signature).</p>
 <a id="more"></a>
-<h2 id="Implementation-of-heap"><a href="#Implementation-of-heap" class="headerlink" title="Implementation of heap"></a>Implementation of heap</h2><p>There are two operations on a heap:</p>
+<h2 id="Digital-signature-using-asymmetric-cryptography"><a href="#Digital-signature-using-asymmetric-cryptography" class="headerlink" title="Digital signature using asymmetric cryptography"></a>Digital signature using asymmetric cryptography</h2><p>Suppose that A wants to make sure that a message is sent by B and is not altered in transit, how can asymmetric cryptography help in this case?</p>
+<p>This is how it works:</p>
+<ol>
+<li>B generates a pair of keys - one private key and one public key</li>
+<li>B generates the digest of the message using some hashing algorithm and then encrypts the digest using the private key - the encoded digest is known as a digital signature</li>
+<li>B sends the message along with the digital signature and the public key to A</li>
+<li>A decrypts the digital signature using the public key and gets the message digest, which proves that B signs this message</li>
+<li>A generates the digest of the message using the same hashing algorithm and compares it with the one decrypted from the digital signature, which proves that the message has not been altered in transit.</li>
+</ol>
+<h2 id="Flaws-in-asymmetric-cryptography"><a href="#Flaws-in-asymmetric-cryptography" class="headerlink" title="Flaws in asymmetric cryptography"></a>Flaws in asymmetric cryptography</h2><p>Asymmetric cryptography is vulnerable to Man-In-The-Middle attacks. Suppose that C (as the man in the middle) has the ability of intercepting the messages between A and B and sending fake messages to A and B, so C can pretend to be A for B and pretend to be B for A, and yet Both A and B are aware of the attack.<br>Here is an illustration:</p>
+<ol>
+<li>B generates a pair of keys and sends the public key PK1 to A</li>
+<li>C intercepts PK1, but sends a fake one PK1’ to A</li>
+<li>A encrypts a message using PK1’</li>
+<li>C intercepts the message from B and decrypts it using the correspongding private key, then C encrypts the message using PK1 and sends it back to B</li>
+<li>B gets the message and is able to decrypts it.</li>
+</ol>
+<p>Why does such an attack work? Because B (who receives the public key) is unable to tell if the public key is authentic.</p>
+<p>The most common solution to this problem is to introduce third-party authorities for authentication. Simly speaking, a public key is wrapped in a certificate which is issued by a Certificate Authority (CA); if the certificate is valid and we trust the CA, we can conclude that the public key is authentic.<br>The next question is: how do we know if the certificate is valid and if we can trust a specific CA? </p>
+<h3 id="Digital-certificate"><a href="#Digital-certificate" class="headerlink" title="Digital certificate"></a>Digital certificate</h3><p>Let’s first get an impression of what a certificate looks like:<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/other/wikipedia-certificate.png" alt=""></p>
+<p>A public key certificate usually contains:</p>
 <ul>
-<li>Insertion: insert the new element at the rear of the array and then adjust the heap using bottom-up approach</li>
-<li>Removal: remove the top element and then adjust the heap using top-down approach</li>
+<li>information about the subject (i.e. the owner of the certificate)</li>
+<li>information about the certificate issuer (aka. CA)</li>
+<li>information about the public key</li>
+<li>fingerprint (i.e. digital signature of the certificate)</li>
 </ul>
-<h3 id="Insert-a-new-element"><a href="#Insert-a-new-element" class="headerlink" title="Insert a new element"></a>Insert a new element</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span>[] maxHeap, <span class="keyword">int</span> len, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    maxHeap[len++] = num;</span><br><span class="line">    <span class="comment">// bottom-up adjust</span></span><br><span class="line">    <span class="keyword">int</span> i = len - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> parent = (i - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (maxHeap[parent] &gt;= maxHeap[i]) <span class="keyword">break</span>;</span><br><span class="line">        swap(maxHeap, parent, i);</span><br><span class="line">        i = parent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Remove-the-top-element"><a href="#Remove-the-top-element" class="headerlink" title="Remove the top element"></a>Remove the top element</h3><p>Implementation 1: replace the element at the top with the one at the rear and then adjust the heap<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span>[] maxHeap, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    maxHeap[<span class="number">0</span>] = maxHeap[--len];</span><br><span class="line">    <span class="comment">// top-down adjust</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = i * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= len) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> j = left;</span><br><span class="line">        <span class="keyword">if</span> (right &lt; len &amp;&amp; maxHeap[right] &gt; maxHeap[left]) &#123;</span><br><span class="line">            j = right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (maxHeap[i] &gt;= maxHeap[j]) <span class="keyword">break</span>;</span><br><span class="line">        swap(maxHeap, i, j);</span><br><span class="line">        i = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Implementation 2: remove the element at the top and then replace the blank with its child<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span>[] maxHeap, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = i * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= len) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">int</span> j = left;</span><br><span class="line">        <span class="keyword">if</span> (right &lt; len &amp;&amp; maxHeap[right] &gt; maxHeap[left]) &#123;</span><br><span class="line">            j = right;</span><br><span class="line">        &#125;</span><br><span class="line">        maxHeap[i] = maxHeap[j];</span><br><span class="line">        i = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (i &lt; len) &#123;</span><br><span class="line">        maxHeap[i] = maxHeap[--len];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>This is how a certificate is generated by the CA:</p>
+<ol>
+<li>Put the information about the subject, the issuer, and the public key together and create a certificate</li>
+<li>Generate the digest of the information using some hashing algorithm</li>
+<li>Generate the digital signature by encoding the digest using the private key owned by the issuer</li>
+<li>Attach the digital signature to the certificate.</li>
+</ol>
+<p>This is how a certificate is verified:</p>
+<ol>
+<li>Extract the digital signature from the certificate</li>
+<li>Decipher the digial signature using the CA’s public key to get the digest d1</li>
+<li>Apply the same hashing algorithm on the certificate to get the digest d2</li>
+<li>If d1 matches d2, then the certificate is valid and the public key extracted from it can be trusted.</li>
+</ol>
+<p>You might wonder where to get the CA’s public key. Let’s get back to the snapshot above. It shows that the issuer is “GlobalSign Organization Validation CA - SH256 - G2”; from here we can get its certificate which contains its public key. Note that the certificate is issued by “GlobalSign”, so it needs the public key of “GlobalSign” to verify the validation of the intermediate CA. “GlobalSign” is a root CA, which means that its certificate can be included on the list of trust and explicitly trusted; “GlobalSign Organization Validation CA - SH256 - G2” is an intermediate CA, so its certificate is not valid unless it is trusted by a trust root CA. So we might get the certificate of “GlobalSign” from the trust store (e.g. keychains on MAC) or a warning message from the browser.</p>
+<p>This is known as <em>chain of trust</em> which is well explained in the following diagram.<br><img src="https://upload-images.jianshu.io/upload_images/735869-9fff88cd487604d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/692" alt=""></p>
+<p>The whole solution looks perfect except that it is still vulnerable if a trust root CA does not play the game by the book (CNNIC and WoSign are two examples).</p>
+<p>The public key certificates and the certificate authorities are part of a system know as Public Key Infrastructure (PKI), but this topic will be left for the future.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm" target="_blank" rel="noopener">Wikipedia - Symmetric-key Algorithm</a><br>2 <a href="https://searchsecurity.techtarget.com/definition/asymmetric-cryptography" target="_blank" rel="noopener">Asymmetric Cryptography</a><br>3 <a href="https://en.wikipedia.org/wiki/Public_key_certificate" target="_blank" rel="noopener">Wikipedia - Public Key Certificate</a><br>4 <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure" target="_blank" rel="noopener">Wikipedia - Public Key Infrastructure</a><br>5 <a href="http://www.youdzone.com/signature.html" target="_blank" rel="noopener">What is Digital Signature</a></p>
 
       
     </div>
@@ -385,9 +430,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/data-structure/" rel="tag"># data structure</a>
+            <a href="/tags/cryptography/" rel="tag"># cryptography</a>
           
-            <a href="/tags/heap/" rel="tag"># heap</a>
+            <a href="/tags/man-in-the-middle/" rel="tag"># man-in-the-middle</a>
           
         </div>
       
@@ -400,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/queue/" rel="next" title="Queue">
-                <i class="fa fa-chevron-left"></i> Queue
+              <a href="/semaphore/" rel="next" title="Semaphore">
+                <i class="fa fa-chevron-left"></i> Semaphore
               </a>
             
           </div>
@@ -409,10 +454,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/array-list/" rel="prev" title="Array vs. List">
-                Array vs. List <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -564,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-of-heap"><span class="nav-text">Implementation of heap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-a-new-element"><span class="nav-text">Insert a new element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-the-top-element"><span class="nav-text">Remove the top element</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Digital-signature-using-asymmetric-cryptography"><span class="nav-text">Digital signature using asymmetric cryptography</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flaws-in-asymmetric-cryptography"><span class="nav-text">Flaws in asymmetric cryptography</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Digital-certificate"><span class="nav-text">Digital certificate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
