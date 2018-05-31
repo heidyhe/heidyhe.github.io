@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/http-https-layer.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/SSL-handshake.png">
-<meta property="og:updated_time" content="2018-05-31T00:00:51.000Z">
+<meta property="og:updated_time" content="2018-05-31T00:03:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="What is the &quot;S&quot; in HTTPS">
 <meta name="twitter:description" content="HTTP (short for Hypertext Transfer Protocol) is a protocol for transmitting hypermedia documents, such as HTML, XML, script, CSS, image and text in the format of JSON. It can be used for communication">
@@ -371,7 +371,7 @@
 <h3 id="What-happens-when-we-access-a-HTTPS-website-in-browser"><a href="#What-happens-when-we-access-a-HTTPS-website-in-browser" class="headerlink" title="What happens when we access a HTTPS website in browser?"></a>What happens when we access a HTTPS website in browser?</h3><p>i. The browser establishes a TCP connection to port 443 (which is the default port for HTTPS) on the web server.</p>
 <p>ii. The browser and server initialize the SSL/TLS layer, which is known as SSL/TLS handshake. This process is used mainly for verifying the website authentication and establishing a secret key for data encryption. As depicted in the diagram below (quoted from Reference 1):<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/other/SSL-handshake.png" alt=""></p>
 <ol>
-<li>The browser receives a digital certificate from the server and runs some checks on the certificate (which has been discussed in a previous [post on Asymmetric Cryptography(<a href="https://heidyhe.github.io/asymmetric-cryptography/))">https://heidyhe.github.io/asymmetric-cryptography/))</a>. If the browser does not trust the certificate, then it will show a warning message and let the user decide whether to move on.</li>
+<li>The browser receives a digital certificate from the server and runs some checks on the certificate (which has been discussed in a previous <a href="https://heidyhe.github.io/asymmetric-cryptography/">post on Asymmetric Cryptography</a>). If the browser does not trust the certificate, then it will show a warning message and let the user decide whether to move on.</li>
 <li>The browser extracts a public key from the certificate, then generates a random secret key and encrypts it using the public key, and sends is back to the server. This is how the browser and server establish a secret key.</li>
 </ol>
 <p>iii. The browser builds an HTTP request and sends it over SSL/TLS where the request data is encrypted using the secret key before sent over TCP. When the encrypted request arrives at the server through TCP, SSL/TLC has it decrypted and sends it to the application layer where the request is handled by the application. The process is the same when an HTTP response is sent over the network.</p>
