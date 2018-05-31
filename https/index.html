@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="security,symmetric cryptography,asymmetric cryptography,man-in-the-middle attack,public key certificate,digital certificate" />
+  <meta name="keywords" content="cryptography,http,tls," />
 
 
 
@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using">
-<meta name="keywords" content="security,symmetric cryptography,asymmetric cryptography,man-in-the-middle attack,public key certificate,digital certificate">
+<meta name="description" content="HTTP (short for Hypertext Transfer Protocol) is a protocol for transmitting hypermedia documents, such as HTML, XML, script, CSS, image and text in the format of JSON. It can be used for communication">
+<meta name="keywords" content="cryptography,http,tls">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Introduction to Asymmetric Cryptography">
-<meta property="og:url" content="https://heidyhe.github.io/asymmetric-cryptography/index.html">
+<meta property="og:title" content="What is the &quot;S&quot; in HTTPS">
+<meta property="og:url" content="https://heidyhe.github.io/https/index.html">
 <meta property="og:site_name" content="Little by Little">
-<meta property="og:description" content="Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using">
+<meta property="og:description" content="HTTP (short for Hypertext Transfer Protocol) is a protocol for transmitting hypermedia documents, such as HTML, XML, script, CSS, image and text in the format of JSON. It can be used for communication">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/wikipedia-certificate.png">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/735869-9fff88cd487604d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/692">
-<meta property="og:updated_time" content="2018-05-30T16:52:48.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/http-https-layer.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/SSL-handshake.png">
+<meta property="og:updated_time" content="2018-05-31T00:00:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Introduction to Asymmetric Cryptography">
-<meta name="twitter:description" content="Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/wikipedia-certificate.png">
+<meta name="twitter:title" content="What is the &quot;S&quot; in HTTPS">
+<meta name="twitter:description" content="HTTP (short for Hypertext Transfer Protocol) is a protocol for transmitting hypermedia documents, such as HTML, XML, script, CSS, image and text in the format of JSON. It can be used for communication">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/heidyhe/img/master/other/http-https-layer.png">
 
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://heidyhe.github.io/asymmetric-cryptography/"/>
+  <link rel="canonical" href="https://heidyhe.github.io/https/"/>
 
 
 
 
 
-  <title>Introduction to Asymmetric Cryptography | Little by Little</title>
+  <title>What is the "S" in HTTPS | Little by Little</title>
   
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/asymmetric-cryptography/">
+    <link itemprop="mainEntityOfPage" href="https://heidyhe.github.io/https/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Heidy">
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Introduction to Asymmetric Cryptography</h1>
+          <h1 class="post-title" itemprop="name headline">What is the "S" in HTTPS</h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T21:34:20-07:00">
-                2018-05-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T19:18:30-07:00">
+                2018-05-22
               </time>
             
 
@@ -355,64 +355,33 @@
       
 
       
-        <p>Let’s say, A wants to send a secret message to B. Hypothetically, A owns a key which is also owned by B. Thus, A can encrypt the message using the key and then B can decipher the encoded message using the same key. This is known as symmetric cryptography. </p>
-<p>In contrast, asymmetric cryptography doesn’t require A and B to share the same private key; instead, A and B hold two different keys - one public key and one private key (it is impossible to compute the private key based on the public key). If A wants to send a secret message to B, A can first get a public key from B and use it to encode the message, and then B can decode the ciphertext using the private key.</p>
-<p>In summary, symmetric cryptography</p>
-<blockquote>
-<p>uses the same cryptographic keys for both encryption of plaintext and decryption of ciphertext.</p>
-</blockquote>
-<p>Asymmetric cryptography</p>
-<blockquote>
-<p>uses public and private keys to encrypt and decrypt data; either of the keys can be used to encrypt a message, and the other key can be used for decryption.</p>
-</blockquote>
-<p>Both cryptography can be used for data confidential, as shown in the example above. Besides, asymmetric cryptography can be applied in other scenarios, like representing the authentication of digital messages (aka. digital signature).</p>
+        <p>HTTP (short for Hypertext Transfer Protocol) is a protocol for transmitting hypermedia documents, such as HTML, XML, script, CSS, image and text in the format of JSON. It can be used for communication between browsers and web servers, or between mobile applications and web servers, or among web severs.</p>
+<p>A typical HTTP transaction consists of two parts: an HTTP request (from client to server) and an HTTP response (from server to client), and both include protocol version (like “HTTP/1.1”), headers and entity body.</p>
+<p>An HTTP request header:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: qconferences.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) ...</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span><br><span class="line">Referer: https://www.google.com/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6</span><br></pre></td></tr></table></figure></p>
+<p>An HTTP response header:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Language: en</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Server: Apache/2.4.7 (Ubuntu)</span><br><span class="line">Content-Length: 17089</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h2 id="Digital-signature-using-asymmetric-cryptography"><a href="#Digital-signature-using-asymmetric-cryptography" class="headerlink" title="Digital signature using asymmetric cryptography"></a>Digital signature using asymmetric cryptography</h2><p>Suppose that A wants to make sure that a message is sent by B and is not altered in transit, how can asymmetric cryptography help in this case?</p>
-<p>This is how it works:</p>
+<h2 id="HTTP-over-SSL-TLS-HTTPS"><a href="#HTTP-over-SSL-TLS-HTTPS" class="headerlink" title="HTTP over SSL/TLS = HTTPS"></a>HTTP over SSL/TLS = HTTPS</h2><p>HTTP is not secure, meaning that</p>
 <ol>
-<li>B generates a pair of keys - one private key and one public key</li>
-<li>B generates the digest of the message using some hashing algorithm and then encrypts the digest using the private key - the encoded digest is known as a digital signature</li>
-<li>B sends the message along with the digital signature and the public key to A</li>
-<li>A decrypts the digital signature using the public key and gets the message digest, which proves that B signs this message (because B is the only one who owns the private key to encrypt the digest)</li>
-<li>A generates the digest of the message using the same hashing algorithm and compares it with the one decrypted from the digital signature, if both digest are equal, then the message has not been tampered in transit.</li>
+<li>data in transportation are not encrypted and hence are exposed to sniffing attacks</li>
+<li>data can be tampered by man-in-the-middle attacks</li>
+<li>web servers might not be genuine</li>
 </ol>
-<h2 id="Flaws-in-asymmetric-cryptography"><a href="#Flaws-in-asymmetric-cryptography" class="headerlink" title="Flaws in asymmetric cryptography"></a>Flaws in asymmetric cryptography</h2><p>Asymmetric cryptography is vulnerable to Man-In-The-Middle attacks. Suppose that C (as the man in the middle) has the ability of intercepting the messages between A and B and sending fake messages to A and B, so C can pretend to be A for B and pretend to be B for A, and yet Both A and B are aware of the attack.<br>Here is an illustration:</p>
+<p>HTTPS is a secure version of HTTP. As shown in the diagram below (quoted from Reference 1):<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/other/http-https-layer.png" alt=""></p>
+<p>HTTP is a protocol for application layer, and it is built upon TCP which is a transport-layer protocol providing reliable, ordered and error-checked transportation of data. The HTTPS solution of making HTTP secure is to add a security layer between HTTP and TCP, which is know as SSL (Secure Sockets Layer) at the beginning and later changed to TLS (Transport Layer Security).</p>
+<h3 id="What-happens-when-we-access-a-HTTPS-website-in-browser"><a href="#What-happens-when-we-access-a-HTTPS-website-in-browser" class="headerlink" title="What happens when we access a HTTPS website in browser?"></a>What happens when we access a HTTPS website in browser?</h3><p>i. The browser establishes a TCP connection to port 443 (which is the default port for HTTPS) on the web server.</p>
+<p>ii. The browser and server initialize the SSL/TLS layer, which is known as SSL/TLS handshake. This process is used mainly for verifying the website authentication and establishing a secret key for data encryption. As depicted in the diagram below (quoted from Reference 1):<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/other/SSL-handshake.png" alt=""></p>
 <ol>
-<li>B generates a pair of keys and sends the public key PK1 to A</li>
-<li>C intercepts PK1, but sends a fake one PK1’ to A</li>
-<li>A encrypts a message using PK1’</li>
-<li>C intercepts the message from B and decrypts it using the correspongding private key, then C encrypts the message using PK1 and sends it back to B</li>
-<li>B gets the message and is able to decrypts it.</li>
+<li>The browser receives a digital certificate from the server and runs some checks on the certificate (which has been discussed in a previous [post on Asymmetric Cryptography(<a href="https://heidyhe.github.io/asymmetric-cryptography/))">https://heidyhe.github.io/asymmetric-cryptography/))</a>. If the browser does not trust the certificate, then it will show a warning message and let the user decide whether to move on.</li>
+<li>The browser extracts a public key from the certificate, then generates a random secret key and encrypts it using the public key, and sends is back to the server. This is how the browser and server establish a secret key.</li>
 </ol>
-<p>Why does such an attack work? Because B (who receives the public key) is unable to tell if the public key is authentic.</p>
-<p>The most common solution to this problem is to introduce third-party authorities which issue certificates to web servers for authentication. Such an authority is known as a Certificate Authority (CA). Simly speaking, a public key is sent along with a certificate issued by a CA; if the certificate is valid and we trust the CA, we can conclude that the public key is authentic.<br>The next question is: how do we know if the certificate is valid and if we can trust a specific CA? </p>
-<h3 id="Digital-certificate"><a href="#Digital-certificate" class="headerlink" title="Digital certificate"></a>Digital certificate</h3><p>Let’s first get an impression of what a certificate looks like:<br><img src="https://raw.githubusercontent.com/heidyhe/img/master/other/wikipedia-certificate.png" alt=""></p>
-<p>A public key certificate usually contains (most certificates today follow the <strong>X.509 v3</strong> structure):</p>
-<ul>
-<li>information about the subject (i.e. the owner of the certificate)</li>
-<li>information about the certificate issuer (aka. CA)</li>
-<li>information about the public key</li>
-<li>fingerprint (i.e. digital signature of the certificate)</li>
-</ul>
-<p>This is how a certificate is generated by the CA:</p>
-<ol>
-<li>Put the information about the subject, the issuer, and the public key together and create a certificate</li>
-<li>Generate the digest of the information using some hashing algorithm</li>
-<li>Generate the digital signature by encoding the digest using the private key owned by the issuer</li>
-<li>Attach the digital signature to the certificate.</li>
-</ol>
-<p>This is how a certificate is verified:</p>
-<ol>
-<li>Extract the digital signature from the certificate</li>
-<li>Decipher the digial signature using the CA’s public key to get the digest d1</li>
-<li>Apply the same hashing algorithm on the certificate to get the digest d2</li>
-<li>If d1 matches d2, then the certificate is valid and the public key extracted from it can be trusted.</li>
-</ol>
-<p>You might wonder where to get the CA’s public key. Let’s get back to the snapshot above. It shows that the issuer is “GlobalSign Organization Validation CA - SH256 - G2”; from here we can get its certificate which contains its public key. Note that the certificate is issued by “GlobalSign”, so it needs the public key of “GlobalSign” to verify the validation of the intermediate CA. “GlobalSign” is a root CA, which means that its certificate can be included on the list of trust and explicitly trusted; “GlobalSign Organization Validation CA - SH256 - G2” is an intermediate CA, so its certificate is not valid unless it is trusted by a trust root CA. So we might get the certificate of “GlobalSign” from the trust store (e.g. keychains on MAC) or a warning message from the browser.</p>
-<p>This is known as <em>chain of trust</em> which is well explained in the following diagram.<br><img src="https://upload-images.jianshu.io/upload_images/735869-9fff88cd487604d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/692" alt=""></p>
-<p>The whole solution looks perfect except that it is still vulnerable if a trust root CA does not play the game by the book (CNNIC and WoSign are two examples).</p>
-<p>The public key certificates and the certificate authorities are part of a system know as Public Key Infrastructure (PKI), but this topic will be left for the future.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 <a href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm" target="_blank" rel="noopener">Wikipedia - Symmetric-key Algorithm</a><br>2 <a href="https://searchsecurity.techtarget.com/definition/asymmetric-cryptography" target="_blank" rel="noopener">Asymmetric Cryptography</a><br>3 <a href="https://en.wikipedia.org/wiki/Public_key_certificate" target="_blank" rel="noopener">Wikipedia - Public Key Certificate</a><br>4 <a href="https://en.wikipedia.org/wiki/Public_key_infrastructure" target="_blank" rel="noopener">Wikipedia - Public Key Infrastructure</a><br>5 <a href="http://www.youdzone.com/signature.html" target="_blank" rel="noopener">What is Digital Signature</a></p>
+<p>iii. The browser builds an HTTP request and sends it over SSL/TLS where the request data is encrypted using the secret key before sent over TCP. When the encrypted request arrives at the server through TCP, SSL/TLC has it decrypted and sends it to the application layer where the request is handled by the application. The process is the same when an HTTP response is sent over the network.</p>
+<p>This is how SSL/TLS makes HTTP secure.</p>
+<h3 id="Why-secures-HTTP-by-introducing-a-new-layer"><a href="#Why-secures-HTTP-by-introducing-a-new-layer" class="headerlink" title="Why secures HTTP by introducing a new layer"></a>Why secures HTTP by introducing a new layer</h3><p>As we has talked about the parts of What and How, it is time to discuss Why HTTPS is designed in this way.</p>
+<p>Reason 1. HTTP is the cornerstone of internet, it is well-known and widely used, so it would be extremely difficult to replace it with a new secure protocol even it is perfectly designed.</p>
+<p>Reason 2. It requires no changes to HTTP or TCP by adding a security layer between HTTP and TCP. The security layer can be viewed as an extra wrapper of the HTTP package, so it is easy to put on or remove the layer - conforming to the principals of layer model of computing networking.</p>
+<p>Reason 3. It is flexible to apply SSL/TLS to other scenarios (like working with other applicaiton protocols) by decouple SSL/TLS from HTTP.</p>
+<p>Note that it is important that HTTPS should not introduce too much overhead, so asymmetric cryptography cannot be used for data encryption and decryption. Symmetric cryptography is what we have, but first we need to solve the issue of how to establish a secret key over public channels. There are several solutions to such problems, and as introduced above, the one mostly adopted today uses the help of digital certificate and asymmertirc cryptography.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>1 HTTP - The Definitive Guide</p>
 
       
     </div>
@@ -432,7 +401,9 @@
           
             <a href="/tags/cryptography/" rel="tag"># cryptography</a>
           
-            <a href="/tags/man-in-the-middle/" rel="tag"># man-in-the-middle</a>
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+            <a href="/tags/tls/" rel="tag"># tls</a>
           
         </div>
       
@@ -445,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/semaphore/" rel="next" title="Semaphore">
-                <i class="fa fa-chevron-left"></i> Semaphore
+              <a href="/asymmetric-cryptography/" rel="next" title="Introduction to Asymmetric Cryptography">
+                <i class="fa fa-chevron-left"></i> Introduction to Asymmetric Cryptography
               </a>
             
           </div>
@@ -454,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/https/" rel="prev" title="What is the "S" in HTTPS">
-                What is the "S" in HTTPS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Digital-signature-using-asymmetric-cryptography"><span class="nav-text">Digital signature using asymmetric cryptography</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flaws-in-asymmetric-cryptography"><span class="nav-text">Flaws in asymmetric cryptography</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Digital-certificate"><span class="nav-text">Digital certificate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-over-SSL-TLS-HTTPS"><span class="nav-text">HTTP over SSL/TLS = HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-happens-when-we-access-a-HTTPS-website-in-browser"><span class="nav-text">What happens when we access a HTTPS website in browser?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-secures-HTTP-by-introducing-a-new-layer"><span class="nav-text">Why secures HTTP by introducing a new layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
